@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWITONGO E&E CO. LTD - Your Partner in Progress</title>
+    <link rel="stylesheet" href="/landing.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+  <body>
+    <a class="skip-link" href="#home">Skip to content</a>
+    <div id="welcomeOverlay" aria-hidden="false">
+      <div class="welcome-inner" role="region" aria-label="Welcome">
+        <div class="welcome-logo"><span>MWITONGO E&amp;E</span><small>CO. LTD</small></div>
+        <div class="welcome-tagline">Your Partner in Progress</div>
+        <button id="skipIntro" class="skip-intro" aria-label="Skip introduction">Skip</button>
+      </div>
+    </div>
+    <div id="progressBarContainer"><div id="progressBar"></div></div>
+    <button id="backToTop" aria-label="Back to Top" title="Back to Top">↑</button>
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+      <div class="container">
+        <div class="nav-content">
+          <div class="logo">MWITONGO E&E</div>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button class="mobile-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="hero-background">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">Welcome to Tanzania's Premier Consultancy Firm</div>
+          <h1 class="main-heading" id="animatedHeading"></h1>
+          <p class="hero-subtitle">Leading consultancy and digital transformation company empowering organizations with innovative, efficient, and sustainable solutions across Tanzania</p>
+          <div class="hero-features">
+            <div class="hero-feature">
+              <span class="feature-icon">✓</span>
+              <span>20+ Years Experience</span>
+            </div>
+            <div class="hero-feature">
+              <span class="feature-icon">✓</span>
+              <span>500+ Projects Delivered</span>
+            </div>
+            <div class="hero-feature">
+              <span class="feature-icon">✓</span>
+              <span>98% Client Satisfaction</span>
+            </div>
+          </div>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Start Your Journey</a>
+            <a href="#services" class="btn btn-secondary">Explore Services</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-overlay"></div>
+    </section>
+
+    <section class="experienced-staff">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Experienced Team</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Meet the experts behind your success</p>
+        </div>
+        <div class="staff-grid">
+          <div class="staff-card">
+            <div class="staff-image" style="background: linear-gradient(135deg, #D4AF37 0%, #a0860a 100%);">
+              <span class="staff-initials">EK</span>
+            </div>
+            <h3>Eng. Kiprotich</h3>
+            <p class="staff-position">Chief Executive Officer</p>
+            <p class="staff-bio">25+ years in strategic consultancy and organizational development with expertise in Fortune 500 companies.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Strategy</span>
+              <span class="expertise-tag">Leadership</span>
+              <span class="expertise-tag">Innovation</span>
+            </div>
+          </div>
+          <div class="staff-card">
+            <div class="staff-image" style="background: linear-gradient(135deg, #a0860a 0%, #7a5f0b 100%);">
+              <span class="staff-initials">DR</span>
+            </div>
+            <h3>Dr. Rose Makali</h3>
+            <p class="staff-position">Director of Digital Innovation</p>
+            <p class="staff-bio">PhD in Information Systems with 18+ years experience in ICT solutions and digital transformation.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Technology</span>
+              <span class="expertise-tag">Digital</span>
+              <span class="expertise-tag">Systems</span>
+            </div>
+          </div>
+          <div class="staff-card">
+            <div class="staff-image" style="background: linear-gradient(135deg, #7a5f0b 0%, #5a4608 100%);">
+              <span class="staff-initials">JM</span>
+            </div>
+            <h3>James Mwangi</h3>
+            <p class="staff-position">Head of Project Management</p>
+            <p class="staff-bio">PMP certified with 16+ years managing complex infrastructure and enterprise projects across Africa.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Projects</span>
+              <span class="expertise-tag">Management</span>
+              <span class="expertise-tag">Delivery</span>
+            </div>
+          </div>
+          <div class="staff-card">
+            <div class="staff-image" style="background: linear-gradient(135deg, #5a4608 0%, #3a2c05 100%);">
+              <span class="staff-initials">AM</span>
+            </div>
+            <h3>Amara Okonkwo</h3>
+            <p class="staff-position">Lead Research & Analytics</p>
+            <p class="staff-bio">Masters in Data Science with expertise in market research and business intelligence across 12+ countries.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Research</span>
+              <span class="expertise-tag">Analytics</span>
+              <span class="expertise-tag">Data</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About Us</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Your Partner in Progress</h3>
+            <p>MWITONGO E&E CO. LTD is a premier Tanzanian company offering comprehensive services in consultancy, training, digital transformation, research, proposal development, ICT solutions, construction support, and general supplies.</p>
+            <p>Registered as Company No. 609438, we are strategically located on Kigamboni Street, nearby Roman Catholic Church, Kigamboni, Dar es Salaam, Tanzania.</p>
+            <div class="mission-vision">
+              <div class="mv-card">
+                <h4>Vision</h4>
+                <p>To be a leading consultancy and digital transformation company in Tanzania.</p>
+              </div>
+              <div class="mv-card">
+                <h4>Mission</h4>
+                <p>To empower organizations with innovative, efficient, and sustainable solutions.</p>
+              </div>
+            </div>
+          </div>
+          <div class="about-values">
+            <h3>Our Core Values</h3>
+            <ul class="values-list">
+              <li><span class="value-icon">✓</span> Integrity</li>
+              <li><span class="value-icon">✓</span> Excellence</li>
+              <li><span class="value-icon">✓</span> Innovation</li>
+              <li><span class="value-icon">✓</span> Empowerment</li>
+              <li><span class="value-icon">✓</span> Collaboration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Services</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Comprehensive solutions tailored to your business needs</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Management Consultancy</h3>
+            <p>Strategic planning, organizational development, and management advisory services to optimize your business operations.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>News Agency Services</h3>
+            <p>Professional news gathering, distribution, and media relations services for your organization.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h10"/></svg>
+            </div>
+            <h3>Office Administrative Support</h3>
+            <p>Comprehensive administrative solutions including document management, scheduling, and office coordination.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Civil Engineering & Construction Support</h3>
+            <p>Technical expertise in construction project planning, supervision, and quality assurance.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h3>Project Writing & Proposal Development</h3>
+            <p>Expert proposal writing, grant applications, and project documentation services.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Research & Data Analysis</h3>
+            <p>Comprehensive research methodologies, data collection, statistical analysis, and reporting.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            </div>
+            <h3>Training & Capacity Building</h3>
+            <p>Professional development programs, workshops, and organizational capacity building initiatives.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+            </div>
+            <h3>Digital & ICT Solutions</h3>
+            <p>Web development, systems design, databases, digital marketing, and comprehensive ICT support services.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <h3>General Supplies</h3>
+            <p>Reliable procurement and supply chain management services for various organizational needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-choose">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Why Choose Us</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-number">01</div>
+            <h3>Proven Expertise</h3>
+            <p>Years of experience delivering exceptional consultancy and digital solutions across Tanzania.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">02</div>
+            <h3>Comprehensive Services</h3>
+            <p>One-stop solution for all your consultancy, ICT, and business development needs.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">03</div>
+            <h3>Client-Centric Approach</h3>
+            <p>Tailored solutions that align with your specific organizational goals and challenges.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">04</div>
+            <h3>Innovation Driven</h3>
+            <p>Cutting-edge methodologies and technologies to keep you ahead of the competition.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="structure">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Organizational Structure</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="structure-grid">
+          <div class="structure-card">
+            <h3>Executive Management</h3>
+            <p>Strategic leadership and corporate governance ensuring organizational excellence and growth.</p>
+          </div>
+          <div class="structure-card">
+            <h3>Consultancy Division</h3>
+            <p>Expert consultancy services spanning management, engineering, and specialized advisory.</p>
+          </div>
+          <div class="structure-card">
+            <h3>Digital & ICT Division</h3>
+            <p>Technology solutions including web development, systems design, and digital transformation.</p>
+          </div>
+          <div class="structure-card">
+            <h3>Research & Development</h3>
+            <p>Innovation hub driving data-driven insights and cutting-edge solutions.</p>
+          </div>
+          <div class="structure-card">
+            <h3>Training & Capacity Building</h3>
+            <p>Professional development programs empowering individuals and organizations.</p>
+          </div>
+          <div class="structure-card">
+            <h3>Operations & Support</h3>
+            <p>Administrative excellence and supply chain management for seamless service delivery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clients">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Clients & Partners</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Trusted by leading organizations across Tanzania</p>
+        </div>
+        <div class="clients-content">
+          <p>We proudly serve government agencies, private sector organizations, NGOs, and international partners, delivering exceptional value through our comprehensive suite of services.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" data-target="500">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="150">0</div>
+            <div class="stat-label">Clients Served</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">Client Satisfaction %</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="15">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Process</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">A strategic approach to delivering excellence</p>
+        </div>
+        <div class="process-timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker">01</div>
+            <div class="timeline-content">
+              <h3>Discovery & Analysis</h3>
+              <p>We begin by understanding your unique challenges, goals, and organizational context to develop tailored solutions.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker">02</div>
+            <div class="timeline-content">
+              <h3>Strategy Development</h3>
+              <p>Our experts craft comprehensive strategies aligned with your vision and market dynamics.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker">03</div>
+            <div class="timeline-content">
+              <h3>Implementation</h3>
+              <p>We execute with precision, ensuring seamless integration and minimal disruption to operations.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker">04</div>
+            <div class="timeline-content">
+              <h3>Optimization & Support</h3>
+              <p>Continuous monitoring, refinement, and support ensure sustained success and growth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="testimonial-controls">
+        <button id="prevTestimonial" aria-label="Previous testimonial">‹</button>
+        <button id="nextTestimonial" aria-label="Next testimonial">›</button>
+      </div>
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Client Success Stories</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Hear from organizations we've partnered with</p>
+        </div>
+        <div class="testimonials-carousel">
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="client-avatar">JK</div>
+              <div class="client-info">
+                <h4>John Kamau</h4>
+                <p>Managing Director, Enterprise Solutions Ltd</p>
+              </div>
+            </div>
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+            <p class="testimonial-text">"MWITONGO's consultancy team transformed our entire organizational structure. Their insights were invaluable and the implementation was seamless. Highly recommended!"</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="client-avatar">AM</div>
+              <div class="client-info">
+                <h4>Amina Mohamed</h4>
+                <p>CEO, Digital Innovation Hub Tanzania</p>
+              </div>
+            </div>
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+            <p class="testimonial-text">"The ICT solutions provided have revolutionized our operations. Their team's expertise in digital transformation is unmatched in the region."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="client-avatar">PK</div>
+              <div class="client-info">
+                <h4>Peter Kwame</h4>
+                <p>Director, Government Affairs Ministry</p>
+              </div>
+            </div>
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+            <p class="testimonial-text">"Professional, reliable, and results-driven. MWITONGO consistently delivers beyond expectations. They're our trusted partner for strategic initiatives."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Leadership Team</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Experienced professionals dedicated to your success</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card" data-name="Victor" data-role="Chief Executive Officer" data-bio="Visionary leader with extensive experience driving organizational excellence and strategic growth across multiple sectors." data-email="victor@mwitongo.co.tz">
+            <div class="team-image" style="background: linear-gradient(135deg, #D4AF37 0%, #a0860a 100%);">
+              <div class="team-initial">V</div>
+            </div>
+            <h3>Victor</h3>
+            <p class="team-role">Chief Executive Officer</p>
+            <p class="team-bio">Visionary leader with extensive experience driving organizational excellence and strategic growth across multiple sectors.</p>
+            <div class="team-actions">
+              <button class="btn btn-small open-profile" aria-label="Open Victor profile">Profile</button>
+            </div>
+          </div>
+          <div class="team-card" data-name="John Kanyoro" data-role="Director" data-bio="Strategic director with proven expertise in project management, consultancy delivery, and client relations across Africa." data-email="john.kanyoro@mwitongo.co.tz">
+            <div class="team-image" style="background: linear-gradient(135deg, #a0860a 0%, #7a5f0b 100%);">
+              <div class="team-initial">JK</div>
+            </div>
+            <h3>John Kanyoro</h3>
+            <p class="team-role">Director</p>
+            <p class="team-bio">Strategic director with proven expertise in project management, consultancy delivery, and client relations across Africa.</p>
+            <div class="team-actions"><button class="btn btn-small open-profile" aria-label="Open John profile">Profile</button></div>
+          </div>
+          <div class="team-card" data-name="Technical Director" data-role="Digital Innovation & ICT" data-bio="Expert in digital transformation with a track record of cutting-edge technology implementation and system architecture." data-email="tech@mwitongo.co.tz">
+            <div class="team-image" style="background: linear-gradient(135deg, #7a5f0b 0%, #5a4608 100%);">
+              <div class="team-initial">TD</div>
+            </div>
+            <h3>Technical Director</h3>
+            <p class="team-role">Digital Innovation & ICT</p>
+            <p class="team-bio">Expert in digital transformation with a track record of cutting-edge technology implementation and system architecture.</p>
+            <div class="team-actions"><button class="btn btn-small open-profile" aria-label="Open Technical Director profile">Profile</button></div>
+          </div>
+          <div class="team-card" data-name="Operations Director" data-role="Project Execution & Quality" data-bio="Ensures seamless delivery, quality assurance, and client satisfaction across all strategic engagements." data-email="ops@mwitongo.co.tz">
+            <div class="team-image" style="background: linear-gradient(135deg, #5a4608 0%, #3a2c05 100%);">
+              <div class="team-initial">OD</div>
+            </div>
+            <h3>Operations Director</h3>
+            <p class="team-role">Project Execution & Quality</p>
+            <p class="team-bio">Ensures seamless delivery, quality assurance, and client satisfaction across all strategic engagements.</p>
+            <div class="team-actions"><button class="btn btn-small open-profile" aria-label="Open Operations Director profile">Profile</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Why Organizations Choose MWITONGO</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Strategic advantages that drive measurable success</p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3>Measurable Results</h3>
+            <p>Achieve 40-60% efficiency gains and ROI improvements through data-driven strategies.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>Cost Effective</h3>
+            <p>Flexible pricing models and scalable solutions that adapt to your budget.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </div>
+            <h3>Dedicated Support</h3>
+            <p>24/7 expert support team ensuring seamless implementation and success.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1"/><circle cx="12" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg>
+            </div>
+            <h3>Clear Communication</h3>
+            <p>Transparent reporting and regular updates keep you informed every step.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-studies">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Success Stories</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Real results from organizations we've transformed</p>
+        </div>
+        <div class="case-studies-grid">
+          <div class="case-study-card">
+            <div class="case-study-header">
+              <h3>Financial Services Transformation</h3>
+              <span class="case-study-badge">Digital Solutions</span>
+            </div>
+            <div class="case-study-content">
+              <div class="case-study-stat">
+                <span class="stat-value">85%</span>
+                <span class="stat-desc">Process Automation</span>
+              </div>
+              <p>Implemented comprehensive digital transformation resulting in significant operational efficiency.</p>
+              <ul class="case-study-results">
+                <li>Reduced processing time by 85%</li>
+                <li>Improved customer satisfaction to 95%</li>
+                <li>Cut operational costs by 40%</li>
+              </ul>
+            </div>
+          </div>
+          <div class="case-study-card">
+            <div class="case-study-header">
+              <h3>Enterprise Consultancy Project</h3>
+              <span class="case-study-badge">Management</span>
+            </div>
+            <div class="case-study-content">
+              <div class="case-study-stat">
+                <span class="stat-value">120%</span>
+                <span class="stat-desc">Revenue Growth</span>
+              </div>
+              <p>Organizational restructuring and strategic planning for multinational corporation.</p>
+              <ul class="case-study-results">
+                <li>Achieved 120% revenue growth in year one</li>
+                <li>Enhanced team productivity by 65%</li>
+                <li>Expanded into 3 new markets</li>
+              </ul>
+            </div>
+          </div>
+          <div class="case-study-card">
+            <div class="case-study-header">
+              <h3>Government ICT Implementation</h3>
+              <span class="case-study-badge">ICT Solutions</span>
+            </div>
+            <div class="case-study-content">
+              <div class="case-study-stat">
+                <span class="stat-value">10,000+</span>
+                <span class="stat-desc">Users Trained</span>
+              </div>
+              <p>Large-scale government IT infrastructure modernization and capacity building.</p>
+              <ul class="case-study-results">
+                <li>Trained 10,000+ government employees</li>
+                <li>Modernized legacy systems successfully</li>
+                <li>Achieved 99.9% system uptime</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="expertise">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Industry Expertise</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Certified and experienced across multiple sectors</p>
+        </div>
+        <div class="expertise-grid">
+          <div class="expertise-card">
+            <div class="expertise-badge">Financial Services</div>
+            <p>Banking, insurance, and fintech solutions with compliance expertise.</p>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-badge">Government & Public Sector</div>
+            <p>Strategic planning and digital transformation for government agencies.</p>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-badge">Manufacturing & Construction</div>
+            <p>Supply chain optimization and project management expertise.</p>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-badge">Healthcare & NGO</div>
+            <p>Impact-driven solutions for healthcare organizations and nonprofits.</p>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-badge">Technology & Startups</div>
+            <p>Growth strategies and tech enablement for innovative companies.</p>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-badge">Education & Research</div>
+            <p>Capacity building and research support for educational institutions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Common questions about our services</p>
+        </div>
+        <div class="faq-accordion">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>What is the typical project timeline?</h3>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Project timelines vary based on scope and complexity. Initial consultations typically take 2-4 weeks, with implementation ranging from 3 months to 2 years depending on your requirements.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Do you provide ongoing support after implementation?</h3>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, we offer comprehensive post-implementation support packages including maintenance, training, and optimization to ensure sustained success.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>How do you ensure project success?</h3>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>We employ a proven methodology combining stakeholder engagement, clear milestones, regular reporting, and dedicated project teams to ensure your success.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Can you work with organizations of all sizes?</h3>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Absolutely. Our scalable solutions work for startups, SMEs, and large enterprises. We customize our approach to match your organization's unique needs.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>What makes MWITONGO different from competitors?</h3>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>We combine deep industry expertise with innovative technology solutions, backed by a team dedicated to your success. Our proven track record speaks for itself.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>How do we get started?</h3>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Contact us today for a free consultation. We'll discuss your needs, provide a tailored proposal, and outline a clear path to success.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="container">
+        <div class="newsletter-content">
+          <h2>Stay Updated with Industry Insights</h2>
+          <p>Subscribe to our newsletter for exclusive updates, case studies, and expert insights delivered to your inbox.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <p class="newsletter-notice">We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Transform Your Business?</h2>
+          <p>Partner with MWITONGO E&E CO. LTD for innovative solutions that drive sustainable growth and success.</p>
+          <a href="#contact" class="btn btn-primary">Get Started Today</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Contact Us</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Location</h4>
+                <p>Kigamboni Street, Nearby Roman Catholic Church</p>
+                <p>Kigamboni, Dar es Salaam, Tanzania</p>
+                <p>Postal Code: 17107</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <h4>Phone & WhatsApp</h4>
+                <p>+255 763 542 024</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <h4>Email</h4>
+                <p>e.e.eof2025@gmail.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-map">
+            <div id="map" class="map-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="certifications">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Certifications & Recognition</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Trusted by industry standards and recognized for excellence</p>
+        </div>
+        <div class="certifications-grid">
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>ISO 9001:2015 Certified</h3>
+            <p>Quality Management System - Ensuring consistent delivery of excellence</p>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>Business Excellence Award</h3>
+            <p>Recognition for innovation and outstanding service delivery</p>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>Digital Innovation Leader</h3>
+            <p>Recognized as a leading digital transformation company in East Africa</p>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>Best Consultancy Firm</h3>
+            <p>Award for consultancy excellence and client satisfaction</p>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>Project Management Excellence</h3>
+            <p>Certified PMP practitioners delivering projects on time and budget</p>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>Green Business Certified</h3>
+            <p>Committed to sustainable practices and environmental responsibility</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="achievements">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Achievements</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Milestones and accomplishments that define our success</p>
+        </div>
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <div class="achievement-number">500+</div>
+            <div class="achievement-label">Projects Delivered Successfully</div>
+            <p>Across government, private, and NGO sectors in Tanzania and beyond</p>
+          </div>
+          <div class="achievement-card">
+            <div class="achievement-number">50,000+</div>
+            <div class="achievement-label">Professionals Trained</div>
+            <p>Capacity building programs impacting organizations nationwide</p>
+          </div>
+          <div class="achievement-card">
+            <div class="achievement-number">98%</div>
+            <div class="achievement-label">Client Retention Rate</div>
+            <p>Long-term partnerships built on trust and delivered results</p>
+          </div>
+          <div class="achievement-card">
+            <div class="achievement-number">20+</div>
+            <div class="achievement-label">Years of Excellence</div>
+            <p>Two decades of continuous innovation and service delivery</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="commitment">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Commitment</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="commitment-grid">
+          <div class="commitment-card">
+            <div class="commitment-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20m9-9H3"/></svg>
+            </div>
+            <h3>Quality First</h3>
+            <p>Every project, every client interaction, every deliverable meets our highest standards of excellence.</p>
+          </div>
+          <div class="commitment-card">
+            <div class="commitment-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg>
+            </div>
+            <h3>Innovation-Driven</h3>
+            <p>Continuous research and development ensure we deliver cutting-edge solutions ahead of market trends.</p>
+          </div>
+          <div class="commitment-card">
+            <div class="commitment-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Client-Centric</h3>
+            <p>Your success is our success. We partner with you as strategic advisors, not just service providers.</p>
+          </div>
+          <div class="commitment-card">
+            <div class="commitment-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 2.2"/></svg>
+            </div>
+            <h3>Sustainable Growth</h3>
+            <p>Building long-term value through ethical practices and sustainable business solutions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>MWITONGO E&E CO. LTD</h3>
+            <p class="footer-motto">"Your Partner in Progress"</p>
+            <p>Leading consultancy and digital transformation company in Tanzania.</p>
+            <div class="social-icons">
+              <a href="#" class="social-icon" title="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="#" class="social-icon" title="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="18" cy="6" r="1" fill="currentColor"/></svg>
+              </a>
+              <a href="#" class="social-icon" title="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7a10.6 10.6 0 01-3-10z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#" class="social-icon" title="TikTok">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.89 3.5a4.5 4.5 0 0 1-3.14-1.3 4.5 4.5 0 0 1 .6 6.3 4.5 4.5 0 0 1-5.4.9v8.7a2.5 2.5 0 1 1-2.5-2.5h2.5v-3a4.5 4.5 0 1 0 8-2.5v-3c1.39.8 2.5 2.1 2.5 3.7v5.3a3.5 3.5 0 0 1-3.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#services">Management Consultancy</a></li>
+              <li><a href="#services">Digital & ICT Solutions</a></li>
+              <li><a href="#services">Research & Analysis</a></li>
+              <li><a href="#services">Training Programs</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+              <li>+255 763 542 024</li>
+              <li>e.e.eof2025@gmail.com</li>
+              <li>Kigamboni, Dar es Salaam</li>
+              <li>Company No. 609438</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 MWITONGO E&E CO. LTD. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="/landing.js"></script>
+  </body>
+</html>
