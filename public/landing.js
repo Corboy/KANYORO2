@@ -29,8 +29,60 @@ function growText() {
 headingElement.style.color = '#D4AF37';
 headingElement.style.textShadow = '0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.15)';
 
-window.addEventListener('load', () => {
+function startTyping() {
   setTimeout(typeText, 500);
+}
+
+function playWelcomeAnimation() {
+  const overlay = document.getElementById('welcomeOverlay');
+  const skipBtn = document.getElementById('skipIntro');
+
+  if (!overlay) {
+    startTyping();
+    return;
+  }
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    overlay.remove();
+    startTyping();
+    return;
+  }
+
+  const alreadyPlayed = localStorage.getItem('introPlayed') === 'true';
+  if (alreadyPlayed) {
+    overlay.remove();
+    startTyping();
+    return;
+  }
+
+  const logo = overlay.querySelector('.welcome-logo span');
+  const tagline = overlay.querySelector('.welcome-tagline');
+
+  // animate
+  logo.classList.add('welcome-logo-animate');
+  tagline.classList.add('welcome-tagline-animate');
+
+  let finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    overlay.classList.add('welcome-overlay-hide');
+    overlay.setAttribute('aria-hidden', 'true');
+    localStorage.setItem('introPlayed', 'true');
+    overlay.addEventListener('animationend', () => {
+      if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    });
+    setTimeout(startTyping, 450);
+  };
+
+  skipBtn.addEventListener('click', finish);
+  // auto-finish after animation sequence (appears after 3s)
+  setTimeout(finish, 3000);
+}
+
+window.addEventListener('load', () => {
+  playWelcomeAnimation();
 });
 
 const navbar = document.querySelector('.navbar');
@@ -158,6 +210,9 @@ if (newsletterForm) {
     button.style.background = 'var(--gold)';
     button.disabled = true;
 
+    // launch gentle confetti
+    fireConfetti();
+
     setTimeout(() => {
       newsletterForm.reset();
       button.textContent = originalText;
@@ -165,6 +220,96 @@ if (newsletterForm) {
       button.disabled = false;
     }, 3000);
   });
+}
+
+/* Theme toggle */
+const themeToggle = document.querySelector('.theme-toggle');
+function setTheme(isLight) {
+  if (isLight) {
+    document.body.classList.add('light-theme');
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.body.classList.remove('light-theme');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+if (themeToggle) {
+  // initialize theme
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') setTheme(true);
+
+  themeToggle.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-theme');
+    setTheme(isLight);
+  });
+}
+
+/* Scroll progress */
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  if (progressBar) {
+    progressBar.style.width = scrolled + '%';
+  }
+});
+
+/* Staff card tilt */
+const staffCards = document.querySelectorAll('.staff-card');
+staffCards.forEach(card => {
+  card.classList.add('tilt');
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const midX = rect.width / 2;
+    const midY = rect.height / 2;
+    const rotateY = ((x - midX) / midX) * 6; // degrees
+    const rotateX = -((y - midY) / midY) * 6;
+    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* Confetti */
+function fireConfetti() {
+  const colors = ['#D4AF37','#ffdd57','#ffd6a5','#fed7aa','#ffe8c2'];
+  const confetti = document.createElement('div');
+  confetti.style.position = 'fixed';
+  confetti.style.left = '50%';
+  confetti.style.top = '20%';
+  confetti.style.pointerEvents = 'none';
+  confetti.style.zIndex = 2000;
+  document.body.appendChild(confetti);
+
+  for (let i = 0; i < 40; i++) {
+    const piece = document.createElement('div');
+    const size = Math.floor(Math.random() * 8) + 6;
+    const left = (Math.random() - 0.5) * 400;
+    const rotate = Math.random() * 360;
+    piece.style.position = 'absolute';
+    piece.style.width = `${size}px`;
+    piece.style.height = `${size * 0.6}px`;
+    piece.style.left = `${left}px`;
+    piece.style.top = '0px';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.borderRadius = '2px';
+    piece.style.transform = `rotate(${rotate}deg)`;
+    piece.style.opacity = '1';
+    piece.style.transition = `transform ${1.5 + Math.random()}s cubic-bezier(.2,.8,.2,1), opacity 0.6s linear`;
+
+    confetti.appendChild(piece);
+
+    setTimeout(() => {
+      piece.style.transform = `translateY(${300 + Math.random() * 300}px) translateX(${left * 2}px) rotate(${rotate + 360}deg)`;
+      piece.style.opacity = '0';
+    }, 50 + Math.random() * 90);
+  }
+
+  setTimeout(() => {
+    document.body.removeChild(confetti);
+  }, 2500);
 }
 
 function createFloatingParticles() {
