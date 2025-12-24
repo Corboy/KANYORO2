@@ -1994,3 +1994,170 @@ section {
     font-size: 2.5rem;
   }
 }
+
+.quality-assurance {
+  background: linear-gradient(135deg, var(--dark-blue) 0%, #1a3a52 100%);
+  padding: 5rem 0;
+}
+
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.qa-card {
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.qa-card:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-5px);
+}
+
+.qa-number {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.qa-card h3 {
+  color: var(--white);
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.qa-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.partnerships {
+  background: var(--dark-blue-darker);
+  padding: 5rem 0;
+}
+
+.partnerships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.partner-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+.partner-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.partner-card h3 {
+  color: var(--white);
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.partner-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.support-channels {
+  background: linear-gradient(135deg, var(--dark-blue-lighter) 0%, var(--dark-blue) 100%);
+  padding: 5rem 0;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.support-card {
+  background: rgba(10, 26, 47, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.support-card:hover {
+  background: rgba(10, 26, 47, 0.8);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateY(-5px);
+}
+
+.support-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.support-card h3 {
+  color: var(--white);
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.support-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.support-detail {
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 0.95rem !important;
+  margin-top: 1rem !important;
+}
+
+@media (max-width: 768px) {
+  .quality-assurance,
+  .partnerships,
+  .support-channels {
+    padding: 3rem 0;
+  }
+
+  .qa-grid,
+  .partnerships-grid,
+  .support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qa-card,
+  .partner-card,
+  .support-card {
+    padding: 1.5rem;
+  }
+}

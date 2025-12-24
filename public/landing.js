@@ -1,65 +1,32 @@
-const companyName = "MWITONGO E&E CO. LTD";
-const typingSpeed = 100;
-const growDuration = 800;
-const colorTransitionDuration = 1500;
-
-let charIndex = 0;
 const headingElement = document.getElementById('animatedHeading');
-
-function typeText() {
-  if (charIndex < companyName.length) {
-    headingElement.textContent += companyName.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeText, typingSpeed);
-  } else {
-    setTimeout(growText, 300);
-  }
-}
-
-function growText() {
-  headingElement.style.transition = `transform ${growDuration}ms cubic-bezier(0.34, 1.56, 0.64, 1)`;
-  headingElement.style.transform = 'scale(1.08)';
-
-  setTimeout(() => {
-    headingElement.style.transition = `transform ${growDuration * 0.6}ms cubic-bezier(0.34, 1.56, 0.64, 1)`;
-    headingElement.style.transform = 'scale(1)';
-  }, growDuration);
-}
-
-headingElement.style.color = '#D4AF37';
-headingElement.style.textShadow = '0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.15)';
-
-function startTyping() {
-  setTimeout(typeText, 500);
+if (headingElement) {
+  headingElement.style.color = '#D4AF37';
+  headingElement.style.textShadow = '0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.15)';
 }
 
 function playWelcomeAnimation() {
   const overlay = document.getElementById('welcomeOverlay');
-  const skipBtn = document.getElementById('skipIntro');
 
   if (!overlay) {
-    startTyping();
     return;
   }
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
     overlay.remove();
-    startTyping();
     return;
   }
 
   const alreadyPlayed = localStorage.getItem('introPlayed') === 'true';
   if (alreadyPlayed) {
     overlay.remove();
-    startTyping();
     return;
   }
 
   const logo = overlay.querySelector('.welcome-logo span');
   const tagline = overlay.querySelector('.welcome-tagline');
+  const skipBtn = overlay.querySelector('.skip-intro');
 
-  // animate
   logo.classList.add('welcome-logo-animate');
   tagline.classList.add('welcome-tagline-animate');
 
@@ -73,11 +40,9 @@ function playWelcomeAnimation() {
     overlay.addEventListener('animationend', () => {
       if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     });
-    setTimeout(startTyping, 450);
   };
 
   skipBtn.addEventListener('click', finish);
-  // auto-finish after animation sequence (appears after 3s)
   setTimeout(finish, 3000);
 }
 
