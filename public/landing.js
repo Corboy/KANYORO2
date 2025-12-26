@@ -140,47 +140,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-function animateHeroOnLoad() {
-  const heroBadge = document.querySelector('.hero-badge');
-  const mainHeading = document.querySelector('.main-heading');
-  const heroSubtitle = document.querySelector('.hero-subtitle');
-  const heroFeatures = document.querySelector('.hero-features');
-  const heroButtons = document.querySelector('.hero-buttons');
-
-  if (heroBadge) {
-    heroBadge.style.opacity = '0';
-    heroBadge.style.transform = 'translateY(-20px)';
-    heroBadge.style.animation = 'fadeSlideDown 0.8s ease-out 0.2s forwards';
-  }
-
-  if (mainHeading) {
-    mainHeading.style.opacity = '0';
-    mainHeading.style.transform = 'translateY(-20px)';
-    mainHeading.style.animation = 'fadeSlideDown 0.8s ease-out 0.4s forwards';
-  }
-
-  if (heroSubtitle) {
-    heroSubtitle.style.opacity = '0';
-    heroSubtitle.style.transform = 'translateY(-20px)';
-    heroSubtitle.style.animation = 'fadeSlideDown 0.8s ease-out 0.6s forwards';
-  }
-
-  if (heroFeatures) {
-    heroFeatures.style.opacity = '0';
-    heroFeatures.style.transform = 'translateY(-20px)';
-    heroFeatures.style.animation = 'fadeSlideDown 0.8s ease-out 0.8s forwards';
-  }
-
-  if (heroButtons) {
-    heroButtons.style.opacity = '0';
-    heroButtons.style.transform = 'translateY(-20px)';
-    heroButtons.style.animation = 'fadeSlideDown 0.8s ease-out 1s forwards';
-  }
-}
-
-window.addEventListener('load', () => {
-  animateHeroOnLoad();
-});
 
 const newsletterForm = document.getElementById('newsletterForm');
 if (newsletterForm) {
