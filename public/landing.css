@@ -26,6 +26,17 @@ body {
   overflow-x: hidden;
 }
 
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Light theme override */
 body.light-theme {
   --dark-blue: #f7faff;
