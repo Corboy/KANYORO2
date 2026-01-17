@@ -12,6 +12,10 @@
   --white: #FFFFFF;
   --light-gray: #F5F5F5;
   --gray: #CCCCCC;
+  /* logo sizing variables for easy tuning */
+  --logo-nav-size: 80px; /* navbar */
+  --logo-welcome-size: 140px; /* welcome overlay */
+  --logo-footer-size: 96px; /* footer */
 }
 
 html {
@@ -82,7 +86,7 @@ body.light-theme {
 }
 .welcome-logo img {
   /* larger welcome logo for stronger brand presence */
-  height: 120px;
+  height: var(--logo-welcome-size);
   width: auto;
   display: block;
   margin: 0 auto;
@@ -207,26 +211,34 @@ body.light-theme .theme-toggle {
 }
 
 .logo img {
-  /* make navbar logo larger but keep aspect ratio */
-  height: 64px;
+  /* make navbar logo larger but keep aspect ratio; controlled via var */
+  height: var(--logo-nav-size);
   width: auto;
   display: block;
 }
 
 /* Footer logo placement (used in footer company section) */
 .footer-logo {
-  height: 72px;
+  height: var(--logo-footer-size);
   width: auto;
   display: block;
   margin-bottom: 0.5rem;
 }
 
 /* Responsive adjustments: scale logos down on small screens */
-@media (max-width: 768px) {
-  .logo img { height: 48px; }
-  .welcome-logo img { height: 80px; }
-  .footer-logo { height: 56px; }
+@media (max-width: 1024px) {
+  /* Medium screens: slightly reduce logos */
+  :root { --logo-nav-size: 64px; --logo-welcome-size: 110px; --logo-footer-size: 72px; }
 }
+
+@media (max-width: 768px) {
+  /* Mobile: compact sizes */
+  :root { --logo-nav-size: 48px; --logo-welcome-size: 80px; --logo-footer-size: 56px; }
+}
+
+/* Fine tune navbar vertical alignment when logo is large */
+.nav-content { align-items: center; }
+.navbar { padding-top: 0.9rem; padding-bottom: 0.9rem; }
 
 .nav-links {
   display: flex;
