@@ -5,6 +5,10 @@ MWITONGO E&E — Deployment & Configuration Guide
 
 Replace `SITE_ID` in the badge URL with your Netlify site's API ID (the badge image still requires the site API ID to work).
 
+[![Deploy workflow](https://github.com/Corboy/KANYORO2/actions/workflows/deploy-netlify.yml/badge.svg)](https://github.com/Corboy/KANYORO2/actions/workflows/deploy-netlify.yml)
+
+This Actions badge shows the status of the `deploy-netlify.yml` workflow (build + optional deploy). The workflow will only perform a Netlify publish when `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` secrets are present in the repository.
+
 This README explains how to finish the production setup for the site and how the automation added to this repository works.
 
 1) Formspree (newsletter / contact form)
