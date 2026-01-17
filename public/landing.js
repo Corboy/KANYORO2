@@ -292,7 +292,23 @@ function playWelcomeAnimation() {
 }
 
 window.addEventListener('load', () => {
-  playWelcomeAnimation();
+  // If user prefers reduced motion, don't delay or show the overlay
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    const ov = document.getElementById('welcomeOverlay');
+    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    return;
+  }
+
+  // Wait 5 seconds, then reveal the overlay and start the animation sequence.
+  setTimeout(() => {
+    const overlay = document.getElementById('welcomeOverlay');
+    if (!overlay) return;
+    // add visible class so CSS can transition it in
+    overlay.classList.add('welcome-overlay-visible');
+    // start the existing animation flow
+    playWelcomeAnimation();
+  }, 5000);
 });
 
 const navbar = document.querySelector('.navbar');

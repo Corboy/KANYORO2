@@ -69,6 +69,9 @@ body.light-theme {
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.2,.8,.2,1);
   will-change: opacity, transform;
 }
+/* start hidden to allow controlled delayed appearance */
+#welcomeOverlay { opacity: 0; pointer-events: none; transform: scale(1.02); }
+.welcome-overlay-visible { opacity: 1; pointer-events: auto; transform: scale(1); }
 #welcomeOverlay .welcome-inner {
   text-align: center;
   color: var(--gold);
