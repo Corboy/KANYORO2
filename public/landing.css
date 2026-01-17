@@ -13,9 +13,9 @@
   --light-gray: #F5F5F5;
   --gray: #CCCCCC;
   /* logo sizing variables for easy tuning */
-  --logo-nav-size: 80px; /* navbar */
-  --logo-welcome-size: 140px; /* welcome overlay */
-  --logo-footer-size: 96px; /* footer */
+  --logo-nav-size: 120px; /* navbar - increased per request */
+  --logo-welcome-size: 220px; /* welcome overlay - increased for strong brand presence */
+  --logo-footer-size: 160px; /* footer */
 }
 
 html {
@@ -228,17 +228,18 @@ body.light-theme .theme-toggle {
 /* Responsive adjustments: scale logos down on small screens */
 @media (max-width: 1024px) {
   /* Medium screens: slightly reduce logos */
-  :root { --logo-nav-size: 64px; --logo-welcome-size: 110px; --logo-footer-size: 72px; }
+  :root { --logo-nav-size: 96px; --logo-welcome-size: 180px; --logo-footer-size: 128px; }
 }
 
 @media (max-width: 768px) {
   /* Mobile: compact sizes */
-  :root { --logo-nav-size: 48px; --logo-welcome-size: 80px; --logo-footer-size: 56px; }
+  :root { --logo-nav-size: 64px; --logo-welcome-size: 110px; --logo-footer-size: 80px; }
 }
 
 /* Fine tune navbar vertical alignment when logo is large */
 .nav-content { align-items: center; }
-.navbar { padding-top: 0.9rem; padding-bottom: 0.9rem; }
+/* increase navbar vertical space to fit larger logo nicely */
+.navbar { padding-top: 1.1rem; padding-bottom: 1.1rem; }
 
 .nav-links {
   display: flex;
