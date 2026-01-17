@@ -16,6 +16,7 @@
   --logo-nav-size: 120px; /* navbar - increased per request */
   --logo-welcome-size: 220px; /* welcome overlay - increased for strong brand presence */
   --logo-footer-size: 160px; /* footer */
+  --logo-hero-size: 120px; /* hero decorative */
 }
 
 /* Accessibility: visible focus styles */
@@ -335,6 +336,32 @@ body.light-theme .theme-toggle {
   background: linear-gradient(135deg, var(--dark-blue-darker) 0%, var(--dark-blue) 50%, var(--dark-blue-lighter) 100%);
   padding-top: 80px;
   overflow: hidden;
+}
+
+/* Decorative hero logo (top-right) */
+.hero-logo {
+  position: absolute;
+  top: 24px;
+  right: 40px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.95;
+  transform-origin: center;
+}
+.hero-logo img {
+  height: var(--logo-hero-size);
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+}
+
+@media (max-width: 1024px) {
+  :root { --logo-hero-size: 96px; }
+}
+
+@media (max-width: 768px) {
+  /* hide decorative hero logo on small screens for clarity */
+  .hero-logo { display: none; }
 }
 
 .hero::before {
