@@ -18,6 +18,31 @@
   --logo-footer-size: 160px; /* footer */
 }
 
+/* Accessibility: visible focus styles */
+*:focus { outline: none; }
+:focus-visible { outline: 3px solid rgba(212,175,55,0.9); outline-offset: 2px; border-radius: 6px; }
+
+/* Improve skip link visibility when focused */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 20px;
+  top: 20px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: var(--gold);
+  color: var(--dark-blue);
+  z-index: 2200;
+  border-radius: 6px;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -264,15 +289,6 @@ body.light-theme .theme-toggle {
   transition: color 0.3s ease;
   position: relative;
 }
-
-/* During intro we keep nav hidden and then animate items in */
-.intro-active .nav-links li a,
-.intro-active .logo {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-.nav-entrance { transition: transform 360ms cubic-bezier(.2,.9,.25,1), opacity 360ms ease; opacity: 1; transform: translateY(0); }
 
 .nav-links a::after {
   content: '';
@@ -1880,21 +1896,6 @@ section {
   border-top: 1px solid rgba(212, 175, 55, 0.1);
   color: var(--gray);
 }
-
-/* subtle replay intro button */
-.replay-intro {
-  margin-left: 0.75rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  background: transparent;
-  color: rgba(255,255,255,0.9);
-  border: none;
-  cursor: pointer;
-  font-size: 0.92rem;
-  opacity: 0.85;
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-.replay-intro:hover { opacity: 1; transform: translateY(-2px); }
 
 @media (max-width: 968px) {
   .nav-links {

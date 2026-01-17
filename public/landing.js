@@ -226,9 +226,6 @@ function playWelcomeAnimation() {
     try { localStorage.setItem('introPlayed', 'true'); } catch (e) {}
     overlay.addEventListener('animationend', () => {
       if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-      try { document.body.classList.remove('intro-active'); } catch (e) {}
-      // notify other parts of the UI that the intro finished
-      try { document.dispatchEvent(new Event('introFinished')); } catch (e) {}
     });
   };
 
@@ -309,8 +306,6 @@ window.addEventListener('load', () => {
     if (!overlay) return;
     // add visible class so CSS can transition it in
     overlay.classList.add('welcome-overlay-visible');
-    // mark body so UI elements (nav) can animate in after intro
-    try { document.body.classList.add('intro-active'); } catch (e) {}
     // start the existing animation flow
     playWelcomeAnimation();
   }, 5000);
@@ -337,41 +332,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     navLinks.classList.remove('active');
     mobileToggle.classList.remove('active');
-  });
-});
-
-// Replay helper: reinserts the overlay from the stored template and plays the intro
-function replayIntro() {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  try { localStorage.removeItem('introPlayed'); } catch (e) {}
-
-  // if overlay already exists, just play it
-  if (document.getElementById('welcomeOverlay')) return playWelcomeAnimation();
-
-  const tpl = window.__welcomeOverlayTemplate;
-  if (!tpl) return;
-
-  const container = document.createElement('div');
-  container.innerHTML = tpl.trim();
-  const overlayEl = container.firstElementChild;
-  if (!overlayEl) return;
-  document.body.appendChild(overlayEl);
-
-  // reveal and start after tiny timeout
-  setTimeout(() => {
-    try { document.body.classList.add('intro-active'); } catch (e) {}
-    overlayEl.classList.add('welcome-overlay-visible');
-    playWelcomeAnimation();
-  }, 80);
-}
-
-// When the intro finishes, animate nav items in sequence
-document.addEventListener('introFinished', () => {
-  const items = document.querySelectorAll('.nav-links li, .logo');
-  items.forEach((el, i) => {
-    setTimeout(() => el.classList.add('nav-entrance'), i * 80);
   });
 });
 
@@ -438,7 +398,7 @@ function assignStaffPhotos() {
           img.src = `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(name)}`;
         }
       });
-      imageWrap.appendChild(img);
+  imageWrap.appendChild(img);
 
       // make image clickable to open WhatsApp with a prefilled message for that person
       const phone = '+255763542024';
@@ -451,6 +411,19 @@ function assignStaffPhotos() {
       imageWrap.setAttribute('role', 'button');
       imageWrap.setAttribute('tabindex', '0');
       imageWrap.setAttribute('aria-label', `Contact ${name} on WhatsApp`);
+
+      // Attempt to prefetch and use blob URL to improve reliability and caching
+      (async function prefetch() {
+        try {
+          const resp = await fetch(img.src, { mode: 'cors', cache: 'force-cache' });
+          if (!resp.ok) throw new Error('prefetch-failed');
+          const blob = await resp.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          img.src = objectUrl;
+        } catch (e) {
+          // ignore and fall back to original src (browser will handle caching)
+        }
+      })();
       imageWrap.addEventListener('click', openWhatsapp);
       imageWrap.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { openWhatsapp(); } });
     }
@@ -521,26 +494,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 const newsletterForm = document.getElementById('newsletterForm');
 if (newsletterForm) {
+  // Wire the form to Formspree (replace `YOUR_FORMSPREE_ID` with your real endpoint)
   newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = newsletterForm.querySelector('input[type="email"]').value;
-
+    const email = newsletterForm.querySelector('input[name="email"]').value;
     const button = newsletterForm.querySelector('button');
     const originalText = button.textContent;
-
-    button.textContent = 'Subscribed!';
-    button.style.background = 'var(--gold)';
     button.disabled = true;
+    button.textContent = 'Sending...';
 
-    // launch gentle confetti
-    fireConfetti();
+    const endpoint = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
 
-    setTimeout(() => {
-      newsletterForm.reset();
-      button.textContent = originalText;
-      button.style.background = '';
-      button.disabled = false;
-    }, 3000);
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    }).then(res => {
+      if (res.ok) {
+        button.textContent = 'Subscribed!';
+        button.style.background = 'var(--gold)';
+        try { fireConfetti(); } catch (e) {}
+        setTimeout(() => { newsletterForm.reset(); button.textContent = originalText; button.style.background = ''; button.disabled = false; }, 2500);
+      } else {
+        return res.text().then(text => Promise.reject(new Error(text || 'Failed')));
+      }
+    }).catch(err => {
+      console.error('Subscribe error', err);
+      button.textContent = 'Try again';
+      setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2000);
+    });
   });
 }
 
@@ -744,15 +726,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(personalizeLeadershipButtons, 300);
   // try to insert provided local photo for John Kanyoro and crop to face
   setTimeout(assignJohnPhoto, 350);
-  // preserve the welcome overlay HTML so we can replay the intro on demand
-  try {
-    const welcomeOverlay = document.getElementById('welcomeOverlay');
-    if (welcomeOverlay) window.__welcomeOverlayTemplate = welcomeOverlay.outerHTML;
-  } catch (e) { window.__welcomeOverlayTemplate = null; }
-
-  // wire up replay button (if present in footer)
-  const replayBtn = document.getElementById('replayIntro');
-  if (replayBtn) replayBtn.addEventListener('click', (ev) => { ev.preventDefault(); replayIntro(); });
 });
 
 // Insert local John Kanyoro photo (expects /avatars/john-kanyoro.jpg in the public folder)

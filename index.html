@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MWITONGO E&E CO. LTD - Your Partner in Progress</title>
     <link rel="stylesheet" href="/landing.css" />
+    <!-- Favicon & Manifest -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A1A2F">
+    <!-- Open Graph / SEO -->
+    <meta property="og:title" content="MWITONGO E&E CO. LTD - Your Partner in Progress" />
+    <meta property="og:description" content="Leading consultancy and digital transformation company empowering organizations across Tanzania." />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MWITONGO E&E CO. LTD",
+      "url": "https://example.com/",
+      "logo": "https://example.com/logo.png",
+      "sameAs": []
+    }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -14,10 +35,7 @@
     <a class="skip-link" href="#home">Skip to content</a>
     <div id="welcomeOverlay" aria-hidden="false">
       <div class="welcome-inner" role="region" aria-label="Welcome">
-     <div class="welcome-logo"><img src="/logo.png" alt="MWITONGO E&E"
-       srcset="/logo-sm.png 240w, /logo.png 480w, /logo@2x.png 960w"
-       sizes="(max-width:520px) 80px, (max-width:1024px) 140px, 220px"
-     /><small>CO. LTD</small></div>
+        <div class="welcome-logo"><img src="/logo.png" alt="MWITONGO E&E" /><small>CO. LTD</small></div>
         <div class="welcome-tagline">Your Partner in Progress</div>
         <button id="skipIntro" class="skip-intro" aria-label="Skip introduction">Skip</button>
       </div>
@@ -28,10 +46,7 @@
       <div class="container">
         <div class="nav-content">
           <a class="logo" href="#home" aria-label="MWITONGO E&E home">
-            <img src="/logo.png" alt="MWITONGO E&E logo"
-                 srcset="/logo-sm.png 240w, /logo.png 480w, /logo@2x.png 960w"
-                 sizes="(max-width:520px) 48px, (max-width:1024px) 96px, 120px"
-            />
+            <img src="/logo.png" alt="MWITONGO E&E logo" />
           </a>
           <ul class="nav-links">
             <li><a href="#home">Home</a></li>
@@ -726,11 +741,11 @@
 
     <section class="newsletter">
       <div class="container">
-        <div class="newsletter-content">
+          <div class="newsletter-content">
           <h2>Stay Updated with Industry Insights</h2>
           <p>Subscribe to our newsletter for exclusive updates, case studies, and expert insights delivered to your inbox.</p>
           <form class="newsletter-form" id="newsletterForm">
-            <input type="email" placeholder="Enter your email address" required>
+            <input type="email" name="email" placeholder="Enter your email address" required>
             <button type="submit" class="btn btn-primary">Subscribe</button>
           </form>
           <p class="newsletter-notice">We respect your privacy. Unsubscribe anytime.</p>
@@ -1042,10 +1057,7 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-      <img src="/logo.png" alt="MWITONGO E&E logo" class="footer-logo"
-        srcset="/logo-sm.png 240w, /logo.png 480w, /logo@2x.png 960w"
-        sizes="(max-width:520px) 56px, (max-width:1024px) 128px, 160px"
-      />
+            <img src="/logo.png" alt="MWITONGO E&E logo" class="footer-logo" />
             <h3>MWITONGO E&E CO. LTD</h3>
             <p class="footer-motto">"Your Partner in Progress"</p>
             <p>Leading consultancy and digital transformation company in Tanzania.</p>
@@ -1094,8 +1106,6 @@
         </div>
         <div class="footer-bottom">
           <p>&copy; 2025 MWITONGO E&E CO. LTD. All rights reserved.</p>
-          <!-- replay intro control for demos -->
-          <button id="replayIntro" class="replay-intro" type="button" aria-label="Replay introduction">Replay Intro</button>
         </div>
       </div>
     </footer>

@@ -1,0 +1,14 @@
+{
+  "name": "MWITONGO E&E CO. LTD",
+  "short_name": "MWITONGO",
+  "description": "MWITONGO E&E CO. LTD - Your Partner in Progress",
+  "icons": [
+    { "src": "/logo-sm.png", "sizes": "240x240", "type": "image/png" },
+    { "src": "/logo.png", "sizes": "480x480", "type": "image/png" },
+    { "src": "/logo@2x.png", "sizes": "960x960", "type": "image/png" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0A1A2F",
+  "background_color": "#0A1A2F"
+}
