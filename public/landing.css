@@ -239,6 +239,42 @@ body.light-theme .theme-toggle {
   align-items: center;
 }
 
+/* Subtle entrance for the navbar */
+.navbar { transform: translateY(-8px); opacity: 0; transition: transform 420ms cubic-bezier(.16,.9,.24,1), opacity 420ms ease; }
+.navbar.nav-enter { transform: translateY(0); opacity: 1; }
+
+/* Hero heading underline reveal */
+.main-heading { position: relative; overflow: visible; }
+.main-heading::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  height: 6px;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(212,175,55,0.4));
+  border-radius: 4px;
+  transition: width 700ms cubic-bezier(.22,.8,.3,1);
+}
+.main-heading.animate-underline::after { width: 56%; }
+
+/* CTA pulse: subtle attention without being flashy */
+.cta-pulse { animation: ctaPulse 2400ms ease-in-out infinite; }
+@keyframes ctaPulse {
+  0% { transform: translateY(0) scale(1); box-shadow: 0 6px 18px rgba(212,175,55,0.12); }
+  50% { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 30px rgba(212,175,55,0.18); }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 6px 18px rgba(212,175,55,0.12); }
+}
+
+/* Generic fade-up animation helper */
+.animate-fadeUp { opacity: 0; transform: translateY(18px); }
+.animate-fadeUp.in-view { opacity: 1; transform: translateY(0); transition: opacity 600ms ease, transform 600ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar, .main-heading::after, .cta-pulse, .animate-fadeUp { transition: none !important; animation: none !important; }
+}
+
 .logo {
   display: inline-flex;
   align-items: center;
@@ -661,20 +697,6 @@ body.light-theme .theme-toggle {
   background: rgba(10,26,47,0.6);
   color: var(--white);
 }
-.staff-controls select#staffSort {
-  padding: 0.6rem 0.8rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(10,26,47,0.6);
-  color: var(--white);
-}
-.btn-small#exportStaffCsv { padding:0.55rem 0.9rem; }
-
-.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
-
-/* Read more */
-.staff-bio.truncated { display: block; max-height: 3.6rem; overflow: hidden; position: relative; }
-.read-more { display:inline-block; margin-top:0.5rem; background:transparent; border:1px solid rgba(255,255,255,0.06); padding:0.35rem 0.6rem; border-radius:8px; cursor:pointer; }
 .staff-tags { display:flex; gap:0.5rem; flex-wrap:wrap; }
 .tag-btn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color:var(--white); padding:0.45rem 0.8rem; border-radius:999px; cursor:pointer; font-weight:600; }
 .tag-btn.active { background: var(--gold); color: var(--dark-blue); border-color: var(--gold); }
@@ -712,13 +734,6 @@ body.light-theme .theme-toggle {
 .staff-modal .contact-btn { padding:0.6rem 0.95rem; border-radius:999px; font-weight:700; text-decoration:none; }
 .staff-modal .contact-wa { background: linear-gradient(180deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; }
 .staff-modal .contact-linkedin { background: #0e76a8; color:#fff; border:none; }
-
-/* contact form styles */
-.contact-form-wrap h3 { color: var(--white); margin-bottom:0.5rem; }
-.contact-form { display:flex; flex-direction:column; gap:0.5rem; }
-.contact-form label { color:var(--gray); font-size:0.9rem; }
-.contact-form input, .contact-form textarea { padding:0.7rem 0.9rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background: rgba(10,26,47,0.6); color:var(--white); }
-.contact-form button { align-self:flex-start; }
 
 @media (max-width: 768px) {
   .staff-modal { flex-direction: column; padding: 1rem; }

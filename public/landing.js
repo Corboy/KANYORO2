@@ -311,6 +311,38 @@ window.addEventListener('load', () => {
   }, 5000);
 });
 
+// tasteful, low-cost animations applied on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', () => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  // animate navbar in
+  setTimeout(() => {
+    const nav = document.querySelector('.navbar');
+    if (nav) nav.classList.add('nav-enter');
+  }, 120);
+
+  // underline the main heading
+  setTimeout(() => {
+    const h = document.getElementById('animatedHeading') || document.querySelector('.main-heading');
+    if (h) h.classList.add('animate-underline');
+  }, 320);
+
+  // pulse primary CTAs gently
+  setTimeout(() => {
+    document.querySelectorAll('.hero-buttons .btn-primary').forEach((b) => b.classList.add('cta-pulse'));
+  }, 900);
+
+  // stagger fade-up for key blocks that the IntersectionObserver will reveal
+  const animated = document.querySelectorAll('.service-card, .why-card, .structure-card, .mv-card, .stat-card, .testimonial-card, .team-card, .timeline-item, .staff-card');
+  animated.forEach((el, i) => {
+    // add helper class and a staggered transition delay; IntersectionObserver will toggle in-view
+    el.classList.add('animate-fadeUp');
+    const delay = Math.min(400, i * 60);
+    el.style.transitionDelay = `${delay}ms`;
+  });
+});
+
 const navbar = document.querySelector('.navbar');
 const mobileToggle = document.querySelector('.mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -738,7 +770,6 @@ function initializeStaffUI() {
   const tagContainer = document.getElementById('staffTags');
   const staffGrid = document.querySelector('.experienced-staff .staff-grid');
   let activeTag = 'all';
-  let activeLocation = 'all';
 
   function filterStaff() {
     const q = (searchInput && searchInput.value || '').trim().toLowerCase();
@@ -773,15 +804,6 @@ function initializeStaffUI() {
     const allBtn = tagContainer.querySelector('.tag-btn[data-tag="all"]'); if (allBtn) allBtn.classList.add('active');
   }
 
-  // location filter
-  const locationSelect = document.getElementById('staffLocation');
-  if (locationSelect) {
-    locationSelect.addEventListener('change', () => {
-      activeLocation = locationSelect.value || 'all';
-      filterStaff();
-    });
-  }
-
   if (searchInput) {
     let timeout;
     searchInput.addEventListener('input', () => {
@@ -790,78 +812,6 @@ function initializeStaffUI() {
     });
     searchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { searchInput.value = ''; filterStaff(); } });
   }
-
-  // keyboard shortcut: press 'f' to focus the staff search (unless typing already)
-  document.addEventListener('keydown', (e) => {
-    const tag = e.target && e.target.tagName && e.target.tagName.toLowerCase();
-    if (e.key === 'f' && tag !== 'input' && tag !== 'textarea') {
-      e.preventDefault();
-      if (searchInput) searchInput.focus();
-    }
-  });
-
-  // sorting
-  const sortSelect = document.getElementById('staffSort');
-  if (sortSelect) {
-    sortSelect.addEventListener('change', () => {
-      const val = sortSelect.value || 'name';
-      const cards = Array.from(staffGrid.querySelectorAll('.staff-card'));
-      cards.sort((a,b) => {
-        if (val === 'name') {
-          return (a.dataset.name || a.querySelector('h3').textContent).localeCompare(b.dataset.name || b.querySelector('h3').textContent);
-        } else if (val === 'role') {
-          const ra = (a.querySelector('.staff-position') && a.querySelector('.staff-position').textContent) || '';
-          const rb = (b.querySelector('.staff-position') && b.querySelector('.staff-position').textContent) || '';
-          return ra.localeCompare(rb);
-        } else if (val === 'tags') {
-          const ta = (a.dataset.tags||''); const tb = (b.dataset.tags||'');
-          return ta.localeCompare(tb);
-        }
-        return 0;
-      });
-      // re-append in order
-      cards.forEach(c => staffGrid.appendChild(c));
-    });
-  }
-
-  // Export staff list to CSV
-  const exportBtn = document.getElementById('exportStaffCsv');
-  if (exportBtn) {
-    exportBtn.addEventListener('click', () => {
-      const rows = [['Name','Role','Tags','Bio']];
-      document.querySelectorAll('.experienced-staff .staff-card').forEach(card => {
-        const name = card.dataset.name || (card.querySelector('h3') && card.querySelector('h3').textContent) || '';
-        const role = card.querySelector('.staff-position') ? card.querySelector('.staff-position').textContent : '';
-        const tags = card.dataset.tags || '';
-        const bio = card.querySelector('.staff-bio') ? card.querySelector('.staff-bio').textContent.replace(/\n/g,' ') : '';
-        rows.push([name, role, tags, bio]);
-      });
-      const csv = rows.map(r => r.map(cell => '"' + String(cell).replace(/"/g,'""') + '"').join(',')).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'staff-list.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-  }
-
-  // Read-more toggles for long bios
-  document.querySelectorAll('.staff-bio').forEach(p => {
-    const txt = p.textContent.trim();
-    const limit = 140;
-    if (txt.length > limit) {
-      const short = txt.slice(0, limit).trim() + '…';
-      p.dataset.full = txt;
-      p.textContent = short;
-      p.classList.add('truncated');
-      const moreBtn = document.createElement('button');
-      moreBtn.className = 'read-more'; moreBtn.type = 'button'; moreBtn.textContent = 'Read more';
-      moreBtn.addEventListener('click', () => {
-        if (moreBtn.textContent === 'Read more') {
-          p.textContent = p.dataset.full; moreBtn.textContent = 'Show less'; p.classList.remove('truncated');
-        } else { p.textContent = p.dataset.full.slice(0, limit).trim() + '…'; moreBtn.textContent = 'Read more'; p.classList.add('truncated'); }
-      });
-      p.parentNode.insertBefore(moreBtn, p.nextSibling);
-    }
-  });
 
   // Modal creation
   let modalOverlay = null;
@@ -888,7 +838,6 @@ function initializeStaffUI() {
         <div class="modal-actions">
           <a class="contact-btn contact-wa" href="#" target="_blank" rel="noreferrer">Message (WhatsApp)</a>
           <a class="contact-btn contact-linkedin" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          <button class="contact-btn contact-form-btn" type="button">Contact (Form)</button>
           <button class="close-modal">Close</button>
         </div>
       </div>
@@ -927,15 +876,6 @@ function initializeStaffUI() {
     if (focusable && focusable.length) focusable[0].focus();
     // remember last focused element
     var lastFocused = document.activeElement;
-    // wire contact form button: close modal and prefill contact form
-    const contactFormBtn = modal.querySelector('.contact-form-btn');
-    if (contactFormBtn) {
-      contactFormBtn.addEventListener('click', () => {
-        // close modal then open contact form with prefill
-        closeModal();
-        openContactFormWithPrefill(name, role);
-      });
-    }
   }
 
   // wire view-profile buttons
@@ -948,36 +888,6 @@ function initializeStaffUI() {
 
   // re-run filter once to apply initial state
   filterStaff();
-}
-
-// Open contact form in contact section and prefill fields
-function openContactFormWithPrefill(name, role) {
-  const form = document.getElementById('contactForm');
-  if (!form) {
-    // fallback: open mailto if no form
-    const subject = `Enquiry for ${name} — ${role}`;
-    const body = `Hello ${name},%0A%0AI would like to enquire about your professional services.%0A%0ARegards.`;
-    window.location.href = `mailto:e.e.eof2025@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    return;
-  }
-  // set fields
-  const nameInput = document.getElementById('contactName');
-  const emailInput = document.getElementById('contactEmail');
-  const subjectInput = document.getElementById('contactSubject');
-  const messageInput = document.getElementById('contactMessage');
-  const referred = document.getElementById('contactReferred');
-
-  if (subjectInput) subjectInput.value = `Enquiry for ${name} — ${role}`;
-  if (messageInput) messageInput.value = `Hello ${name},\n\nI would like to enquire about your professional services. Please let me know the best way to proceed.\n\nRegards,`;
-  if (referred) referred.value = name;
-
-  // scroll to contact section and focus first input
-  const contactSection = document.getElementById('contact');
-  if (contactSection) {
-    const offsetTop = contactSection.offsetTop - 70;
-    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    setTimeout(() => { if (nameInput) nameInput.focus(); }, 600);
-  }
 }
 
 // Insert local John Kanyoro photo (expects /avatars/john-kanyoro.jpg in the public folder)
