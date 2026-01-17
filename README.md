@@ -1,9 +1,9 @@
 MWITONGO E&E — Deployment & Configuration Guide
 ===============================================
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/SITE_ID/deploy-status)](https://app.netlify.com/sites/SITE_NAME/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/SITE_ID/deploy-status)](https://app.netlify.com/sites/kanyoro12/deploys)
 
-Replace `SITE_ID` and `SITE_NAME` in the badge URL with your Netlify site's API ID and site name (or remove the badge until you have them).
+Replace `SITE_ID` in the badge URL with your Netlify site's API ID (the badge image still requires the site API ID to work).
 
 This README explains how to finish the production setup for the site and how the automation added to this repository works.
 
