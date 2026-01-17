@@ -108,9 +108,6 @@
           </div>
         </div>
       </div>
-      <div class="hero-logo" aria-hidden="true">
-        <img src="/logo.png" alt="MWITONGO E&E logo" />
-      </div>
       <div class="hero-overlay"></div>
     </section>
 
@@ -121,8 +118,19 @@
           <div class="title-underline"></div>
           <p class="section-subtitle">Meet the experts behind your success</p>
         </div>
+        <div class="staff-controls">
+          <input id="staffSearch" type="search" placeholder="Search team by name, role, or skill…" aria-label="Search team" />
+          <div id="staffTags" class="staff-tags" aria-hidden="false">
+            <button class="tag-btn" data-tag="all">All</button>
+            <button class="tag-btn" data-tag="strategy">Strategy</button>
+            <button class="tag-btn" data-tag="technology">Technology</button>
+            <button class="tag-btn" data-tag="projects">Projects</button>
+            <button class="tag-btn" data-tag="research">Research</button>
+            <button class="tag-btn" data-tag="data">Data</button>
+          </div>
+        </div>
         <div class="staff-grid">
-          <div class="staff-card" data-name="Eng. Kiprotich" data-gender="male">
+          <div class="staff-card" data-name="Eng. Kiprotich" data-gender="male" data-tags="strategy,leadership,innovation">
             <div class="staff-image" style="background: linear-gradient(135deg, #D4AF37 0%, #a0860a 100%);">
               <span class="staff-initials">EK</span>
             </div>
@@ -134,8 +142,11 @@
               <span class="expertise-tag">Leadership</span>
               <span class="expertise-tag">Innovation</span>
             </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
           </div>
-          <div class="staff-card" data-name="Dr. Rose Makali" data-gender="female">
+          <div class="staff-card" data-name="Dr. Rose Makali" data-gender="female" data-tags="technology,digital,systems">
             <div class="staff-image" style="background: linear-gradient(135deg, #a0860a 0%, #7a5f0b 100%);">
               <span class="staff-initials">DR</span>
             </div>
@@ -147,8 +158,11 @@
               <span class="expertise-tag">Digital</span>
               <span class="expertise-tag">Systems</span>
             </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
           </div>
-          <div class="staff-card" data-name="James Mwangi" data-gender="male">
+          <div class="staff-card" data-name="James Mwangi" data-gender="male" data-tags="projects,management,delivery">
             <div class="staff-image" style="background: linear-gradient(135deg, #7a5f0b 0%, #5a4608 100%);">
               <span class="staff-initials">JM</span>
             </div>
@@ -160,8 +174,11 @@
               <span class="expertise-tag">Management</span>
               <span class="expertise-tag">Delivery</span>
             </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
           </div>
-          <div class="staff-card" data-name="Amara Okonkwo" data-gender="female">
+          <div class="staff-card" data-name="Amara Okonkwo" data-gender="female" data-tags="research,analytics,data">
             <div class="staff-image" style="background: linear-gradient(135deg, #5a4608 0%, #3a2c05 100%);">
               <span class="staff-initials">AM</span>
             </div>
@@ -172,6 +189,74 @@
               <span class="expertise-tag">Research</span>
               <span class="expertise-tag">Analytics</span>
               <span class="expertise-tag">Data</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
+          </div>
+
+          <!-- Additional staff added -->
+          <div class="staff-card" data-name="Fatima Suleiman" data-gender="female" data-tags="operations,logistics">
+            <div class="staff-image" style="background: linear-gradient(135deg, #8b6b1f 0%, #5a430f 100%);">
+              <span class="staff-initials">FS</span>
+            </div>
+            <h3>Fatima Suleiman</h3>
+            <p class="staff-position">Operations Manager</p>
+            <p class="staff-bio">Oversees day-to-day operations, logistics and procurement ensuring projects run smoothly and on time.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Operations</span>
+              <span class="expertise-tag">Logistics</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
+          </div>
+
+          <div class="staff-card" data-name="Michael Otieno" data-gender="male" data-tags="infrastructure,engineering">
+            <div class="staff-image" style="background: linear-gradient(135deg, #5b7a4a 0%, #2e4e2a 100%);">
+              <span class="staff-initials">MO</span>
+            </div>
+            <h3>Michael Otieno</h3>
+            <p class="staff-position">Infrastructure Lead</p>
+            <p class="staff-bio">Specialist in infrastructure planning and delivery with extensive experience in road and civil projects.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Infrastructure</span>
+              <span class="expertise-tag">Engineering</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
+          </div>
+
+          <div class="staff-card" data-name="Sonia Njeri" data-gender="female" data-tags="communications,media">
+            <div class="staff-image" style="background: linear-gradient(135deg, #6a3b5a 0%, #3e2440 100%);">
+              <span class="staff-initials">SN</span>
+            </div>
+            <h3>Sonia Njeri</h3>
+            <p class="staff-position">Communications Manager</p>
+            <p class="staff-bio">Leads PR, media relations and communications strategy to amplify client messages and impact.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Communications</span>
+              <span class="expertise-tag">Media</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
+            </div>
+          </div>
+
+          <div class="staff-card" data-name="Dr. Ahmed Yusuf" data-gender="male" data-tags="environment,policy">
+            <div class="staff-image" style="background: linear-gradient(135deg, #2f5b6a 0%, #17343f 100%);">
+              <span class="staff-initials">AY</span>
+            </div>
+            <h3>Dr. Ahmed Yusuf</h3>
+            <p class="staff-position">Environmental Specialist</p>
+            <p class="staff-bio">Expert in environmental impact assessments and sustainable development policy advisory.</p>
+            <div class="staff-expertise">
+              <span class="expertise-tag">Environment</span>
+              <span class="expertise-tag">Policy</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn-small view-profile">View Profile</button>
             </div>
           </div>
         </div>

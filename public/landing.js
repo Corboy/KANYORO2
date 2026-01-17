@@ -728,7 +728,135 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(personalizeLeadershipButtons, 300);
   // try to insert provided local photo for John Kanyoro and crop to face
   setTimeout(assignJohnPhoto, 350);
+  // initialize enhanced staff UI (search, filters, modal)
+  setTimeout(initializeStaffUI, 400);
 });
+
+// Initialize search, tag filters and profile modal for staff cards
+function initializeStaffUI() {
+  const searchInput = document.getElementById('staffSearch');
+  const tagContainer = document.getElementById('staffTags');
+  const staffGrid = document.querySelector('.experienced-staff .staff-grid');
+  let activeTag = 'all';
+
+  function filterStaff() {
+    const q = (searchInput && searchInput.value || '').trim().toLowerCase();
+    const cards = staffGrid.querySelectorAll('.staff-card');
+    cards.forEach(card => {
+      const name = (card.dataset.name || (card.querySelector('h3') && card.querySelector('h3').textContent) || '').toLowerCase();
+      const role = (card.querySelector('.staff-position') && card.querySelector('.staff-position').textContent || '').toLowerCase();
+      const tags = (card.dataset.tags || '').toLowerCase();
+      const bio = (card.querySelector('.staff-bio') && card.querySelector('.staff-bio').textContent || '').toLowerCase();
+
+      let visible = true;
+      if (activeTag !== 'all' && tags.indexOf(activeTag) === -1) visible = false;
+      if (q) {
+        if (name.indexOf(q) === -1 && role.indexOf(q) === -1 && tags.indexOf(q) === -1 && bio.indexOf(q) === -1) visible = false;
+      }
+
+      card.style.display = visible ? '' : 'none';
+    });
+  }
+
+  if (tagContainer) {
+    tagContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest && e.target.closest('.tag-btn');
+      if (!btn) return;
+      // toggle active class
+      tagContainer.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTag = btn.dataset.tag || 'all';
+      filterStaff();
+    });
+    // set default active
+    const allBtn = tagContainer.querySelector('.tag-btn[data-tag="all"]'); if (allBtn) allBtn.classList.add('active');
+  }
+
+  if (searchInput) {
+    let timeout;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(filterStaff, 160);
+    });
+    searchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { searchInput.value = ''; filterStaff(); } });
+  }
+
+  // Modal creation
+  let modalOverlay = null;
+  function openProfileModal(card) {
+    if (!card) return;
+    const name = card.dataset.name || (card.querySelector('h3') && card.querySelector('h3').textContent) || '';
+    const role = card.querySelector('.staff-position') ? card.querySelector('.staff-position').textContent : '';
+    const bio = card.querySelector('.staff-bio') ? card.querySelector('.staff-bio').textContent : '';
+    const expertise = Array.from(card.querySelectorAll('.expertise-tag')).map(t => t.textContent).join(', ');
+    // image src (if lazy blob applied earlier, it'll be an object URL)
+    const imgEl = card.querySelector('.staff-image img');
+    const imgSrc = imgEl ? imgEl.src : '/logo.png';
+
+    // build modal
+    modalOverlay = document.createElement('div'); modalOverlay.className = 'staff-modal-overlay';
+    const modal = document.createElement('div'); modal.className = 'staff-modal';
+    modal.innerHTML = `
+      <div class="modal-image"><img src="${imgSrc}" alt="${name}"></div>
+      <div class="modal-body">
+        <h3>${name}</h3>
+        <div class="staff-position">${role}</div>
+        <p class="staff-bio">${bio}</p>
+        <p class="staff-expertise"><strong>Expertise:</strong> ${expertise}</p>
+        <div class="modal-actions">
+          <a class="contact-btn contact-wa" href="#" target="_blank" rel="noreferrer">Message (WhatsApp)</a>
+          <a class="contact-btn contact-linkedin" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+          <button class="close-modal">Close</button>
+        </div>
+      </div>
+    `;
+    modalOverlay.appendChild(modal);
+    document.body.appendChild(modalOverlay);
+
+    // wire actions
+    const waBtn = modal.querySelector('.contact-wa');
+    const linkBtn = modal.querySelector('.contact-linkedin');
+    const closeBtn = modal.querySelector('.close-modal');
+
+    // Prefill WhatsApp with message using the organization's phone
+    const phone = '+255763542024';
+    const text = `Hello ${name}, I'm interested in your professional services.`;
+    waBtn.href = `https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
+
+    // Try to create a LinkedIn search link (no private data needed)
+    linkBtn.href = `https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(name)}`;
+
+    function closeModal() {
+      if (modalOverlay && modalOverlay.parentNode) modalOverlay.parentNode.removeChild(modalOverlay);
+      modalOverlay = null;
+      lastFocused && lastFocused.focus();
+      document.removeEventListener('keydown', onKey);
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (ev) => { if (ev.target === modalOverlay) closeModal(); });
+
+    function onKey(e) { if (e.key === 'Escape') closeModal(); }
+    document.addEventListener('keydown', onKey);
+
+    // focus trap: move focus into modal
+    const focusable = modal.querySelectorAll('a,button');
+    if (focusable && focusable.length) focusable[0].focus();
+    // remember last focused element
+    var lastFocused = document.activeElement;
+  }
+
+  // wire view-profile buttons
+  document.querySelectorAll('.staff-card .view-profile').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = btn.closest('.staff-card');
+      openProfileModal(card);
+    });
+  });
+
+  // re-run filter once to apply initial state
+  filterStaff();
+}
 
 // Insert local John Kanyoro photo (expects /avatars/john-kanyoro.jpg in the public folder)
 function assignJohnPhoto() {
