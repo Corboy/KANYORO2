@@ -713,6 +713,13 @@ body.light-theme .theme-toggle {
 .staff-modal .contact-wa { background: linear-gradient(180deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; }
 .staff-modal .contact-linkedin { background: #0e76a8; color:#fff; border:none; }
 
+/* contact form styles */
+.contact-form-wrap h3 { color: var(--white); margin-bottom:0.5rem; }
+.contact-form { display:flex; flex-direction:column; gap:0.5rem; }
+.contact-form label { color:var(--gray); font-size:0.9rem; }
+.contact-form input, .contact-form textarea { padding:0.7rem 0.9rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background: rgba(10,26,47,0.6); color:var(--white); }
+.contact-form button { align-self:flex-start; }
+
 @media (max-width: 768px) {
   .staff-modal { flex-direction: column; padding: 1rem; }
   .staff-modal .modal-image { width:100%; height:220px; }

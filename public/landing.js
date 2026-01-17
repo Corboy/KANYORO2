@@ -738,6 +738,7 @@ function initializeStaffUI() {
   const tagContainer = document.getElementById('staffTags');
   const staffGrid = document.querySelector('.experienced-staff .staff-grid');
   let activeTag = 'all';
+  let activeLocation = 'all';
 
   function filterStaff() {
     const q = (searchInput && searchInput.value || '').trim().toLowerCase();
@@ -770,6 +771,15 @@ function initializeStaffUI() {
     });
     // set default active
     const allBtn = tagContainer.querySelector('.tag-btn[data-tag="all"]'); if (allBtn) allBtn.classList.add('active');
+  }
+
+  // location filter
+  const locationSelect = document.getElementById('staffLocation');
+  if (locationSelect) {
+    locationSelect.addEventListener('change', () => {
+      activeLocation = locationSelect.value || 'all';
+      filterStaff();
+    });
   }
 
   if (searchInput) {
@@ -878,6 +888,7 @@ function initializeStaffUI() {
         <div class="modal-actions">
           <a class="contact-btn contact-wa" href="#" target="_blank" rel="noreferrer">Message (WhatsApp)</a>
           <a class="contact-btn contact-linkedin" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+          <button class="contact-btn contact-form-btn" type="button">Contact (Form)</button>
           <button class="close-modal">Close</button>
         </div>
       </div>
@@ -916,6 +927,15 @@ function initializeStaffUI() {
     if (focusable && focusable.length) focusable[0].focus();
     // remember last focused element
     var lastFocused = document.activeElement;
+    // wire contact form button: close modal and prefill contact form
+    const contactFormBtn = modal.querySelector('.contact-form-btn');
+    if (contactFormBtn) {
+      contactFormBtn.addEventListener('click', () => {
+        // close modal then open contact form with prefill
+        closeModal();
+        openContactFormWithPrefill(name, role);
+      });
+    }
   }
 
   // wire view-profile buttons
@@ -928,6 +948,36 @@ function initializeStaffUI() {
 
   // re-run filter once to apply initial state
   filterStaff();
+}
+
+// Open contact form in contact section and prefill fields
+function openContactFormWithPrefill(name, role) {
+  const form = document.getElementById('contactForm');
+  if (!form) {
+    // fallback: open mailto if no form
+    const subject = `Enquiry for ${name} — ${role}`;
+    const body = `Hello ${name},%0A%0AI would like to enquire about your professional services.%0A%0ARegards.`;
+    window.location.href = `mailto:e.e.eof2025@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    return;
+  }
+  // set fields
+  const nameInput = document.getElementById('contactName');
+  const emailInput = document.getElementById('contactEmail');
+  const subjectInput = document.getElementById('contactSubject');
+  const messageInput = document.getElementById('contactMessage');
+  const referred = document.getElementById('contactReferred');
+
+  if (subjectInput) subjectInput.value = `Enquiry for ${name} — ${role}`;
+  if (messageInput) messageInput.value = `Hello ${name},\n\nI would like to enquire about your professional services. Please let me know the best way to proceed.\n\nRegards,`;
+  if (referred) referred.value = name;
+
+  // scroll to contact section and focus first input
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    const offsetTop = contactSection.offsetTop - 70;
+    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    setTimeout(() => { if (nameInput) nameInput.focus(); }, 600);
+  }
 }
 
 // Insert local John Kanyoro photo (expects /avatars/john-kanyoro.jpg in the public folder)
