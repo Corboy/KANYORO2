@@ -120,23 +120,6 @@
         </div>
         <div class="staff-controls">
           <input id="staffSearch" type="search" placeholder="Search team by name, role, or skill…" aria-label="Search team" />
-          <div style="display:flex;gap:0.75rem;align-items:center">
-            <label for="staffSort" class="visually-hidden">Sort team</label>
-            <select id="staffSort" aria-label="Sort team">
-              <option value="name">Sort: Name</option>
-              <option value="role">Sort: Role</option>
-              <option value="tags">Sort: Tags</option>
-            </select>
-            <label for="staffLocation" class="visually-hidden">Filter by location</label>
-            <select id="staffLocation" aria-label="Filter by location">
-              <option value="all">All locations</option>
-              <option value="Dar es Salaam">Dar es Salaam</option>
-              <option value="Nairobi">Nairobi</option>
-              <option value="Mombasa">Mombasa</option>
-              <option value="Kigali">Kigali</option>
-            </select>
-            <button id="exportStaffCsv" class="btn-small" type="button">Export CSV</button>
-          </div>
           <div id="staffTags" class="staff-tags" aria-hidden="false">
             <button class="tag-btn" data-tag="all">All</button>
             <button class="tag-btn" data-tag="strategy">Strategy</button>
@@ -147,7 +130,7 @@
           </div>
         </div>
         <div class="staff-grid">
-          <div class="staff-card" data-name="Eng. Kiprotich" data-gender="male" data-tags="strategy,leadership,innovation" data-location="Dar es Salaam">
+          <div class="staff-card" data-name="Eng. Kiprotich" data-gender="male" data-tags="strategy,leadership,innovation">
             <div class="staff-image" style="background: linear-gradient(135deg, #D4AF37 0%, #a0860a 100%);">
               <span class="staff-initials">EK</span>
             </div>
@@ -163,7 +146,7 @@
               <button class="btn-small view-profile">View Profile</button>
             </div>
           </div>
-          <div class="staff-card" data-name="Dr. Rose Makali" data-gender="female" data-tags="technology,digital,systems" data-location="Dar es Salaam">
+          <div class="staff-card" data-name="Dr. Rose Makali" data-gender="female" data-tags="technology,digital,systems">
             <div class="staff-image" style="background: linear-gradient(135deg, #a0860a 0%, #7a5f0b 100%);">
               <span class="staff-initials">DR</span>
             </div>
@@ -179,7 +162,7 @@
               <button class="btn-small view-profile">View Profile</button>
             </div>
           </div>
-          <div class="staff-card" data-name="James Mwangi" data-gender="male" data-tags="projects,management,delivery" data-location="Nairobi">
+          <div class="staff-card" data-name="James Mwangi" data-gender="male" data-tags="projects,management,delivery">
             <div class="staff-image" style="background: linear-gradient(135deg, #7a5f0b 0%, #5a4608 100%);">
               <span class="staff-initials">JM</span>
             </div>
@@ -195,7 +178,7 @@
               <button class="btn-small view-profile">View Profile</button>
             </div>
           </div>
-          <div class="staff-card" data-name="Amara Okonkwo" data-gender="female" data-tags="research,analytics,data" data-location="Dar es Salaam">
+          <div class="staff-card" data-name="Amara Okonkwo" data-gender="female" data-tags="research,analytics,data">
             <div class="staff-image" style="background: linear-gradient(135deg, #5a4608 0%, #3a2c05 100%);">
               <span class="staff-initials">AM</span>
             </div>
@@ -213,7 +196,7 @@
           </div>
 
           <!-- Additional staff added -->
-          <div class="staff-card" data-name="Fatima Suleiman" data-gender="female" data-tags="operations,logistics" data-location="Dar es Salaam">
+          <div class="staff-card" data-name="Fatima Suleiman" data-gender="female" data-tags="operations,logistics">
             <div class="staff-image" style="background: linear-gradient(135deg, #8b6b1f 0%, #5a430f 100%);">
               <span class="staff-initials">FS</span>
             </div>
@@ -229,7 +212,7 @@
             </div>
           </div>
 
-          <div class="staff-card" data-name="Michael Otieno" data-gender="male" data-tags="infrastructure,engineering" data-location="Mombasa">
+          <div class="staff-card" data-name="Michael Otieno" data-gender="male" data-tags="infrastructure,engineering">
             <div class="staff-image" style="background: linear-gradient(135deg, #5b7a4a 0%, #2e4e2a 100%);">
               <span class="staff-initials">MO</span>
             </div>
@@ -245,7 +228,7 @@
             </div>
           </div>
 
-          <div class="staff-card" data-name="Sonia Njeri" data-gender="female" data-tags="communications,media" data-location="Nairobi">
+          <div class="staff-card" data-name="Sonia Njeri" data-gender="female" data-tags="communications,media">
             <div class="staff-image" style="background: linear-gradient(135deg, #6a3b5a 0%, #3e2440 100%);">
               <span class="staff-initials">SN</span>
             </div>
@@ -261,7 +244,7 @@
             </div>
           </div>
 
-          <div class="staff-card" data-name="Dr. Ahmed Yusuf" data-gender="male" data-tags="environment,policy" data-location="Dar es Salaam">
+          <div class="staff-card" data-name="Dr. Ahmed Yusuf" data-gender="male" data-tags="environment,policy">
             <div class="staff-image" style="background: linear-gradient(135deg, #2f5b6a 0%, #17343f 100%);">
               <span class="staff-initials">AY</span>
             </div>
@@ -616,7 +599,7 @@
             <p class="team-role">Chief Executive Officer</p>
             <p class="team-bio">Visionary leader with extensive experience driving organizational excellence and strategic growth across multiple sectors.</p>
             <div class="team-actions">
-              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Victor on WhatsApp">
+              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255772251839" data-phone="255772251839" data-text="Hello Victor — Chief Executive Officer, I am interested in your professional services. Please let me know how we can discuss." target="_blank" rel="noopener noreferrer" aria-label="Contact Victor on WhatsApp">
                 <svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg>
                 <span>Message</span>
               </a>
@@ -630,7 +613,10 @@
             <p class="team-role">Director</p>
             <p class="team-bio">Strategic director with proven expertise in project management, consultancy delivery, and client relations across Africa.</p>
             <div class="team-actions">
-              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact John on WhatsApp"><svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg><span>Message</span></a>
+              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" data-phone="255763542024" data-text="Hello John Kanyoro — Director, I am interested in your professional services. Please let me know how we can discuss." target="_blank" rel="noopener noreferrer" aria-label="Contact John on WhatsApp">
+                <svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg>
+                <span>Message</span>
+              </a>
             </div>
           </div>
           <div class="team-card" data-name="Technical Director" data-role="Digital Innovation & ICT" data-bio="Expert in digital transformation with a track record of cutting-edge technology implementation and system architecture." data-email="tech@mwitongo.co.tz">
@@ -918,29 +904,7 @@
             </div>
           </div>
           <div class="contact-map">
-            <div class="contact-form-wrap">
-              <h3>Send us a message</h3>
-              <form id="contactForm" class="contact-form">
-                <label for="contactName">Full name</label>
-                <input id="contactName" name="name" type="text" placeholder="Your full name" required>
-
-                <label for="contactEmail">Email</label>
-                <input id="contactEmail" name="email" type="email" placeholder="you@example.com" required>
-
-                <label for="contactSubject">Subject</label>
-                <input id="contactSubject" name="subject" type="text" placeholder="Subject" required>
-
-                <label for="contactMessage">Message</label>
-                <textarea id="contactMessage" name="message" rows="5" placeholder="Tell us how we can help..."></textarea>
-
-                <input type="hidden" id="contactReferred" name="referredTo" value="">
-                <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.75rem;">
-                  <button type="submit" class="btn btn-primary">Send Message</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form>
-            </div>
-            <div id="map" class="map-container" style="margin-top:1rem"></div>
+            <div id="map" class="map-container"></div>
           </div>
         </div>
       </div>

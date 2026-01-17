@@ -311,38 +311,6 @@ window.addEventListener('load', () => {
   }, 5000);
 });
 
-// tasteful, low-cost animations applied on DOMContentLoaded
-window.addEventListener('DOMContentLoaded', () => {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  // animate navbar in
-  setTimeout(() => {
-    const nav = document.querySelector('.navbar');
-    if (nav) nav.classList.add('nav-enter');
-  }, 120);
-
-  // underline the main heading
-  setTimeout(() => {
-    const h = document.getElementById('animatedHeading') || document.querySelector('.main-heading');
-    if (h) h.classList.add('animate-underline');
-  }, 320);
-
-  // pulse primary CTAs gently
-  setTimeout(() => {
-    document.querySelectorAll('.hero-buttons .btn-primary').forEach((b) => b.classList.add('cta-pulse'));
-  }, 900);
-
-  // stagger fade-up for key blocks that the IntersectionObserver will reveal
-  const animated = document.querySelectorAll('.service-card, .why-card, .structure-card, .mv-card, .stat-card, .testimonial-card, .team-card, .timeline-item, .staff-card');
-  animated.forEach((el, i) => {
-    // add helper class and a staggered transition delay; IntersectionObserver will toggle in-view
-    el.classList.add('animate-fadeUp');
-    const delay = Math.min(400, i * 60);
-    el.style.transitionDelay = `${delay}ms`;
-  });
-});
-
 const navbar = document.querySelector('.navbar');
 const mobileToggle = document.querySelector('.mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -469,9 +437,13 @@ function personalizeLeadershipButtons() {
       const card = btn.closest('.team-card');
       const name = (card && card.dataset.name) ? card.dataset.name : (card && card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Team Member');
       const role = (card && card.dataset.role) ? card.dataset.role : (card && card.querySelector('.team-role') ? card.querySelector('.team-role').textContent.trim() : '');
-      const phone = '255763542024';
-      const text = `Hello ${name}${role ? ' — ' + role : ''}, I would like to enquire about professional services.`;
-      // set href to include prefilled message
+      // prefer per-button or per-card overrides (data-phone / data-text)
+      let phone = btn.dataset.phone || (card && card.dataset.phone) || '255763542024';
+      // strip any leading + from phone if present
+      phone = phone.replace(/^\+/, '');
+      const customText = btn.dataset.text || (card && card.dataset.text);
+      const text = customText || `Hello ${name}${role ? ' — ' + role : ''}, I would like to enquire about professional services.`;
+      // set href to include prefilled message (encode text)
       btn.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
       // allow default navigation to proceed (will open in new tab because anchors have target='_blank')
     });

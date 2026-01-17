@@ -239,42 +239,6 @@ body.light-theme .theme-toggle {
   align-items: center;
 }
 
-/* Subtle entrance for the navbar */
-.navbar { transform: translateY(-8px); opacity: 0; transition: transform 420ms cubic-bezier(.16,.9,.24,1), opacity 420ms ease; }
-.navbar.nav-enter { transform: translateY(0); opacity: 1; }
-
-/* Hero heading underline reveal */
-.main-heading { position: relative; overflow: visible; }
-.main-heading::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -8px;
-  height: 6px;
-  width: 0%;
-  background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(212,175,55,0.4));
-  border-radius: 4px;
-  transition: width 700ms cubic-bezier(.22,.8,.3,1);
-}
-.main-heading.animate-underline::after { width: 56%; }
-
-/* CTA pulse: subtle attention without being flashy */
-.cta-pulse { animation: ctaPulse 2400ms ease-in-out infinite; }
-@keyframes ctaPulse {
-  0% { transform: translateY(0) scale(1); box-shadow: 0 6px 18px rgba(212,175,55,0.12); }
-  50% { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 30px rgba(212,175,55,0.18); }
-  100% { transform: translateY(0) scale(1); box-shadow: 0 6px 18px rgba(212,175,55,0.12); }
-}
-
-/* Generic fade-up animation helper */
-.animate-fadeUp { opacity: 0; transform: translateY(18px); }
-.animate-fadeUp.in-view { opacity: 1; transform: translateY(0); transition: opacity 600ms ease, transform 600ms ease; }
-
-@media (prefers-reduced-motion: reduce) {
-  .navbar, .main-heading::after, .cta-pulse, .animate-fadeUp { transition: none !important; animation: none !important; }
-}
-
 .logo {
   display: inline-flex;
   align-items: center;
