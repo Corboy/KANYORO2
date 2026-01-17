@@ -265,6 +265,15 @@ body.light-theme .theme-toggle {
   position: relative;
 }
 
+/* During intro we keep nav hidden and then animate items in */
+.intro-active .nav-links li a,
+.intro-active .logo {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.nav-entrance { transition: transform 360ms cubic-bezier(.2,.9,.25,1), opacity 360ms ease; opacity: 1; transform: translateY(0); }
+
 .nav-links a::after {
   content: '';
   position: absolute;

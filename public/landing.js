@@ -226,6 +226,9 @@ function playWelcomeAnimation() {
     try { localStorage.setItem('introPlayed', 'true'); } catch (e) {}
     overlay.addEventListener('animationend', () => {
       if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      try { document.body.classList.remove('intro-active'); } catch (e) {}
+      // notify other parts of the UI that the intro finished
+      try { document.dispatchEvent(new Event('introFinished')); } catch (e) {}
     });
   };
 
@@ -306,6 +309,8 @@ window.addEventListener('load', () => {
     if (!overlay) return;
     // add visible class so CSS can transition it in
     overlay.classList.add('welcome-overlay-visible');
+    // mark body so UI elements (nav) can animate in after intro
+    try { document.body.classList.add('intro-active'); } catch (e) {}
     // start the existing animation flow
     playWelcomeAnimation();
   }, 5000);
@@ -332,6 +337,41 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     navLinks.classList.remove('active');
     mobileToggle.classList.remove('active');
+  });
+});
+
+// Replay helper: reinserts the overlay from the stored template and plays the intro
+function replayIntro() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  try { localStorage.removeItem('introPlayed'); } catch (e) {}
+
+  // if overlay already exists, just play it
+  if (document.getElementById('welcomeOverlay')) return playWelcomeAnimation();
+
+  const tpl = window.__welcomeOverlayTemplate;
+  if (!tpl) return;
+
+  const container = document.createElement('div');
+  container.innerHTML = tpl.trim();
+  const overlayEl = container.firstElementChild;
+  if (!overlayEl) return;
+  document.body.appendChild(overlayEl);
+
+  // reveal and start after tiny timeout
+  setTimeout(() => {
+    try { document.body.classList.add('intro-active'); } catch (e) {}
+    overlayEl.classList.add('welcome-overlay-visible');
+    playWelcomeAnimation();
+  }, 80);
+}
+
+// When the intro finishes, animate nav items in sequence
+document.addEventListener('introFinished', () => {
+  const items = document.querySelectorAll('.nav-links li, .logo');
+  items.forEach((el, i) => {
+    setTimeout(() => el.classList.add('nav-entrance'), i * 80);
   });
 });
 
@@ -704,6 +744,15 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(personalizeLeadershipButtons, 300);
   // try to insert provided local photo for John Kanyoro and crop to face
   setTimeout(assignJohnPhoto, 350);
+  // preserve the welcome overlay HTML so we can replay the intro on demand
+  try {
+    const welcomeOverlay = document.getElementById('welcomeOverlay');
+    if (welcomeOverlay) window.__welcomeOverlayTemplate = welcomeOverlay.outerHTML;
+  } catch (e) { window.__welcomeOverlayTemplate = null; }
+
+  // wire up replay button (if present in footer)
+  const replayBtn = document.getElementById('replayIntro');
+  if (replayBtn) replayBtn.addEventListener('click', (ev) => { ev.preventDefault(); replayIntro(); });
 });
 
 // Insert local John Kanyoro photo (expects /avatars/john-kanyoro.jpg in the public folder)
