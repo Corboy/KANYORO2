@@ -26,9 +26,13 @@ function playWelcomeAnimation() {
   const logo = overlay.querySelector('.welcome-logo span');
   const tagline = overlay.querySelector('.welcome-tagline');
   const skipBtn = overlay.querySelector('.skip-intro');
-
+  // more professional, typed tagline animation
   logo.classList.add('welcome-logo-animate');
   tagline.classList.add('welcome-tagline-animate');
+
+  // typed effect for the tagline (reads existing text then types it)
+  const fullText = (tagline && tagline.textContent) ? tagline.textContent.trim() : '';
+  if (tagline) tagline.textContent = '';
 
   let finished = false;
   const finish = () => {
@@ -36,14 +40,35 @@ function playWelcomeAnimation() {
     finished = true;
     overlay.classList.add('welcome-overlay-hide');
     overlay.setAttribute('aria-hidden', 'true');
-    localStorage.setItem('introPlayed', 'true');
+    try { localStorage.setItem('introPlayed', 'true'); } catch (e) {}
     overlay.addEventListener('animationend', () => {
       if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     });
   };
 
   skipBtn.addEventListener('click', finish);
-  setTimeout(finish, 3000);
+
+  // type the tagline realistically
+  let idx = 0;
+  const typeDelay = 28; // ms per character
+  function typeNext() {
+    if (!tagline) return finish();
+    if (idx <= fullText.length) {
+      tagline.textContent = fullText.slice(0, idx);
+      idx++;
+      setTimeout(typeNext, typeDelay + Math.random() * 20);
+    } else {
+      // small pause then finish
+      setTimeout(() => {
+        // subtle confetti to make it feel professional but not flashy
+        try { fireConfetti(); } catch (e) {}
+        setTimeout(finish, 900);
+      }, 300);
+    }
+  }
+
+  // start typing
+  setTimeout(typeNext, 300);
 }
 
 window.addEventListener('load', () => {
