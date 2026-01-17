@@ -120,6 +120,15 @@
         </div>
         <div class="staff-controls">
           <input id="staffSearch" type="search" placeholder="Search team by name, role, or skill…" aria-label="Search team" />
+          <div style="display:flex;gap:0.75rem;align-items:center">
+            <label for="staffSort" class="visually-hidden">Sort team</label>
+            <select id="staffSort" aria-label="Sort team">
+              <option value="name">Sort: Name</option>
+              <option value="role">Sort: Role</option>
+              <option value="tags">Sort: Tags</option>
+            </select>
+            <button id="exportStaffCsv" class="btn-small" type="button">Export CSV</button>
+          </div>
           <div id="staffTags" class="staff-tags" aria-hidden="false">
             <button class="tag-btn" data-tag="all">All</button>
             <button class="tag-btn" data-tag="strategy">Strategy</button>

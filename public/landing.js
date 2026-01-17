@@ -781,6 +781,78 @@ function initializeStaffUI() {
     searchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { searchInput.value = ''; filterStaff(); } });
   }
 
+  // keyboard shortcut: press 'f' to focus the staff search (unless typing already)
+  document.addEventListener('keydown', (e) => {
+    const tag = e.target && e.target.tagName && e.target.tagName.toLowerCase();
+    if (e.key === 'f' && tag !== 'input' && tag !== 'textarea') {
+      e.preventDefault();
+      if (searchInput) searchInput.focus();
+    }
+  });
+
+  // sorting
+  const sortSelect = document.getElementById('staffSort');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      const val = sortSelect.value || 'name';
+      const cards = Array.from(staffGrid.querySelectorAll('.staff-card'));
+      cards.sort((a,b) => {
+        if (val === 'name') {
+          return (a.dataset.name || a.querySelector('h3').textContent).localeCompare(b.dataset.name || b.querySelector('h3').textContent);
+        } else if (val === 'role') {
+          const ra = (a.querySelector('.staff-position') && a.querySelector('.staff-position').textContent) || '';
+          const rb = (b.querySelector('.staff-position') && b.querySelector('.staff-position').textContent) || '';
+          return ra.localeCompare(rb);
+        } else if (val === 'tags') {
+          const ta = (a.dataset.tags||''); const tb = (b.dataset.tags||'');
+          return ta.localeCompare(tb);
+        }
+        return 0;
+      });
+      // re-append in order
+      cards.forEach(c => staffGrid.appendChild(c));
+    });
+  }
+
+  // Export staff list to CSV
+  const exportBtn = document.getElementById('exportStaffCsv');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      const rows = [['Name','Role','Tags','Bio']];
+      document.querySelectorAll('.experienced-staff .staff-card').forEach(card => {
+        const name = card.dataset.name || (card.querySelector('h3') && card.querySelector('h3').textContent) || '';
+        const role = card.querySelector('.staff-position') ? card.querySelector('.staff-position').textContent : '';
+        const tags = card.dataset.tags || '';
+        const bio = card.querySelector('.staff-bio') ? card.querySelector('.staff-bio').textContent.replace(/\n/g,' ') : '';
+        rows.push([name, role, tags, bio]);
+      });
+      const csv = rows.map(r => r.map(cell => '"' + String(cell).replace(/"/g,'""') + '"').join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'staff-list.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+  }
+
+  // Read-more toggles for long bios
+  document.querySelectorAll('.staff-bio').forEach(p => {
+    const txt = p.textContent.trim();
+    const limit = 140;
+    if (txt.length > limit) {
+      const short = txt.slice(0, limit).trim() + '…';
+      p.dataset.full = txt;
+      p.textContent = short;
+      p.classList.add('truncated');
+      const moreBtn = document.createElement('button');
+      moreBtn.className = 'read-more'; moreBtn.type = 'button'; moreBtn.textContent = 'Read more';
+      moreBtn.addEventListener('click', () => {
+        if (moreBtn.textContent === 'Read more') {
+          p.textContent = p.dataset.full; moreBtn.textContent = 'Show less'; p.classList.remove('truncated');
+        } else { p.textContent = p.dataset.full.slice(0, limit).trim() + '…'; moreBtn.textContent = 'Read more'; p.classList.add('truncated'); }
+      });
+      p.parentNode.insertBefore(moreBtn, p.nextSibling);
+    }
+  });
+
   // Modal creation
   let modalOverlay = null;
   function openProfileModal(card) {
