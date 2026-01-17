@@ -81,7 +81,8 @@ body.light-theme {
   transform-origin: center center;
 }
 .welcome-logo img {
-  height: 68px;
+  /* larger welcome logo for stronger brand presence */
+  height: 120px;
   width: auto;
   display: block;
   margin: 0 auto;
@@ -206,9 +207,25 @@ body.light-theme .theme-toggle {
 }
 
 .logo img {
-  height: 40px;
+  /* make navbar logo larger but keep aspect ratio */
+  height: 64px;
   width: auto;
   display: block;
+}
+
+/* Footer logo placement (used in footer company section) */
+.footer-logo {
+  height: 72px;
+  width: auto;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments: scale logos down on small screens */
+@media (max-width: 768px) {
+  .logo img { height: 48px; }
+  .welcome-logo img { height: 80px; }
+  .footer-logo { height: 56px; }
 }
 
 .nav-links {
