@@ -26,6 +26,17 @@
       "sameAs": []
     }
     </script>
+  <!-- Formspree endpoint (replace with your real endpoint or set via Netlify env) -->
+  <meta name="formspree-endpoint" content="https://formspree.io/f/YOUR_FORMSPREE_ID">
+    <!-- Inline helper: pick up the formspree endpoint from meta so the JS can post to it -->
+    <script>
+      try {
+        if (!window.FORMSPREE_ENDPOINT) {
+          var m = document.querySelector('meta[name="formspree-endpoint"]');
+          if (m && m.content) window.FORMSPREE_ENDPOINT = m.content;
+        }
+      } catch (e) { /* ignore */ }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
