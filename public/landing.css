@@ -16,6 +16,7 @@
   --logo-nav-size: 120px; /* navbar - increased per request */
   --logo-welcome-size: 220px; /* welcome overlay - increased for strong brand presence */
   --logo-footer-size: 160px; /* footer */
+  --logo-hero-size: 160px; /* hero section */
 }
 
 html {
@@ -228,12 +229,12 @@ body.light-theme .theme-toggle {
 /* Responsive adjustments: scale logos down on small screens */
 @media (max-width: 1024px) {
   /* Medium screens: slightly reduce logos */
-  :root { --logo-nav-size: 96px; --logo-welcome-size: 180px; --logo-footer-size: 128px; }
+  :root { --logo-nav-size: 96px; --logo-welcome-size: 180px; --logo-footer-size: 128px; --logo-hero-size: 120px; }
 }
 
 @media (max-width: 768px) {
   /* Mobile: compact sizes */
-  :root { --logo-nav-size: 64px; --logo-welcome-size: 110px; --logo-footer-size: 80px; }
+  :root { --logo-nav-size: 64px; --logo-welcome-size: 110px; --logo-footer-size: 80px; --logo-hero-size: 80px; }
 }
 
 /* Fine tune navbar vertical alignment when logo is large */
@@ -375,6 +376,29 @@ body.light-theme .theme-toggle {
   text-align: center;
   max-width: 900px;
   padding: 2rem;
+}
+
+/* Hero logo (decorative branding element) */
+.hero-logo {
+  position: absolute;
+  top: 18px;
+  right: 40px;
+  height: var(--logo-hero-size);
+  width: auto;
+  display: block;
+  z-index: 3;
+  opacity: 0.98;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.35));
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+@media (max-width: 1024px) {
+  .hero-logo { right: 28px; top: 14px; }
+}
+
+/* Hide hero logo on small screens to avoid crowding */
+@media (max-width: 520px) {
+  .hero-logo { display: none; }
 }
 
 .hero-badge {
