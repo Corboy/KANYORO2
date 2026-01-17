@@ -29,10 +29,44 @@ This README explains how to finish the production setup for the site and how the
 
 4) Optional: Automatic Netlify deploy from GitHub Actions
 --------------------------------------------------------
-- There's an additional deploy workflow template you can enable (see `.github/workflows/deploy-netlify.yml`). To enable automatic deploy from Actions, add two repository secrets:
-	- `NETLIFY_AUTH_TOKEN` (personal access token from Netlify)
-	- `NETLIFY_SITE_ID` (your Netlify site ID)
-- With those secrets set, the workflow will publish the built `dist/` directory directly to your Netlify site.
+There is a deploy workflow (`.github/workflows/deploy-netlify.yml`) that will build and publish the `dist/` folder to Netlify when you push to `main`.
+
+What you need to enable it:
+
+- Repository secrets (set these in GitHub: Settings → Secrets & variables → Actions → New repository secret):
+	- `NETLIFY_AUTH_TOKEN` — a personal access token from Netlify that allows deployments.
+	- `NETLIFY_SITE_ID` — the site ID for the Netlify site you want to publish to.
+
+How to obtain the values:
+
+- NETLIFY_AUTH_TOKEN (via Netlify UI):
+	1. Sign in to Netlify and click your avatar → User settings → Applications.
+	2. Under "Personal access tokens" click "New access token", give it a name (e.g., "GitHub Actions"), and copy the token value.
+
+- NETLIFY_SITE_ID (via Netlify UI):
+	1. Go to your Site on Netlify, click Site settings → Site information.
+	2. The "API ID" is the Site ID. Copy that value.
+
+Alternatively, using the Netlify CLI (if you prefer):
+
+```bash
+# install the CLI if you don't have it
+npm i -g netlify-cli
+
+# login once interactively
+netlify login
+
+# list sites and find the site id you want
+netlify sites:list
+```
+
+Then add the two values as GitHub repository secrets. Once the secrets are present, pushing to `main` will trigger the deploy workflow (or you can run the workflow manually via the Actions tab).
+
+Notes about the workflow added to this repo:
+- The deploy workflow now performs a small PNG → WebP conversion step on the runner before building so generated WebP assets are included in the build output.
+- The workflow uses `npx netlify-cli deploy --dir=dist --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID --prod` to publish.
+
+If you want, paste the values here and I can add them to the repo for you (I cannot add secrets on your behalf; you must add them in GitHub). I can also update the workflow to use a different secret name if you prefer.
 
 5) Favicon and icons
 --------------------

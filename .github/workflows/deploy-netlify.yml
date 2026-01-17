@@ -19,6 +19,25 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install apt deps (webp tools)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp
+
+      - name: Convert PNGs in public/ to WebP (for build)
+        run: |
+          set -euo pipefail
+          found=0
+          for f in public/*.png; do
+            [ -f "$f" ] || continue
+            out="${f%.png}.webp"
+            cwebp -q 82 "$f" -o "$out" && echo "converted $f -> $out"
+            found=1
+          done
+          if [ "$found" -eq 0 ]; then
+            echo "No PNGs found in public/ to convert"
+          fi
+
       - name: Install dependencies
         run: npm ci
 
