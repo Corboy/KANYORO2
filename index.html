@@ -14,7 +14,7 @@
     <a class="skip-link" href="#home">Skip to content</a>
     <div id="welcomeOverlay" aria-hidden="false">
       <div class="welcome-inner" role="region" aria-label="Welcome">
-        <div class="welcome-logo"><span>MWITONGO E&amp;E</span><small>CO. LTD</small></div>
+        <div class="welcome-logo"><img src="/logo.png" alt="MWITONGO E&E" /><small>CO. LTD</small></div>
         <div class="welcome-tagline">Your Partner in Progress</div>
         <button id="skipIntro" class="skip-intro" aria-label="Skip introduction">Skip</button>
       </div>
@@ -24,7 +24,9 @@
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
       <div class="container">
         <div class="nav-content">
-          <div class="logo">MWITONGO E&E</div>
+          <a class="logo" href="#home" aria-label="MWITONGO E&E home">
+            <img src="/logo.png" alt="MWITONGO E&E logo" />
+          </a>
           <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -85,7 +87,7 @@
           <p class="section-subtitle">Meet the experts behind your success</p>
         </div>
         <div class="staff-grid">
-          <div class="staff-card">
+          <div class="staff-card" data-name="Eng. Kiprotich" data-gender="male">
             <div class="staff-image" style="background: linear-gradient(135deg, #D4AF37 0%, #a0860a 100%);">
               <span class="staff-initials">EK</span>
             </div>
@@ -98,7 +100,7 @@
               <span class="expertise-tag">Innovation</span>
             </div>
           </div>
-          <div class="staff-card">
+          <div class="staff-card" data-name="Dr. Rose Makali" data-gender="female">
             <div class="staff-image" style="background: linear-gradient(135deg, #a0860a 0%, #7a5f0b 100%);">
               <span class="staff-initials">DR</span>
             </div>
@@ -111,7 +113,7 @@
               <span class="expertise-tag">Systems</span>
             </div>
           </div>
-          <div class="staff-card">
+          <div class="staff-card" data-name="James Mwangi" data-gender="male">
             <div class="staff-image" style="background: linear-gradient(135deg, #7a5f0b 0%, #5a4608 100%);">
               <span class="staff-initials">JM</span>
             </div>
@@ -124,7 +126,7 @@
               <span class="expertise-tag">Delivery</span>
             </div>
           </div>
-          <div class="staff-card">
+          <div class="staff-card" data-name="Amara Okonkwo" data-gender="female">
             <div class="staff-image" style="background: linear-gradient(135deg, #5a4608 0%, #3a2c05 100%);">
               <span class="staff-initials">AM</span>
             </div>
@@ -477,7 +479,10 @@
             <p class="team-role">Chief Executive Officer</p>
             <p class="team-bio">Visionary leader with extensive experience driving organizational excellence and strategic growth across multiple sectors.</p>
             <div class="team-actions">
-              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Victor on WhatsApp">Professional</a>
+              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Victor on WhatsApp">
+                <svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg>
+                <span>Message</span>
+              </a>
             </div>
           </div>
           <div class="team-card" data-name="John Kanyoro" data-role="Director" data-bio="Strategic director with proven expertise in project management, consultancy delivery, and client relations across Africa." data-email="john.kanyoro@mwitongo.co.tz">
@@ -487,7 +492,9 @@
             <h3>John Kanyoro</h3>
             <p class="team-role">Director</p>
             <p class="team-bio">Strategic director with proven expertise in project management, consultancy delivery, and client relations across Africa.</p>
-            <div class="team-actions"><a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact John on WhatsApp">Professional</a></div>
+            <div class="team-actions">
+              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact John on WhatsApp"><svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg><span>Message</span></a>
+            </div>
           </div>
           <div class="team-card" data-name="Technical Director" data-role="Digital Innovation & ICT" data-bio="Expert in digital transformation with a track record of cutting-edge technology implementation and system architecture." data-email="tech@mwitongo.co.tz">
             <div class="team-image" style="background: linear-gradient(135deg, #7a5f0b 0%, #5a4608 100%);">
@@ -496,7 +503,7 @@
             <h3>Technical Director</h3>
             <p class="team-role">Digital Innovation & ICT</p>
             <p class="team-bio">Expert in digital transformation with a track record of cutting-edge technology implementation and system architecture.</p>
-            <div class="team-actions"><a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Technical Director on WhatsApp">Professional</a></div>
+            <div class="team-actions"><a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Technical Director on WhatsApp"><svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg><span>Message</span></a></div>
           </div>
           <!-- Operations Director removed per update -->
         </div>

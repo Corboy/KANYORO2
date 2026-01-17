@@ -80,6 +80,12 @@ body.light-theme {
   text-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 20px rgba(212,175,55,0.08);
   transform-origin: center center;
 }
+.welcome-logo img {
+  height: 68px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
 .welcome-logo small {
   display: block;
   font-size: 0.95rem;
@@ -106,13 +112,17 @@ body.light-theme {
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes overlayOut {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.98); }
+  0% { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(0.98) translateY(-8px); filter: blur(6px); }
 }
 .welcome-logo-animate { animation: logoPop 700ms cubic-bezier(.22,.8,.3,1) forwards; }
 @keyframes logoPop { 0% { transform: scale(.82); opacity: 0; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
 .welcome-tagline-animate { animation: taglineIn 650ms cubic-bezier(.22,.8,.3,1) 250ms forwards; }
 @keyframes taglineIn { 0% { transform: translateY(12px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+
+/* subtle animate for small subtext under logo */
+.welcome-subtle-animate { animation: subtleIn 420ms cubic-bezier(.22,.8,.3,1) 100ms forwards; }
+@keyframes subtleIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
 
 /* Skip button */
 .skip-intro {
@@ -190,10 +200,15 @@ body.light-theme .theme-toggle {
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -311,6 +326,17 @@ body.light-theme .theme-toggle {
   top: 50%;
   right: 10%;
   animation: float 30s ease-in-out infinite 4s;
+}
+
+/* Hide decorative floating shapes on small screens for clarity and performance */
+@media (max-width: 768px) {
+  .hero-shape,
+  .hero-shape-1,
+  .hero-shape-2,
+  .hero-shape-3 {
+    display: none !important;
+    opacity: 0 !important;
+  }
 }
 
 .hero-content {
@@ -470,12 +496,51 @@ body.light-theme .theme-toggle {
 }
 
 .whatsapp-btn {
-  background: linear-gradient(90deg, #25D366, #128C7E);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: linear-gradient(180deg, #25D366 0%, #128C7E 100%);
   color: white;
-  border-color: rgba(0,0,0,0.06);
-  box-shadow: 0 6px 18px rgba(18,140,126,0.12);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(18,140,126,0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+  text-decoration: none;
+  font-weight: 700;
 }
-.whatsapp-btn:hover { transform: translateY(-3px); filter: brightness(1.03); }
+.whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(18,140,126,0.22);
+  filter: brightness(1.02);
+}
+.whatsapp-btn:focus-visible {
+  outline: 3px solid rgba(37,211,102,0.18);
+  outline-offset: 3px;
+}
+
+.whatsapp-icon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  stroke: white;
+}
+
+/* badge overlay on staff photos to show role */
+.staff-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.staff-image { position: relative; }
 
 .btn-primary {
   background: var(--gold);
@@ -544,6 +609,15 @@ body.light-theme .theme-toggle {
 .staff-card:hover .staff-image {
   box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
   transform: scale(1.1);
+}
+
+/* staff image tag styling */
+.staff-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
 .staff-initials {
@@ -1136,6 +1210,69 @@ section {
   font-weight: 700;
   color: var(--dark-blue);
 }
+
+/* team image photo styling */
+.team-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Edit photo button style (small pill) */
+.edit-photo-btn {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+.edit-photo-btn:hover { background: rgba(255,255,255,0.03); transform: translateY(-2px); }
+
+/* modal cropper styles */
+.cropper-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2,6,12,0.8);
+  z-index: 3000;
+}
+.cropper-window {
+  width: 92vw;
+  max-width: 920px;
+  background: var(--dark-blue);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  color: var(--white);
+}
+.crop-area {
+  width: 100%;
+  height: 520px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.crop-canvas {
+  width: 100%;
+  height: 100%;
+  background: #222;
+}
+.crop-controls { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.75rem; }
+.crop-controls input[type="range"] { width: 220px; }
+.crop-actions { display:flex; gap:0.5rem; margin-left:auto; }
+.cropper-close { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.06); padding: 0.45rem 0.8rem; border-radius: 8px; }
+.cropper-apply { background: var(--gold); color: var(--dark-blue); padding: 0.45rem 0.9rem; border-radius: 8px; font-weight:700; }
 
 .team-card h3 {
   color: var(--white);
