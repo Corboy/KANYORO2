@@ -204,32 +204,18 @@ document.addEventListener('click', (e) => {
 function playWelcomeAnimation() {
   const overlay = document.getElementById('welcomeOverlay');
 
-  if (!overlay) {
-    return;
-  }
+  if (!overlay) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
-    overlay.remove();
-    return;
-  }
+  if (prefersReduced) { overlay.remove(); return; }
 
   const alreadyPlayed = localStorage.getItem('introPlayed') === 'true';
-  if (alreadyPlayed) {
-    overlay.remove();
-    return;
-  }
+  if (alreadyPlayed) { overlay.remove(); return; }
 
-  const logo = overlay.querySelector('.welcome-logo span');
+  const logoImg = overlay.querySelector('.welcome-logo img');
   const tagline = overlay.querySelector('.welcome-tagline');
-  const skipBtn = overlay.querySelector('.skip-intro');
-  // more professional, typed tagline animation
-  logo.classList.add('welcome-logo-animate');
-  tagline.classList.add('welcome-tagline-animate');
-
-  // typed effect for the tagline (reads existing text then types it)
-  const fullText = (tagline && tagline.textContent) ? tagline.textContent.trim() : '';
-  if (tagline) tagline.textContent = '';
+  const small = overlay.querySelector('.welcome-logo small');
+  const skipBtn = overlay.querySelector('#skipIntro') || overlay.querySelector('.skip-intro');
 
   let finished = false;
   const finish = () => {
@@ -243,40 +229,66 @@ function playWelcomeAnimation() {
     });
   };
 
-  skipBtn.addEventListener('click', finish);
+  if (skipBtn) skipBtn.addEventListener('click', finish);
 
-  // type the tagline realistically and reveal small subtext
-  let idx = 0;
-  const typeDelay = 35; // ms per character (slightly slower for a professional feel)
-  const small = overlay.querySelector('.welcome-logo small');
+  // prepare initial states
+  if (logoImg) {
+    logoImg.style.opacity = '0';
+    logoImg.style.transform = 'scale(0.84) translateY(8px)';
+  }
+  if (tagline) {
+    // keep text for typing; we'll overwrite it during typing
+    tagline._fullText = (tagline.textContent || '').trim();
+    tagline.textContent = '';
+    tagline.style.opacity = '0';
+  }
   if (small) small.style.opacity = '0';
 
-  function typeNext() {
-    if (!tagline) return finish();
-    if (idx <= fullText.length) {
-      tagline.textContent = fullText.slice(0, idx);
-      idx++;
-      setTimeout(typeNext, typeDelay + Math.random() * 20);
-    } else {
-      // reveal small subtext subtly, then finish
-      if (small) {
-        try { small.classList.add('welcome-subtle-animate'); } catch (e) {}
+  // helper: play logo pop (resolves when animation ends or after fallback timeout)
+  const playLogo = () => {
+    if (!logoImg) return Promise.resolve();
+    return new Promise(resolve => {
+      const onEnd = (e) => {
+        logoImg.removeEventListener('animationend', onEnd);
+        resolve();
+      };
+      logoImg.addEventListener('animationend', onEnd);
+      // trigger CSS animation
+      logoImg.classList.add('welcome-logo-animate');
+      // fallback: resolve after 900ms in case animationend doesn't fire
+      setTimeout(resolve, 900);
+    });
+  };
+
+  // typed tagline (returns a promise)
+  const typeTagline = () => {
+    if (!tagline) return Promise.resolve();
+    return new Promise(resolve => {
+      const fullText = tagline._fullText || '';
+      let idx = 0;
+      const typeDelay = 30;
+
+      function step() {
+        if (idx <= fullText.length) {
+          tagline.textContent = fullText.slice(0, idx);
+          idx++;
+          tagline.style.opacity = '1';
+          setTimeout(step, typeDelay + Math.random() * 20);
+        } else {
+          if (small) try { small.classList.add('welcome-subtle-animate'); } catch (e) {}
+          if (window.innerWidth > 768 && !prefersReduced) { try { fireConfetti(); } catch (e) {} }
+          // short pause for reading
+          setTimeout(resolve, 900);
+        }
       }
 
-      // only show confetti on larger screens and when reduced-motion is not requested
-      if (window.innerWidth > 768 && !prefersReduced) {
-        try { fireConfetti(); } catch (e) {}
-      }
+      // small delay before typing to let logo settle
+      setTimeout(step, 220);
+    });
+  };
 
-      // give a measured pause so users can read the line, then finish
-      setTimeout(() => {
-        finish();
-      }, 900);
-    }
-  }
-
-  // start typing after a short pause
-  setTimeout(typeNext, 300);
+  // run sequence: logo pop -> type tagline -> finish
+  playLogo().then(() => typeTagline()).then(() => finish());
 }
 
 window.addEventListener('load', () => {
