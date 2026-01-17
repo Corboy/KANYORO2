@@ -503,7 +503,9 @@ if (newsletterForm) {
     button.disabled = true;
     button.textContent = 'Sending...';
 
-    const endpoint = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+  // Use a configurable endpoint. Set window.FORMSPREE_ENDPOINT in HTML or
+  // set a Netlify env var and inject it into the page during build if desired.
+  const endpoint = (window && window.FORMSPREE_ENDPOINT) ? window.FORMSPREE_ENDPOINT : 'https://formspree.io/f/YOUR_FORMSPREE_ID';
 
     fetch(endpoint, {
       method: 'POST',

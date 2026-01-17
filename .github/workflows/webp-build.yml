@@ -1,0 +1,64 @@
+name: Generate WebP and Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  webp-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install apt deps (webp tools)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp
+
+      - name: Convert PNGs in public/ to WebP
+        run: |
+          set -euo pipefail
+          cd $GITHUB_WORKSPACE
+          found=0
+          for f in public/*.png; do
+            [ -f "$f" ] || continue
+            out="${f%.png}.webp"
+            # convert with decent quality while preserving alpha
+            cwebp -q 82 "$f" -o "$out" && echo "converted $f -> $out"
+            found=1
+          done
+          if [ "$found" -eq 1 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add public/*.webp || true
+            if ! git diff --staged --quiet; then
+              git commit -m "chore: add generated WebP images (ci)" || true
+              git push
+            else
+              echo "No webp changes to commit"
+            fi
+          else
+            echo "No PNGs found in public/ to convert"
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
