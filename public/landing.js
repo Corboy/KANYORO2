@@ -1,7 +1,146 @@
-const headingElement = document.getElementById('animatedHeading');
-if (headingElement) {
-  headingElement.style.color = '#D4AF37';
-  headingElement.style.textShadow = '0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.15)';
+function initHeroRipples() {
+  if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.ripples !== 'function') return;
+  const target = jQuery('.full-landing-image');
+  if (!target.length) return;
+  const heroEl = target.get(0);
+  try {
+    target.ripples({
+      resolution: 556,
+      perturbance: 0.2
+    });
+  } catch (e) {}
+
+  const isHeroVisible = () => {
+    if (!heroEl) return false;
+    const rect = heroEl.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  };
+
+  let lastDrop = 0;
+  const dropRipple = (x, y, radius, strength) => {
+    if (!heroEl) return;
+    try {
+      target.ripples('drop', x, y, radius, strength);
+    } catch (e) {}
+  };
+
+  const randomDrop = () => {
+    if (!heroEl || !isHeroVisible()) return;
+    const now = Date.now();
+    if (now - lastDrop < 350) return;
+    lastDrop = now;
+    const rect = heroEl.getBoundingClientRect();
+    const x = rect.width * (0.25 + Math.random() * 0.5);
+    const y = rect.height * (0.2 + Math.random() * 0.6);
+    const radius = Math.min(rect.width, rect.height) * 0.18;
+    dropRipple(x, y, radius, 0.035);
+  };
+
+  let boostUntil = 0;
+  let boostTimer = null;
+  const startRippleBoost = (durationMs = 5000) => {
+    boostUntil = Math.max(boostUntil, Date.now() + durationMs);
+    if (boostTimer) return;
+    boostTimer = setInterval(() => {
+      if (Date.now() > boostUntil) {
+        clearInterval(boostTimer);
+        boostTimer = null;
+        return;
+      }
+      randomDrop();
+    }, 650);
+  };
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      randomDrop();
+      startRippleBoost(5000);
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  heroEl.addEventListener('click', (e) => {
+    const rect = heroEl.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const radius = Math.min(rect.width, rect.height) * 0.22;
+    dropRipple(x, y, radius, 0.06);
+    startRippleBoost(5000);
+  });
+}
+
+function initCursorGlow() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (prefersReducedMotion || isTouch) return;
+  if (document.getElementById('cursorGlow')) return;
+
+  const glow = document.createElement('div');
+  glow.id = 'cursorGlow';
+  document.body.appendChild(glow);
+
+  let x = window.innerWidth / 2;
+  let y = window.innerHeight / 2;
+  let targetX = x;
+  let targetY = y;
+  let rafId = null;
+
+  const update = () => {
+    x += (targetX - x) * 0.12;
+    y += (targetY - y) * 0.12;
+    glow.style.transform = `translate3d(${x - 120}px, ${y - 120}px, 0)`;
+    rafId = requestAnimationFrame(update);
+  };
+
+  const handleMove = (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    glow.classList.add('is-visible');
+    if (!rafId) rafId = requestAnimationFrame(update);
+  };
+
+  const handleLeave = () => {
+    glow.classList.remove('is-visible');
+  };
+
+  window.addEventListener('mousemove', handleMove);
+  window.addEventListener('mouseout', handleLeave);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) glow.classList.remove('is-visible');
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initHeroRipples();
+    initCursorGlow();
+  });
+} else {
+  initHeroRipples();
+  initCursorGlow();
+}
+
+let cachedVoices = [];
+function loadSpeechVoices() {
+  if (!('speechSynthesis' in window)) return;
+  cachedVoices = window.speechSynthesis.getVoices();
+}
+if ('speechSynthesis' in window) {
+  loadSpeechVoices();
+  window.speechSynthesis.addEventListener('voiceschanged', loadSpeechVoices);
+}
+
+function pickNaturalVoice() {
+  const voices = cachedVoices.length ? cachedVoices : (window.speechSynthesis ? window.speechSynthesis.getVoices() : []);
+  if (!voices || !voices.length) return null;
+  const preferred = voices.find(v => /en/i.test(v.lang || '') && /samantha|ava|allison|zira|moira|serena|victoria|google uk english female|google us english/i.test(v.name || '')) ||
+    voices.find(v => /en/i.test(v.lang || '') && /female|zira|samantha|google|english/i.test(v.name || '')) ||
+    voices.find(v => /en/i.test(v.lang || '')) ||
+    voices[0];
+  return preferred || null;
 }
 
 /* --- Image cropper modal --- */
@@ -206,16 +345,62 @@ function playWelcomeAnimation() {
 
   if (!overlay) return;
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) { overlay.remove(); return; }
-
-  const alreadyPlayed = localStorage.getItem('introPlayed') === 'true';
-  if (alreadyPlayed) { overlay.remove(); return; }
-
   const logoImg = overlay.querySelector('.welcome-logo img');
   const tagline = overlay.querySelector('.welcome-tagline');
+  const message = overlay.querySelector('.welcome-message');
   const small = overlay.querySelector('.welcome-logo small');
+  const divider = overlay.querySelector('.welcome-divider');
   const skipBtn = overlay.querySelector('#skipIntro') || overlay.querySelector('.skip-intro');
+
+  const voiceEl = document.getElementById('welcomeVoice');
+  let voicePlayed = false;
+  if (voiceEl) {
+    voiceEl.muted = false;
+    voiceEl.volume = 1;
+    voiceEl.playbackRate = 0.95;
+    if ('preservesPitch' in voiceEl) voiceEl.preservesPitch = true;
+    if ('mozPreservesPitch' in voiceEl) voiceEl.mozPreservesPitch = true;
+    if ('webkitPreservesPitch' in voiceEl) voiceEl.webkitPreservesPitch = true;
+    try { voiceEl.load(); } catch (e) {}
+    voiceEl.addEventListener('play', () => { voicePlayed = true; });
+  }
+
+  const speakFallback = () => {
+    if (voicePlayed) return false;
+    if (!('speechSynthesis' in window)) return false;
+    const utter = new SpeechSynthesisUtterance('Welcome to MWITONGO Company Limited.');
+    const preferred = pickNaturalVoice();
+    if (preferred) {
+      utter.voice = preferred;
+      utter.lang = preferred.lang || 'en-US';
+    } else {
+      utter.lang = 'en-US';
+    }
+    utter.rate = 0.9;
+    utter.pitch = 1.03;
+    utter.volume = 0.95;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter);
+    voicePlayed = true;
+    return true;
+  };
+  const playIntroSound = () => {
+    if (!voiceEl) return Promise.resolve(false);
+    try {
+      voiceEl.currentTime = 0;
+      const playPromise = voiceEl.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        return playPromise.then(() => {
+          voicePlayed = true;
+          return true;
+        }).catch(() => false);
+      }
+      voicePlayed = true;
+      return Promise.resolve(true);
+    } catch (e) {
+      return Promise.resolve(false);
+    }
+  };
 
   let finished = false;
   const finish = () => {
@@ -223,7 +408,6 @@ function playWelcomeAnimation() {
     finished = true;
     overlay.classList.add('welcome-overlay-hide');
     overlay.setAttribute('aria-hidden', 'true');
-    try { localStorage.setItem('introPlayed', 'true'); } catch (e) {}
     overlay.addEventListener('animationend', () => {
       if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     });
@@ -231,85 +415,54 @@ function playWelcomeAnimation() {
 
   if (skipBtn) skipBtn.addEventListener('click', finish);
 
-  // prepare initial states
-  if (logoImg) {
-    logoImg.style.opacity = '0';
-    logoImg.style.transform = 'scale(0.84) translateY(8px)';
-  }
-  if (tagline) {
-    // keep text for typing; we'll overwrite it during typing
-    tagline._fullText = (tagline.textContent || '').trim();
-    tagline.textContent = '';
-    tagline.style.opacity = '0';
-  }
-  if (small) small.style.opacity = '0';
-
-  // helper: play logo pop (resolves when animation ends or after fallback timeout)
-  const playLogo = () => {
-    if (!logoImg) return Promise.resolve();
-    return new Promise(resolve => {
-      const onEnd = (e) => {
-        logoImg.removeEventListener('animationend', onEnd);
-        resolve();
-      };
-      logoImg.addEventListener('animationend', onEnd);
-      // trigger CSS animation
-      logoImg.classList.add('welcome-logo-animate');
-      // fallback: resolve after 900ms in case animationend doesn't fire
-      setTimeout(resolve, 900);
-    });
-  };
-
-  // typed tagline (returns a promise)
-  const typeTagline = () => {
-    if (!tagline) return Promise.resolve();
-    return new Promise(resolve => {
-      const fullText = tagline._fullText || '';
-      let idx = 0;
-      const typeDelay = 30;
-
-      function step() {
-        if (idx <= fullText.length) {
-          tagline.textContent = fullText.slice(0, idx);
-          idx++;
-          tagline.style.opacity = '1';
-          setTimeout(step, typeDelay + Math.random() * 20);
-        } else {
-          if (small) try { small.classList.add('welcome-subtle-animate'); } catch (e) {}
-          if (window.innerWidth > 768 && !prefersReduced) { try { fireConfetti(); } catch (e) {} }
-          // short pause for reading
-          setTimeout(resolve, 900);
-        }
+  // Try autoplay immediately; if blocked, play on first user interaction anywhere.
+  const setupUnlock = () => {
+    const unlock = async () => {
+      const ok = await playIntroSound();
+      if (!ok) speakFallback();
+      if (ok || voicePlayed) {
+        window.removeEventListener('pointerdown', unlock);
+        window.removeEventListener('keydown', unlock);
+        window.removeEventListener('touchstart', unlock);
+        window.removeEventListener('scroll', unlock);
       }
-
-      // small delay before typing to let logo settle
-      setTimeout(step, 220);
-    });
+    };
+    window.addEventListener('pointerdown', unlock);
+    window.addEventListener('keydown', unlock);
+    window.addEventListener('touchstart', unlock, { passive: true });
+    window.addEventListener('scroll', unlock, { passive: true });
   };
 
-  // run sequence: logo pop -> type tagline -> finish
-  playLogo().then(() => typeTagline()).then(() => finish());
+  playIntroSound().then((ok) => {
+    if (!ok) setupUnlock();
+    if (!ok) speakFallback();
+  });
+
+  // run professional sequence
+  if (logoImg) logoImg.classList.add('welcome-logo-animate');
+  if (tagline) tagline.classList.add('welcome-tagline-animate');
+  if (message) message.classList.add('welcome-message-animate');
+  if (divider) divider.classList.add('welcome-divider-animate');
+  if (small) small.classList.add('welcome-subtle-animate');
+
+  // hold for 5 seconds for readability, then fade out
+  setTimeout(finish, 5000);
 }
 
-window.addEventListener('load', () => {
-  // If user prefers reduced motion, don't delay or show the overlay
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
-    const ov = document.getElementById('welcomeOverlay');
-    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
-    return;
-  }
+function startWelcomeOverlay() {
+  const overlay = document.getElementById('welcomeOverlay');
+  if (!overlay) return;
+  overlay.classList.add('welcome-overlay-visible');
+  playWelcomeAnimation();
+}
 
-  // Wait 5 seconds, then reveal the overlay and start the animation sequence.
-  setTimeout(() => {
-    const overlay = document.getElementById('welcomeOverlay');
-    if (!overlay) return;
-    // add visible class so CSS can transition it in
-    overlay.classList.add('welcome-overlay-visible');
-    // start the existing animation flow
-    playWelcomeAnimation();
-  }, 5000);
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(startWelcomeOverlay, 400);
+  });
+} else {
+  setTimeout(startWelcomeOverlay, 400);
+}
 
 const navbar = document.querySelector('.navbar');
 const mobileToggle = document.querySelector('.mobile-toggle');
@@ -335,6 +488,18 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+testimonialCards.forEach(card => {
+  const row = card.closest('.testimonials-row');
+  if (!row) return;
+  const pause = () => row.classList.add('is-paused');
+  const resume = () => row.classList.remove('is-paused');
+  card.addEventListener('mouseenter', pause);
+  card.addEventListener('mouseleave', resume);
+  card.addEventListener('focusin', pause);
+  card.addEventListener('focusout', resume);
+});
+
 const observerOptions = {
   threshold: 0.1,
   rootMargin: '0px 0px -100px 0px'
@@ -356,79 +521,29 @@ document.querySelectorAll('.service-card, .why-card, .structure-card, .mv-card, 
   observer.observe(card);
 });
 
-// Assign staff photos deterministically from randomuser.me based on name+gender
-function assignStaffPhotos() {
-  const staffCards = document.querySelectorAll('.experienced-staff .staff-card');
-  if (!staffCards || staffCards.length === 0) return;
-
-  staffCards.forEach(card => {
-    // prefer data attributes if provided
-    const name = card.getAttribute('data-name') || (card.querySelector('h3') && card.querySelector('h3').textContent.trim()) || 'user';
-    const genderAttr = (card.getAttribute('data-gender') || '').toLowerCase();
-    const gender = (genderAttr === 'female' || genderAttr === 'woman' || genderAttr === 'women') ? 'women' : 'men';
-
-    // deterministic hash from name -> number 0-99
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-      hash = ((hash << 5) - hash) + name.charCodeAt(i);
-      hash |= 0; // convert to 32bit int
-    }
-    const idx = Math.abs(hash) % 100; // randomuser has 0-99 portraits
-
-    // Prefer Unsplash search for Black portraits (gender-aware). Use sig to keep selection deterministic per name.
-    // Fallback to randomuser.me if Unsplash fails to load.
-    const genderQuery = (gender === 'women') ? 'woman' : 'man';
-    const unsplashSrc = `https://source.unsplash.com/600x600/?black+person,portrait,${encodeURIComponent(genderQuery)}&sig=${idx}`;
-
-    const imageWrap = card.querySelector('.staff-image');
-    if (imageWrap) {
-      // remove existing initials if present
-      imageWrap.innerHTML = '';
-      const img = document.createElement('img');
-      img.alt = `${name} — team member`;
-      img.loading = 'lazy';
-      // try Unsplash first
-      img.src = unsplashSrc;
-      // if Unsplash returns a 404 or blocked, try randomuser as fallback
-      img.addEventListener('error', () => {
-        try {
-          img.src = `https://randomuser.me/api/portraits/${gender}/${idx}.jpg`;
-        } catch (e) {
-          // final fallback: use a generated avatar (DiceBear)
-          img.src = `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(name)}`;
-        }
-      });
-  imageWrap.appendChild(img);
-
-      // make image clickable to open WhatsApp with a prefilled message for that person
-      const phone = '+255763542024';
-      const message = `Hello ${name}, I'm interested in professional services.`;
-      const openWhatsapp = () => {
-        const url = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-      };
-      imageWrap.style.cursor = 'pointer';
-      imageWrap.setAttribute('role', 'button');
-      imageWrap.setAttribute('tabindex', '0');
-      imageWrap.setAttribute('aria-label', `Contact ${name} on WhatsApp`);
-
-      // Attempt to prefetch and use blob URL to improve reliability and caching
-      (async function prefetch() {
-        try {
-          const resp = await fetch(img.src, { mode: 'cors', cache: 'force-cache' });
-          if (!resp.ok) throw new Error('prefetch-failed');
-          const blob = await resp.blob();
-          const objectUrl = URL.createObjectURL(blob);
-          img.src = objectUrl;
-        } catch (e) {
-          // ignore and fall back to original src (browser will handle caching)
-        }
-      })();
-      imageWrap.addEventListener('click', openWhatsapp);
-      imageWrap.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { openWhatsapp(); } });
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
     }
   });
-}
+}, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+
+const revealTargets = document.querySelectorAll(
+  '.section-header, .hero-badge, .hero-subtitle, .hero-feature, .hero-buttons, .trust-item, .newsletter-content, .cta-content, .contact-item, .cert-card, .achievement-card, .support-card'
+);
+
+revealTargets.forEach((el, index) => {
+  el.classList.add('reveal');
+  el.style.setProperty('--reveal-delay', `${(index % 6) * 80}ms`);
+  if (prefersReducedMotion) {
+    el.classList.add('in-view');
+  } else {
+    revealObserver.observe(el);
+  }
+});
 
 // Personalize leadership team WhatsApp buttons: set message with name & role before opening
 function personalizeLeadershipButtons() {
@@ -495,6 +610,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+function getFormspreeEndpoint() {
+  const meta = document.querySelector('meta[name="formspree-endpoint"]');
+  const raw = (window && window.FORMSPREE_ENDPOINT) ? window.FORMSPREE_ENDPOINT : (meta ? meta.content : '');
+  const endpoint = (raw || '').trim();
+  if (!endpoint || endpoint.includes('YOUR_FORMSPREE_ID') || endpoint.includes('REPLACE_WITH_ID')) {
+    return '';
+  }
+  return endpoint;
+}
+
+function openMailto(subject, body) {
+  const to = 'e.e.eof2025@gmail.com';
+  window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 300);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
 
 const newsletterForm = document.getElementById('newsletterForm');
 if (newsletterForm) {
@@ -507,9 +647,13 @@ if (newsletterForm) {
     button.disabled = true;
     button.textContent = 'Sending...';
 
-  // Use a configurable endpoint. Set window.FORMSPREE_ENDPOINT in HTML or
-  // set a Netlify env var and inject it into the page during build if desired.
-  const endpoint = (window && window.FORMSPREE_ENDPOINT) ? window.FORMSPREE_ENDPOINT : 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    const endpoint = getFormspreeEndpoint();
+    if (!endpoint) {
+      button.textContent = 'Open Email App';
+      openMailto('Newsletter Subscription', `Please subscribe this email: ${email}`);
+      setTimeout(() => { newsletterForm.reset(); button.textContent = originalText; button.disabled = false; }, 1200);
+      return;
+    }
 
     fetch(endpoint, {
       method: 'POST',
@@ -526,6 +670,45 @@ if (newsletterForm) {
       }
     }).catch(err => {
       console.error('Subscribe error', err);
+      button.textContent = 'Try again';
+      setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2000);
+    });
+  });
+}
+
+const consultationForm = document.getElementById('consultationForm');
+if (consultationForm) {
+  consultationForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(consultationForm);
+    const payload = Object.fromEntries(formData.entries());
+    const button = consultationForm.querySelector('button');
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Submitting...';
+
+    const endpoint = getFormspreeEndpoint();
+    if (!endpoint) {
+      const summary = `Name: ${payload.name || ''}\nEmail: ${payload.email || ''}\nPhone: ${payload.phone || ''}\nService: ${payload.service || ''}\nBudget: ${payload.budget || ''}\nTimeline: ${payload.timeline || ''}\nMessage: ${payload.message || ''}`;
+      openMailto('Consultation Request', summary);
+      setTimeout(() => { consultationForm.reset(); button.textContent = originalText; button.disabled = false; }, 1200);
+      return;
+    }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(res => {
+      if (res.ok) {
+        button.textContent = 'Request Sent';
+        try { fireConfetti(); } catch (e) {}
+        setTimeout(() => { consultationForm.reset(); button.textContent = originalText; button.disabled = false; }, 2500);
+      } else {
+        return res.text().then(text => Promise.reject(new Error(text || 'Failed')));
+      }
+    }).catch(err => {
+      console.error('Consultation error', err);
       button.textContent = 'Try again';
       setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2000);
     });
@@ -727,7 +910,6 @@ function initializeMap() {
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(initializeMap, 500);
   // assign photos after map init delay so DOM is ready
-  setTimeout(assignStaffPhotos, 200);
   // personalize leadership WhatsApp button messages
   setTimeout(personalizeLeadershipButtons, 300);
   // try to insert provided local photo for John Kanyoro and crop to face

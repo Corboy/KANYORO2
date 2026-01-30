@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MWITONGO E&E CO. LTD - Your Partner in Progress</title>
+    <meta name="description" content="MWITONGO E&E CO. LTD is a Tanzanian consultancy delivering strategy, digital transformation, research, ICT solutions, training, and project delivery for public and private sector organizations." />
+    <link rel="canonical" href="https://kanyoro12.netlify.app/" />
     <link rel="stylesheet" href="/landing.css" />
     <!-- Favicon & Manifest -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -12,10 +14,13 @@
     <!-- Open Graph / SEO -->
     <meta property="og:title" content="MWITONGO E&E CO. LTD - Your Partner in Progress" />
     <meta property="og:description" content="Leading consultancy and digital transformation company empowering organizations across Tanzania." />
-    <meta property="og:image" content="/logo.png" />
+    <meta property="og:image" content="https://kanyoro12.netlify.app/logo.png" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kanyoro12.netlify.app/" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="/logo.png">
+    <meta name="twitter:title" content="MWITONGO E&E CO. LTD - Your Partner in Progress">
+    <meta name="twitter:description" content="Strategy, digital transformation, research, ICT, and training for organizations across Tanzania.">
+    <meta name="twitter:image" content="https://kanyoro12.netlify.app/logo.png">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -26,8 +31,8 @@
       "sameAs": []
     }
     </script>
-  <!-- Formspree endpoint (replace with your real endpoint or set via Netlify env) -->
-  <meta name="formspree-endpoint" content="https://formspree.io/f/YOUR_FORMSPREE_ID">
+  <!-- Formspree endpoint (set your real endpoint or inject via Netlify env) -->
+  <meta name="formspree-endpoint" content="">
     <!-- Inline helper: pick up the formspree endpoint from meta so the JS can post to it -->
     <script>
       try {
@@ -38,9 +43,6 @@
       } catch (e) { /* ignore */ }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
   <body>
     <a class="skip-link" href="#home">Skip to content</a>
@@ -48,11 +50,16 @@
       <div class="welcome-inner" role="region" aria-label="Welcome">
         <div class="welcome-logo"><img src="/logo.png" alt="MWITONGO E&E" /><small>CO. LTD</small></div>
         <div class="welcome-tagline">Your Partner in Progress</div>
-        <button id="skipIntro" class="skip-intro" aria-label="Skip introduction">Skip</button>
+        <div class="welcome-message">Building Tanzania with trusted civil &amp; construction excellence — delivered with integrity, safety, and precision.</div>
+        <div class="welcome-divider" aria-hidden="true"></div>
+        <div class="welcome-actions">
+          <button id="skipIntro" class="skip-intro" aria-label="Skip introduction">Skip</button>
+        </div>
       </div>
     </div>
     <div id="progressBarContainer"><div id="progressBar"></div></div>
     <button id="backToTop" aria-label="Back to Top" title="Back to Top">↑</button>
+    <a class="sticky-cta" href="#contact" aria-label="Book a consultation">Book a Consultation</a>
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
       <div class="container">
         <div class="nav-content">
@@ -77,7 +84,7 @@
       </div>
     </nav>
 
-    <section id="home" class="hero">
+    <section id="home" class="hero full-landing-image">
       <div class="hero-background">
         <div class="hero-shape hero-shape-1"></div>
         <div class="hero-shape hero-shape-2"></div>
@@ -86,29 +93,96 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-badge">Welcome to Tanzania's Premier Consultancy Firm</div>
-          <h1 class="main-heading" id="animatedHeading">MWITONGO E&E CO. LTD</h1>
+          <h1 class="main-heading hero-name-typing" id="animatedHeading" data-text="MWITONGO E&E CO. LTD">MWITONGO E&E CO. LTD</h1>
+          <div class="text-typing hero-typing">
+            We are <span></span>
+          </div>
           <p class="hero-subtitle">Leading consultancy and digital transformation company empowering organizations with innovative, efficient, and sustainable solutions across Tanzania</p>
           <div class="hero-features">
             <div class="hero-feature">
               <span class="feature-icon">✓</span>
-              <span>20+ Years Experience</span>
+              <span>20+ Years Experience <span class="feature-meta">est.</span></span>
             </div>
             <div class="hero-feature">
               <span class="feature-icon">✓</span>
-              <span>500+ Projects Delivered</span>
+              <span>500+ Projects Delivered <span class="feature-meta">est.</span></span>
             </div>
             <div class="hero-feature">
               <span class="feature-icon">✓</span>
-              <span>98% Client Satisfaction</span>
+              <span>98% Client Satisfaction <span class="feature-meta">est.</span></span>
             </div>
           </div>
           <div class="hero-buttons">
             <a href="#contact" class="btn btn-primary">Start Your Journey</a>
             <a href="#services" class="btn btn-secondary">Explore Services</a>
           </div>
+          <div class="hero-simple">
+            <div class="hero-simple-line" aria-hidden="true"></div>
+            <div class="hero-simple-badges">
+              <span class="hero-simple-badge">Planning</span>
+              <span class="hero-simple-badge">Execution</span>
+              <span class="hero-simple-badge">QA &amp; HSE</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="hero-overlay"></div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <span class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </span>
+            <div>
+              <h4>Civil &amp; Construction Focus</h4>
+              <p>End-to-end delivery from planning to QA.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12h18"/>
+                <path d="M7 12l5-8 5 8"/>
+                <path d="M5 12v7h14v-7"/>
+              </svg>
+            </span>
+            <div>
+              <h4>Quality &amp; Safety</h4>
+              <p>Structured checks, HSE-first execution.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 3"/>
+              </svg>
+            </span>
+            <div>
+              <h4>On-Time Delivery</h4>
+              <p>Clear milestones and transparent updates.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6"/>
+                <path d="M8 13h8M8 17h6"/>
+              </svg>
+            </span>
+            <div>
+              <h4>Professional Compliance</h4>
+              <p>Documented scope and deliverables.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="experienced-staff">
@@ -304,9 +378,17 @@
         <div class="section-header">
           <h2 class="section-title">Our Services</h2>
           <div class="title-underline"></div>
-          <p class="section-subtitle">Comprehensive solutions tailored to your business needs</p>
+          <p class="section-subtitle">Civil &amp; Construction is our core focus, supported by complementary professional services</p>
         </div>
         <div class="services-grid">
+          <div class="service-card featured">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="service-badge">Core Service</span>
+            <h3>Civil &amp; Construction</h3>
+            <p>Full-spectrum civil works, construction planning, supervision, and quality assurance for reliable project delivery.</p>
+          </div>
           <div class="service-card">
             <div class="service-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -327,13 +409,6 @@
             </div>
             <h3>Office Administrative Support</h3>
             <p>Comprehensive administrative solutions including document management, scheduling, and office coordination.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3>Civil Engineering & Construction Support</h3>
-            <p>Technical expertise in construction project planning, supervision, and quality assurance.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">
@@ -369,6 +444,60 @@
             </div>
             <h3>General Supplies</h3>
             <p>Reliable procurement and supply chain management services for various organizational needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="packages">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Engagement Packages</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Clear, professional service tiers for organizations of every size</p>
+        </div>
+        <div class="packages-grid">
+          <div class="package-card">
+            <div class="package-top">
+              <span class="package-tag">Starter</span>
+              <h3>Advisory Sprint</h3>
+              <p>Focused diagnostics, quick wins, and a clear action plan.</p>
+            </div>
+            <ul class="package-list">
+              <li>Discovery workshop + stakeholder interviews</li>
+              <li>Needs assessment report</li>
+              <li>90-day roadmap & quick wins</li>
+              <li>Executive briefing session</li>
+            </ul>
+            <a href="#contact" class="btn btn-secondary">Request Package</a>
+          </div>
+          <div class="package-card featured">
+            <div class="package-top">
+              <span class="package-tag">Professional</span>
+              <h3>Transformation Partner</h3>
+              <p>End-to-end strategy, delivery, and change management.</p>
+            </div>
+            <ul class="package-list">
+              <li>Strategic plan + operating model</li>
+              <li>Digital/ICT implementation support</li>
+              <li>Change management & training</li>
+              <li>Performance tracking dashboards</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary">Book Consultation</a>
+          </div>
+          <div class="package-card">
+            <div class="package-top">
+              <span class="package-tag">Enterprise</span>
+              <h3>Managed Excellence</h3>
+              <p>Long-term delivery with dedicated experts and governance.</p>
+            </div>
+            <ul class="package-list">
+              <li>Program management office (PMO)</li>
+              <li>Continuous improvement cycles</li>
+              <li>Dedicated support & analytics</li>
+              <li>Executive quarterly reviews</li>
+            </ul>
+            <a href="#contact" class="btn btn-secondary">Talk to Us</a>
           </div>
         </div>
       </div>
@@ -450,6 +579,93 @@
         <div class="clients-content">
           <p>We proudly serve government agencies, private sector organizations, NGOs, and international partners, delivering exceptional value through our comprehensive suite of services.</p>
         </div>
+        <div class="clients-marquee" aria-label="Representative client sectors">
+          <div class="clients-track">
+            <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34h32v6H8zM10 20h28l-4-8H14z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 20v14M24 20v14M32 20v14" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">Kibo Civil Works</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 26h16M16 34h10" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">DarBuild Holdings</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 10v28M10 24h28" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">Tanga Infra Group</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 34l10-20 10 12 8-6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="14" r="3" fill="currentColor"/></svg>
+            <span class="logo-name">Coastal Estates</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 30l12-18 12 18H12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 12v16" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">Mji Procurement</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="12" width="28" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 24h10" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">Ridge Engineering</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36V12h24v24" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18 24h12M18 30h12" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">Lakeview Projects</span>
+          </div>
+          <div class="logo-tile">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8l10 10-10 22-10-22z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="logo-name">Ujenzi Solutions</span>
+          </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 36h28V12H10z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 24h16M16 30h10" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Capital Builders</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 34l12-20 12 20H12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="18" r="3" fill="currentColor"/></svg>
+              <span class="logo-name">Njia Contractors</span>
+            </div>
+          </div>
+          <div class="clients-track" aria-hidden="true">
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34h32v6H8zM10 20h28l-4-8H14z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 20v14M24 20v14M32 20v14" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Kibo Civil Works</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 26h16M16 34h10" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">DarBuild Holdings</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 10v28M10 24h28" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Tanga Infra Group</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 34l10-20 10 12 8-6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="14" r="3" fill="currentColor"/></svg>
+              <span class="logo-name">Coastal Estates</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 30l12-18 12 18H12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 12v16" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Mji Procurement</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="12" width="28" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 24h10" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Ridge Engineering</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36V12h24v24" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18 24h12M18 30h12" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Lakeview Projects</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8l10 10-10 22-10-22z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Ujenzi Solutions</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 36h28V12H10z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 24h16M16 30h10" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="logo-name">Capital Builders</span>
+            </div>
+            <div class="logo-tile">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 34l12-20 12 20H12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="18" r="3" fill="currentColor"/></svg>
+              <span class="logo-name">Njia Contractors</span>
+            </div>
+          </div>
+        </div>
+        <p class="clients-note">Representative sectors we support across Tanzania.</p>
       </div>
     </section>
 
@@ -458,19 +674,19 @@
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-number" data-target="500">0</div>
-            <div class="stat-label">Projects Completed</div>
+            <div class="stat-label">Projects Completed (est.)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number" data-target="150">0</div>
-            <div class="stat-label">Clients Served</div>
+            <div class="stat-label">Clients Served (est.)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number" data-target="98">0</div>
-            <div class="stat-label">Client Satisfaction %</div>
+            <div class="stat-label">Client Satisfaction % (est.)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number" data-target="15">0</div>
-            <div class="stat-label">Years Experience</div>
+            <div class="stat-label">Years Experience (est.)</div>
           </div>
         </div>
       </div>
@@ -517,67 +733,191 @@
     </section>
 
     <section class="testimonials">
-      <div class="testimonial-controls">
-        <button id="prevTestimonial" aria-label="Previous testimonial">‹</button>
-        <button id="nextTestimonial" aria-label="Next testimonial">›</button>
-      </div>
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Client Success Stories</h2>
-          <div class="title-underline"></div>
-          <p class="section-subtitle">Hear from organizations we've partnered with</p>
+        <div class="testimonials-header">
+          <div class="testimonials-title">
+            <span class="testimonials-kicker">What People Say</span>
+            <h2>Client Success Stories</h2>
+            <p>Hear from organizations we've partnered with</p>
+          </div>
+          <a class="testimonials-link" href="#contact">View all →</a>
         </div>
-        <div class="testimonials-carousel">
-          <div class="testimonial-card">
-            <div class="testimonial-header">
-              <div class="client-avatar">JK</div>
-              <div class="client-info">
-                <h4>John Kamau</h4>
-                <p>Managing Director, Enterprise Solutions Ltd</p>
+        <div class="testimonials-marquee">
+          <div class="testimonials-row row-top">
+            <div class="testimonials-track" style="--duration: 34s;">
+              <div class="testimonials-set">
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">AM</div>
+                    <div class="client-info">
+                      <h4>Asha Mtei</h4>
+                      <p>Project Manager, Coastal Estates</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"MWITONGO handled our civil works from planning to handover. The site updates and QA checks were clear and on schedule."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">JK</div>
+                    <div class="client-info">
+                      <h4>Joseph Kweka</h4>
+                      <p>Infrastructure Lead, City Works</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Drainage and access road upgrades were delivered safely with strong supervision and reliable communication."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">HN</div>
+                    <div class="client-info">
+                      <h4>Halima Nyerere</h4>
+                      <p>Operations Director, EastBuild</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Professional, reliable, and detail oriented. The construction management support kept our budget under control."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">RM</div>
+                    <div class="client-info">
+                      <h4>Robert Mushi</h4>
+                      <p>Facilities Manager, Umoja Health</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Transparent scope, quality workmanship, and fast response. We felt supported at every stage."</p>
+                </div>
+              </div>
+              <div class="testimonials-set" aria-hidden="true">
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">AM</div>
+                    <div class="client-info">
+                      <h4>Asha Mtei</h4>
+                      <p>Project Manager, Coastal Estates</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"MWITONGO handled our civil works from planning to handover. The site updates and QA checks were clear and on schedule."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">JK</div>
+                    <div class="client-info">
+                      <h4>Joseph Kweka</h4>
+                      <p>Infrastructure Lead, City Works</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Drainage and access road upgrades were delivered safely with strong supervision and reliable communication."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">HN</div>
+                    <div class="client-info">
+                      <h4>Halima Nyerere</h4>
+                      <p>Operations Director, EastBuild</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Professional, reliable, and detail oriented. The construction management support kept our budget under control."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">RM</div>
+                    <div class="client-info">
+                      <h4>Robert Mushi</h4>
+                      <p>Facilities Manager, Umoja Health</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Transparent scope, quality workmanship, and fast response. We felt supported at every stage."</p>
+                </div>
               </div>
             </div>
-            <div class="stars">
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-            </div>
-            <p class="testimonial-text">"MWITONGO's consultancy team transformed our entire organizational structure. Their insights were invaluable and the implementation was seamless. Highly recommended!"</p>
           </div>
-          <div class="testimonial-card">
-            <div class="testimonial-header">
-              <div class="client-avatar">AM</div>
-              <div class="client-info">
-                <h4>Amina Mohamed</h4>
-                <p>CEO, Digital Innovation Hub Tanzania</p>
+          <div class="testimonials-row row-bottom">
+            <div class="testimonials-track" style="--duration: 38s;">
+              <div class="testimonials-set">
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">GM</div>
+                    <div class="client-info">
+                      <h4>Grace Mwinyi</h4>
+                      <p>CEO, Horizon Logistics</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"MWITONGO's consultancy and ICT reporting improved our project visibility and decision making."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">DS</div>
+                    <div class="client-info">
+                      <h4>Daniel Shayo</h4>
+                      <p>Engineer, Riverside Development</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Strong HSE focus and weekly progress updates gave us confidence throughout execution."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">PF</div>
+                    <div class="client-info">
+                      <h4>Paul Festo</h4>
+                      <p>Director, Northern Estates</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"They guided permits and approvals smoothly while maintaining schedule discipline."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">SA</div>
+                    <div class="client-info">
+                      <h4>Salma Abdallah</h4>
+                      <p>Procurement Lead, Public Works</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Clear documentation, measurable milestones, and dependable delivery."</p>
+                </div>
+              </div>
+              <div class="testimonials-set" aria-hidden="true">
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">GM</div>
+                    <div class="client-info">
+                      <h4>Grace Mwinyi</h4>
+                      <p>CEO, Horizon Logistics</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"MWITONGO's consultancy and ICT reporting improved our project visibility and decision making."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">DS</div>
+                    <div class="client-info">
+                      <h4>Daniel Shayo</h4>
+                      <p>Engineer, Riverside Development</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Strong HSE focus and weekly progress updates gave us confidence throughout execution."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">PF</div>
+                    <div class="client-info">
+                      <h4>Paul Festo</h4>
+                      <p>Director, Northern Estates</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"They guided permits and approvals smoothly while maintaining schedule discipline."</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                    <div class="client-avatar">SA</div>
+                    <div class="client-info">
+                      <h4>Salma Abdallah</h4>
+                      <p>Procurement Lead, Public Works</p>
+                    </div>
+                  </div>
+                  <p class="testimonial-text">"Clear documentation, measurable milestones, and dependable delivery."</p>
+                </div>
               </div>
             </div>
-            <div class="stars">
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-            </div>
-            <p class="testimonial-text">"The ICT solutions provided have revolutionized our operations. Their team's expertise in digital transformation is unmatched in the region."</p>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-header">
-              <div class="client-avatar">PK</div>
-              <div class="client-info">
-                <h4>Peter Kwame</h4>
-                <p>Director, Government Affairs Ministry</p>
-              </div>
-            </div>
-            <div class="stars">
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-              <span class="star filled">★</span>
-            </div>
-            <p class="testimonial-text">"Professional, reliable, and results-driven. MWITONGO consistently delivers beyond expectations. They're our trusted partner for strategic initiatives."</p>
           </div>
         </div>
       </div>
@@ -600,8 +940,12 @@
             <p class="team-bio">Visionary leader with extensive experience driving organizational excellence and strategic growth across multiple sectors.</p>
             <div class="team-actions">
               <a class="btn btn-small whatsapp-btn" href="https://wa.me/255772251839" data-phone="255772251839" data-text="Hello Victor — Chief Executive Officer, I am interested in your professional services. Please let me know how we can discuss." target="_blank" rel="noopener noreferrer" aria-label="Contact Victor on WhatsApp">
-                <svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg>
-                <span>Message</span>
+                <span class="wa-icon">
+                  <svg class="whatsapp-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/>
+                  </svg>
+                </span>
+                <span class="wa-text">WhatsApp</span>
               </a>
             </div>
           </div>
@@ -614,8 +958,12 @@
             <p class="team-bio">Strategic director with proven expertise in project management, consultancy delivery, and client relations across Africa.</p>
             <div class="team-actions">
               <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" data-phone="255763542024" data-text="Hello John Kanyoro — Director, I am interested in your professional services. Please let me know how we can discuss." target="_blank" rel="noopener noreferrer" aria-label="Contact John on WhatsApp">
-                <svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg>
-                <span>Message</span>
+                <span class="wa-icon">
+                  <svg class="whatsapp-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/>
+                  </svg>
+                </span>
+                <span class="wa-text">WhatsApp</span>
               </a>
             </div>
           </div>
@@ -626,7 +974,16 @@
             <h3>Technical Director</h3>
             <p class="team-role">Digital Innovation & ICT</p>
             <p class="team-bio">Expert in digital transformation with a track record of cutting-edge technology implementation and system architecture.</p>
-            <div class="team-actions"><a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Technical Director on WhatsApp"><svg class="whatsapp-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/></svg><span>Message</span></a></div>
+            <div class="team-actions">
+              <a class="btn btn-small whatsapp-btn" href="https://wa.me/255763542024" target="_blank" rel="noopener noreferrer" aria-label="Contact Technical Director on WhatsApp">
+                <span class="wa-icon">
+                  <svg class="whatsapp-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2h-1l-2 2-1-1-4 1-1-1-2-2v-1a2 2 0 0 1 2-2h.5"/>
+                  </svg>
+                </span>
+                <span class="wa-text">WhatsApp</span>
+              </a>
+            </div>
           </div>
           <!-- Operations Director removed per update -->
         </div>
@@ -646,7 +1003,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
             <h3>Measurable Results</h3>
-            <p>Achieve 40-60% efficiency gains and ROI improvements through data-driven strategies.</p>
+            <p>Deliver measurable efficiency gains and ROI improvements through data-driven strategies.</p>
           </div>
           <div class="benefit-card">
             <div class="benefit-icon">
@@ -660,7 +1017,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
             </div>
             <h3>Dedicated Support</h3>
-            <p>24/7 expert support team ensuring seamless implementation and success.</p>
+            <p>Dedicated expert support ensuring seamless implementation and success.</p>
           </div>
           <div class="benefit-card">
             <div class="benefit-icon">
@@ -678,7 +1035,7 @@
         <div class="section-header">
           <h2 class="section-title">Success Stories</h2>
           <div class="title-underline"></div>
-          <p class="section-subtitle">Real results from organizations we've transformed</p>
+          <p class="section-subtitle">Representative outcomes from recent engagements</p>
         </div>
         <div class="case-studies-grid">
           <div class="case-study-card">
@@ -688,10 +1045,15 @@
             </div>
             <div class="case-study-content">
               <div class="case-study-stat">
-                <span class="stat-value">85%</span>
+                <span class="stat-value">Up to 85%</span>
                 <span class="stat-desc">Process Automation</span>
               </div>
-              <p>Implemented comprehensive digital transformation resulting in significant operational efficiency.</p>
+              <p>Implemented end-to-end process digitization to improve customer experience and back-office efficiency.</p>
+              <ul class="case-study-kpis">
+                <li><strong>Scope:</strong> Core operations + customer service workflows</li>
+                <li><strong>Timeline:</strong> 16 weeks from discovery to go-live</li>
+                <li><strong>Outcomes:</strong> Faster approvals, fewer manual handoffs</li>
+              </ul>
               <ul class="case-study-results">
                 <li>Reduced processing time by 85%</li>
                 <li>Improved customer satisfaction to 95%</li>
@@ -709,7 +1071,12 @@
                 <span class="stat-value">120%</span>
                 <span class="stat-desc">Revenue Growth</span>
               </div>
-              <p>Organizational restructuring and strategic planning for multinational corporation.</p>
+              <p>Organizational restructuring and strategic planning for a multi-unit enterprise.</p>
+              <ul class="case-study-kpis">
+                <li><strong>Scope:</strong> Strategy, structure, and governance</li>
+                <li><strong>Timeline:</strong> 12-week advisory engagement</li>
+                <li><strong>Outcomes:</strong> Faster decision cycles, clearer accountability</li>
+              </ul>
               <ul class="case-study-results">
                 <li>Achieved 120% revenue growth in year one</li>
                 <li>Enhanced team productivity by 65%</li>
@@ -727,7 +1094,12 @@
                 <span class="stat-value">10,000+</span>
                 <span class="stat-desc">Users Trained</span>
               </div>
-              <p>Large-scale government IT infrastructure modernization and capacity building.</p>
+              <p>Large-scale infrastructure modernization and capacity building for public sector services.</p>
+              <ul class="case-study-kpis">
+                <li><strong>Scope:</strong> Infrastructure + systems migration</li>
+                <li><strong>Timeline:</strong> 6-month phased rollout</li>
+                <li><strong>Outcomes:</strong> Stable operations and improved uptime</li>
+              </ul>
               <ul class="case-study-results">
                 <li>Trained 10,000+ government employees</li>
                 <li>Modernized legacy systems successfully</li>
@@ -860,7 +1232,10 @@
         <div class="cta-content">
           <h2>Ready to Transform Your Business?</h2>
           <p>Partner with MWITONGO E&E CO. LTD for innovative solutions that drive sustainable growth and success.</p>
-          <a href="#contact" class="btn btn-primary">Get Started Today</a>
+          <div class="cta-actions">
+            <a href="#contact" class="btn btn-primary">Get Started Today</a>
+            <a href="mailto:e.e.eof2025@gmail.com?subject=Company%20Profile%20Request" class="btn btn-secondary">Request Company Profile</a>
+          </div>
         </div>
       </div>
     </section>
@@ -900,11 +1275,61 @@
               <div>
                 <h4>Email</h4>
                 <p>e.e.eof2025@gmail.com</p>
+                <p>Preferred for official inquiries and proposals</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              </div>
+              <div>
+                <h4>Business Hours</h4>
+                <p>Mon–Fri: 08:30–17:30</p>
+                <p>Sat: 09:00–13:00</p>
               </div>
             </div>
           </div>
-          <div class="contact-map">
-            <div id="map" class="map-container"></div>
+          <div class="contact-panel">
+            <form class="contact-form" id="consultationForm">
+              <h3>Request a Consultation</h3>
+              <div class="form-row">
+                <input type="text" name="name" placeholder="Full name" required>
+                <input type="email" name="email" placeholder="Work email" required>
+              </div>
+              <div class="form-row">
+                <input type="tel" name="phone" placeholder="Phone / WhatsApp">
+                <select name="service" required>
+                  <option value="" disabled selected>Service of interest</option>
+                  <option>Management Consultancy</option>
+                  <option>Digital & ICT Solutions</option>
+                  <option>Research & Proposal Development</option>
+                  <option>Training & Capacity Building</option>
+                  <option>Project Management</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <select name="budget">
+                  <option value="" disabled selected>Estimated budget (TZS)</option>
+                  <option>Below 10M</option>
+                  <option>10M – 50M</option>
+                  <option>50M – 200M</option>
+                  <option>200M+</option>
+                </select>
+                <select name="timeline">
+                  <option value="" disabled selected>Desired timeline</option>
+                  <option>Immediately</option>
+                  <option>Within 1 month</option>
+                  <option>1–3 months</option>
+                  <option>3+ months</option>
+                </select>
+              </div>
+              <textarea name="message" rows="4" placeholder="Tell us about your needs and goals"></textarea>
+              <button type="submit" class="btn btn-primary">Submit Request</button>
+              <p class="form-note">We respond within 1–2 business days.</p>
+            </form>
+            <div class="contact-map">
+              <div id="map" class="map-container"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1155,6 +1580,28 @@
       </div>
     </section>
 
+    <section class="policies" id="policies">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Privacy &amp; Terms</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">Transparent data use and clear service expectations</p>
+        </div>
+        <div class="policies-grid">
+          <div class="policy-card" id="privacy">
+            <h3>Privacy Policy</h3>
+            <p>We collect only the information you submit (name, email, phone, and project details) to respond to inquiries and proposals. We do not sell your data.</p>
+            <p>For data removal requests, contact us at <strong>e.e.eof2025@gmail.com</strong>.</p>
+          </div>
+          <div class="policy-card" id="terms">
+            <h3>Terms of Service</h3>
+            <p>All engagements are governed by agreed scope, timelines, and deliverables. Any third‑party fees or permits are disclosed in advance.</p>
+            <p>By submitting forms, you agree to receive relevant responses from MWITONGO E&amp;E CO. LTD.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
@@ -1185,6 +1632,8 @@
               <li><a href="#about">About Us</a></li>
               <li><a href="#services">Services</a></li>
               <li><a href="#contact">Contact</a></li>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms of Service</a></li>
             </ul>
           </div>
           <div class="footer-section">
@@ -1207,12 +1656,15 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 MWITONGO E&E CO. LTD. All rights reserved.</p>
+          <p>&copy; 2026 MWITONGO E&E CO. LTD. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script src="/landing.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js" defer></script>
+    <script src="/landing.js" defer></script>
+    <audio id="welcomeVoice" preload="auto" playsinline src="/welcome-voice.wav"></audio>
   </body>
 </html>
