@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 </head>
   <body>
-    <a class="skip-link" href="#home">Skip to content</a>
+    <a class="skip-link" href="#home" data-i18n-en="Skip to content" data-i18n-sw="Ruka hadi maudhui">Skip to content</a>
     <div id="welcomeOverlay" aria-hidden="false">
       <div class="welcome-inner" role="region" aria-label="Welcome">
         <div class="welcome-logo"><img src="/logo.png" alt="MWITONGO E&E" /><small>CO. LTD</small></div>
@@ -59,7 +59,40 @@
     </div>
     <div id="progressBarContainer"><div id="progressBar"></div></div>
     <button id="backToTop" aria-label="Back to Top" title="Back to Top">↑</button>
-    <a class="sticky-cta" href="#contact" aria-label="Book a consultation">Book a Consultation</a>
+    <a class="sticky-cta" href="#contact" aria-label="Book a consultation" data-i18n-en="Book a Consultation" data-i18n-sw="Weka Miadi">Book a Consultation</a>
+    <div class="quick-consult" id="quickConsult" aria-live="polite">
+      <button class="quick-consult-toggle" type="button" aria-expanded="false" aria-controls="quickConsultPanel">
+        <span class="qc-dot" aria-hidden="true"></span>
+        <span data-i18n-en="Quick Help" data-i18n-sw="Msaada Haraka">Quick Help</span>
+      </button>
+      <div class="quick-consult-panel" id="quickConsultPanel" role="dialog" aria-modal="false" aria-label="Quick consultation">
+        <div class="quick-consult-header">
+          <div>
+            <h4 data-i18n-en="Quick Consultation" data-i18n-sw="Ushauri wa Haraka">Quick Consultation</h4>
+            <p data-i18n-en="Share a few details and we will call you back." data-i18n-sw="Toa maelezo mafupi, tutakupigia simu.">Share a few details and we will call you back.</p>
+          </div>
+          <button class="quick-consult-close" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="quick-consult-actions">
+          <a class="quick-action" href="tel:+255763542024">Call</a>
+          <a class="quick-action" href="https://wa.me/255763542024" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="quick-action" href="mailto:e.e.eof2025@gmail.com">Email</a>
+        </div>
+        <form class="quick-consult-form" id="quickConsultForm">
+          <input type="text" name="name" placeholder="Full name" data-i18n-en="Full name" data-i18n-sw="Jina kamili" data-i18n-attr="placeholder" required>
+          <input type="tel" name="phone" placeholder="Phone / WhatsApp" data-i18n-en="Phone / WhatsApp" data-i18n-sw="Simu / WhatsApp" data-i18n-attr="placeholder" required>
+          <select name="service" required>
+            <option value="" disabled selected data-i18n-en="Service of interest" data-i18n-sw="Huduma unayohitaji">Service of interest</option>
+            <option>Management Consultancy</option>
+            <option>Civil & Construction</option>
+            <option>Digital & ICT Solutions</option>
+            <option>Research & Proposal Development</option>
+            <option>Training & Capacity Building</option>
+          </select>
+          <button type="submit" class="btn btn-primary" data-i18n-en="Request Call" data-i18n-sw="Omba Simu">Request Call</button>
+        </form>
+      </div>
+    </div>
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
       <div class="container">
         <div class="nav-content">
@@ -67,10 +100,10 @@
             <img src="/logo.png" alt="MWITONGO E&E logo" />
           </a>
           <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" data-i18n-en="Home" data-i18n-sw="Nyumbani">Home</a></li>
+            <li><a href="#about" data-i18n-en="About" data-i18n-sw="Kuhusu">About</a></li>
+            <li><a href="#services" data-i18n-en="Services" data-i18n-sw="Huduma">Services</a></li>
+            <li><a href="#contact" data-i18n-en="Contact" data-i18n-sw="Mawasiliano">Contact</a></li>
           </ul>
           <button class="mobile-toggle" aria-label="Toggle menu">
             <span></span>
@@ -79,6 +112,11 @@
           </button>
           <button class="theme-toggle" aria-label="Toggle theme">
             <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
+          </button>
+          <button class="lang-toggle" type="button" aria-label="Switch language">
+            <span class="lang-code" data-lang="en">EN</span>
+            <span class="lang-divider">/</span>
+            <span class="lang-code" data-lang="sw">SW</span>
           </button>
         </div>
       </div>
@@ -92,12 +130,12 @@
       </div>
       <div class="container">
         <div class="hero-content">
-          <div class="hero-badge">Welcome to Tanzania's Premier Consultancy Firm</div>
+          <div class="hero-badge" data-i18n-en="Welcome to Tanzania's Premier Consultancy Firm" data-i18n-sw="Karibu kwa kampuni bora ya ushauri Tanzania">Welcome to Tanzania's Premier Consultancy Firm</div>
           <h1 class="main-heading hero-name-typing" id="animatedHeading" data-text="MWITONGO E&E CO. LTD">MWITONGO E&E CO. LTD</h1>
           <div class="text-typing hero-typing">
             We are <span></span>
           </div>
-          <p class="hero-subtitle">Leading consultancy and digital transformation company empowering organizations with innovative, efficient, and sustainable solutions across Tanzania</p>
+          <p class="hero-subtitle" data-i18n-en="Leading consultancy and digital transformation company empowering organizations with innovative, efficient, and sustainable solutions across Tanzania" data-i18n-sw="Kampuni ya ushauri na mageuzi ya kidijitali inayowezesha taasisi kwa suluhu bunifu, zenye ufanisi na endelevu kote Tanzania">Leading consultancy and digital transformation company empowering organizations with innovative, efficient, and sustainable solutions across Tanzania</p>
           <div class="hero-features">
             <div class="hero-feature">
               <span class="feature-icon">✓</span>
@@ -113,8 +151,8 @@
             </div>
           </div>
           <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary">Start Your Journey</a>
-            <a href="#services" class="btn btn-secondary">Explore Services</a>
+            <a href="#contact" class="btn btn-primary" data-i18n-en="Start Your Journey" data-i18n-sw="Anza Safari">Start Your Journey</a>
+            <a href="#services" class="btn btn-secondary" data-i18n-en="Explore Services" data-i18n-sw="Gundua Huduma">Explore Services</a>
           </div>
           <div class="hero-simple">
             <div class="hero-simple-line" aria-hidden="true"></div>
@@ -446,6 +484,156 @@
             <p>Reliable procurement and supply chain management services for various organizational needs.</p>
           </div>
         </div>
+        <div class="service-details">
+          <div class="service-details-header">
+            <h3 data-i18n-en="Service Deep Dives" data-i18n-sw="Maelezo ya Huduma">Service Deep Dives</h3>
+            <p data-i18n-en="Clear deliverables, timelines, and standards for every engagement." data-i18n-sw="Orodha wazi ya deliverables, muda wa kazi, na viwango kwa kila mradi.">Clear deliverables, timelines, and standards for every engagement.</p>
+          </div>
+          <div class="service-tabs" role="tablist" aria-label="Service detail tabs">
+            <button class="service-tab active" role="tab" aria-selected="true" aria-controls="service-panel-civil" id="service-tab-civil" data-tab="civil">Civil &amp; Construction</button>
+            <button class="service-tab" role="tab" aria-selected="false" aria-controls="service-panel-digital" id="service-tab-digital" data-tab="digital">Digital &amp; ICT</button>
+            <button class="service-tab" role="tab" aria-selected="false" aria-controls="service-panel-research" id="service-tab-research" data-tab="research">Research &amp; Proposal</button>
+            <button class="service-tab" role="tab" aria-selected="false" aria-controls="service-panel-training" id="service-tab-training" data-tab="training">Training &amp; Capacity</button>
+          </div>
+          <div class="service-panels">
+            <div class="service-panel active" id="service-panel-civil" role="tabpanel" aria-labelledby="service-tab-civil" data-tab="civil">
+              <div class="service-panel-grid">
+                <div>
+                  <h4>Typical deliverables</h4>
+                  <ul>
+                    <li>Site survey, bill of quantities, and phased work plan</li>
+                    <li>HSE and QA documentation with inspection checkpoints</li>
+                    <li>Weekly progress reporting and stakeholder reviews</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Execution focus</h4>
+                  <ul>
+                    <li>Roads, drainage, and facility upgrades</li>
+                    <li>Supervision, compliance, and handover support</li>
+                    <li>Cost control and supplier coordination</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="service-panel-footer">
+                <div class="service-metric">
+                  <span>12-20 weeks</span>
+                  <small>Typical delivery window</small>
+                </div>
+                <div class="service-metric">
+                  <span>HSE-first</span>
+                  <small>Compliance built-in</small>
+                </div>
+                <div class="service-metric">
+                  <span>Weekly</span>
+                  <small>Progress reporting</small>
+                </div>
+              </div>
+            </div>
+            <div class="service-panel" id="service-panel-digital" role="tabpanel" aria-labelledby="service-tab-digital" data-tab="digital">
+              <div class="service-panel-grid">
+                <div>
+                  <h4>Typical deliverables</h4>
+                  <ul>
+                    <li>System audit, solution blueprint, and implementation plan</li>
+                    <li>Custom web or database solution with user training</li>
+                    <li>Post-launch support and performance monitoring</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Technology stack</h4>
+                  <ul>
+                    <li>Web portals, dashboards, and data pipelines</li>
+                    <li>Security, backups, and access controls</li>
+                    <li>Integration with existing workflows</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="service-panel-footer">
+                <div class="service-metric">
+                  <span>6-12 weeks</span>
+                  <small>Average deployment</small>
+                </div>
+                <div class="service-metric">
+                  <span>99.9%</span>
+                  <small>Uptime targets</small>
+                </div>
+                <div class="service-metric">
+                  <span>Secure</span>
+                  <small>Role-based access</small>
+                </div>
+              </div>
+            </div>
+            <div class="service-panel" id="service-panel-research" role="tabpanel" aria-labelledby="service-tab-research" data-tab="research">
+              <div class="service-panel-grid">
+                <div>
+                  <h4>Typical deliverables</h4>
+                  <ul>
+                    <li>Research design, fieldwork, and data collection</li>
+                    <li>Analysis report with actionable recommendations</li>
+                    <li>Proposal writing and donor-ready documentation</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Research methods</h4>
+                  <ul>
+                    <li>Quantitative + qualitative mixed methods</li>
+                    <li>Monitoring and evaluation frameworks</li>
+                    <li>Stakeholder interviews and surveys</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="service-panel-footer">
+                <div class="service-metric">
+                  <span>4-10 weeks</span>
+                  <small>Study + reporting</small>
+                </div>
+                <div class="service-metric">
+                  <span>Evidence-led</span>
+                  <small>Decision support</small>
+                </div>
+                <div class="service-metric">
+                  <span>Donor-ready</span>
+                  <small>Proposal packs</small>
+                </div>
+              </div>
+            </div>
+            <div class="service-panel" id="service-panel-training" role="tabpanel" aria-labelledby="service-tab-training" data-tab="training">
+              <div class="service-panel-grid">
+                <div>
+                  <h4>Typical deliverables</h4>
+                  <ul>
+                    <li>Training needs assessment and curriculum design</li>
+                    <li>On-site or virtual workshops with materials</li>
+                    <li>Post-training evaluation and impact tracking</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Focus areas</h4>
+                  <ul>
+                    <li>Leadership, project delivery, and HSE</li>
+                    <li>Digital literacy and productivity tools</li>
+                    <li>Monitoring, evaluation, and reporting</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="service-panel-footer">
+                <div class="service-metric">
+                  <span>2-6 weeks</span>
+                  <small>Program cycles</small>
+                </div>
+                <div class="service-metric">
+                  <span>Hands-on</span>
+                  <small>Practical delivery</small>
+                </div>
+                <div class="service-metric">
+                  <span>Scalable</span>
+                  <small>From 10 to 500+</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -499,6 +687,142 @@
             </ul>
             <a href="#contact" class="btn btn-secondary">Talk to Us</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n-en="Project Portfolio" data-i18n-sw="Miradi Yetu">Project Portfolio</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle" data-i18n-en="Recent engagements across civil works, ICT, and research." data-i18n-sw="Miradi ya karibuni katika ujenzi, ICT, na utafiti.">Recent engagements across civil works, ICT, and research.</p>
+        </div>
+        <div class="portfolio-controls" role="tablist" aria-label="Portfolio filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="civil">Civil</button>
+          <button class="filter-btn" data-filter="digital">Digital</button>
+          <button class="filter-btn" data-filter="research">Research</button>
+          <button class="filter-btn" data-filter="training">Training</button>
+        </div>
+        <div class="portfolio-grid">
+          <article class="portfolio-card" data-category="civil">
+            <div class="portfolio-cover">
+              <img src="/gallery/project-01.svg" alt="Road and drainage upgrade concept" loading="lazy" />
+              <span class="portfolio-tag">Civil</span>
+            </div>
+            <div class="portfolio-body">
+              <h3>Road &amp; Drainage Upgrade</h3>
+              <p>Multi-ward access road improvements with drainage and safety upgrades.</p>
+              <ul class="portfolio-kpis">
+                <li>Scope: 12 km</li>
+                <li>Timeline: 14 weeks</li>
+              </ul>
+            </div>
+            <div class="portfolio-actions">
+              <button class="btn btn-secondary btn-small portfolio-view" data-image="/gallery/project-01.svg" data-title="Road &amp; Drainage Upgrade" data-desc="Phased civil works with safety checkpoints and weekly reporting." data-meta="Kigamboni | 14 weeks">View Details</button>
+              <button class="btn btn-primary btn-small portfolio-view" data-image="/gallery/project-01.svg" data-title="Road &amp; Drainage Upgrade" data-desc="Quality checks, HSE compliance, and stakeholder updates." data-meta="Civil | 12 km">Case Snapshot</button>
+            </div>
+          </article>
+          <article class="portfolio-card" data-category="civil">
+            <div class="portfolio-cover">
+              <img src="/gallery/project-02.svg" alt="Facility rehabilitation concept" loading="lazy" />
+              <span class="portfolio-tag">Civil</span>
+            </div>
+            <div class="portfolio-body">
+              <h3>Public Facility Rehabilitation</h3>
+              <p>Structural refurbishment and compliance upgrades for public buildings.</p>
+              <ul class="portfolio-kpis">
+                <li>Sites: 6</li>
+                <li>Timeline: 10 weeks</li>
+              </ul>
+            </div>
+            <div class="portfolio-actions">
+              <button class="btn btn-secondary btn-small portfolio-view" data-image="/gallery/project-02.svg" data-title="Public Facility Rehabilitation" data-desc="Structural audits, bill of quantities, and supervised upgrades." data-meta="Dar es Salaam | 10 weeks">View Details</button>
+            </div>
+          </article>
+          <article class="portfolio-card" data-category="digital">
+            <div class="portfolio-cover">
+              <img src="/gallery/project-03.svg" alt="Digital portal concept" loading="lazy" />
+              <span class="portfolio-tag">Digital</span>
+            </div>
+            <div class="portfolio-body">
+              <h3>Citizen Service Portal</h3>
+              <p>Unified portal for case tracking, payment, and notifications.</p>
+              <ul class="portfolio-kpis">
+                <li>Users: 8,000+</li>
+                <li>Timeline: 8 weeks</li>
+              </ul>
+            </div>
+            <div class="portfolio-actions">
+              <button class="btn btn-secondary btn-small portfolio-view" data-image="/gallery/project-03.svg" data-title="Citizen Service Portal" data-desc="Design, build, and launch of secure citizen services." data-meta="Government | 8 weeks">View Details</button>
+            </div>
+          </article>
+          <article class="portfolio-card" data-category="research">
+            <div class="portfolio-cover">
+              <img src="/gallery/project-04.svg" alt="Research and analytics concept" loading="lazy" />
+              <span class="portfolio-tag">Research</span>
+            </div>
+            <div class="portfolio-body">
+              <h3>Market Insight Study</h3>
+              <p>Nationwide survey and analysis for policy and strategy planning.</p>
+              <ul class="portfolio-kpis">
+                <li>Responses: 2,400</li>
+                <li>Timeline: 6 weeks</li>
+              </ul>
+            </div>
+            <div class="portfolio-actions">
+              <button class="btn btn-secondary btn-small portfolio-view" data-image="/gallery/project-04.svg" data-title="Market Insight Study" data-desc="Mixed-methods research with executive reporting." data-meta="Research | 6 weeks">View Details</button>
+            </div>
+          </article>
+          <article class="portfolio-card" data-category="digital">
+            <div class="portfolio-cover">
+              <img src="/gallery/project-05.svg" alt="Operations dashboard concept" loading="lazy" />
+              <span class="portfolio-tag">Digital</span>
+            </div>
+            <div class="portfolio-body">
+              <h3>Operations Dashboard</h3>
+              <p>Real-time KPI reporting for multi-site operational teams.</p>
+              <ul class="portfolio-kpis">
+                <li>Dashboards: 12</li>
+                <li>Timeline: 5 weeks</li>
+              </ul>
+            </div>
+            <div class="portfolio-actions">
+              <button class="btn btn-secondary btn-small portfolio-view" data-image="/gallery/project-05.svg" data-title="Operations Dashboard" data-desc="KPI automation, alerts, and analytics training." data-meta="Private sector | 5 weeks">View Details</button>
+            </div>
+          </article>
+          <article class="portfolio-card" data-category="training">
+            <div class="portfolio-cover">
+              <img src="/gallery/project-06.svg" alt="Training program concept" loading="lazy" />
+              <span class="portfolio-tag">Training</span>
+            </div>
+            <div class="portfolio-body">
+              <h3>Leadership Bootcamp</h3>
+              <p>Leadership, HSE, and reporting workshops for managers.</p>
+              <ul class="portfolio-kpis">
+                <li>Participants: 180</li>
+                <li>Timeline: 4 weeks</li>
+              </ul>
+            </div>
+            <div class="portfolio-actions">
+              <button class="btn btn-secondary btn-small portfolio-view" data-image="/gallery/project-06.svg" data-title="Leadership Bootcamp" data-desc="Curriculum design and delivery with follow-up coaching." data-meta="Training | 4 weeks">View Details</button>
+            </div>
+          </article>
+        </div>
+        <div class="before-after">
+          <div class="before-after-header">
+            <h3>Before &amp; After: Site Transformation</h3>
+            <p>Drag the slider to compare baseline conditions with the completed upgrade.</p>
+          </div>
+          <div class="before-after-frame" style="--reveal: 55%;">
+            <img class="before-image" src="/gallery/before-01.svg" alt="Before site upgrade" loading="lazy" />
+            <div class="after-image">
+              <img src="/gallery/after-01.svg" alt="After site upgrade" loading="lazy" />
+            </div>
+            <span class="before-after-handle" aria-hidden="true"></span>
+          </div>
+          <input class="before-after-range" type="range" min="0" max="100" value="55" aria-label="Before and after slider">
         </div>
       </div>
     </section>
@@ -662,6 +986,70 @@
             <div class="logo-tile">
               <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 34l12-20 12 20H12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="18" r="3" fill="currentColor"/></svg>
               <span class="logo-name">Njia Contractors</span>
+            </div>
+          </div>
+        </div>
+        <div class="logo-grid-block">
+          <div class="logo-grid">
+            <div class="logo-card">
+              <div class="logo-mark">KC</div>
+              <div class="logo-text">
+                <span>Kibo Civil</span>
+                <small>Infrastructure</small>
+              </div>
+            </div>
+            <div class="logo-card">
+              <div class="logo-mark">DH</div>
+              <div class="logo-text">
+                <span>DarBuild</span>
+                <small>Holdings</small>
+              </div>
+            </div>
+            <div class="logo-card">
+              <div class="logo-mark">TG</div>
+              <div class="logo-text">
+                <span>Tanga Infra</span>
+                <small>Group</small>
+              </div>
+            </div>
+            <div class="logo-card">
+              <div class="logo-mark">CE</div>
+              <div class="logo-text">
+                <span>Coastal Estates</span>
+                <small>Real Estate</small>
+              </div>
+            </div>
+            <div class="logo-card">
+              <div class="logo-mark">ME</div>
+              <div class="logo-text">
+                <span>Mji Procurement</span>
+                <small>Public Sector</small>
+              </div>
+            </div>
+            <div class="logo-card">
+              <div class="logo-mark">RE</div>
+              <div class="logo-text">
+                <span>Ridge Eng.</span>
+                <small>Engineering</small>
+              </div>
+            </div>
+          </div>
+          <div class="cert-mini-grid">
+            <div class="cert-mini-card">
+              <span>ISO 9001:2015</span>
+              <small>Quality Management</small>
+            </div>
+            <div class="cert-mini-card">
+              <span>HSE Compliant</span>
+              <small>Safety Standards</small>
+            </div>
+            <div class="cert-mini-card">
+              <span>Digital Innovation</span>
+              <small>Recognized Partner</small>
+            </div>
+            <div class="cert-mini-card">
+              <span>Project Excellence</span>
+              <small>PMP Practitioners</small>
             </div>
           </div>
         </div>
@@ -919,6 +1307,45 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="insights" id="insights">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n-en="Insights & Updates" data-i18n-sw="Maarifa na Habari">Insights &amp; Updates</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle" data-i18n-en="Short reads on strategy, construction, and digital transformation." data-i18n-sw="Makala fupi kuhusu mkakati, ujenzi, na mageuzi ya kidijitali.">Short reads on strategy, construction, and digital transformation.</p>
+        </div>
+        <div class="insights-grid">
+          <article class="insight-card">
+            <div class="insight-meta">
+              <span class="insight-tag">Civil Works</span>
+              <span>5 min read</span>
+            </div>
+            <h3>Reducing Rework with Quality Gates</h3>
+            <p>How structured inspection checkpoints reduce delays and protect project margins.</p>
+            <a class="insight-link" href="#contact">Read summary -></a>
+          </article>
+          <article class="insight-card featured">
+            <div class="insight-meta">
+              <span class="insight-tag">Digital</span>
+              <span>7 min read</span>
+            </div>
+            <h3>Digitizing Field Reporting in 30 Days</h3>
+            <p>Templates, mobile-first workflows, and dashboards that improve visibility fast.</p>
+            <a class="insight-link" href="#contact">Read summary -></a>
+          </article>
+          <article class="insight-card">
+            <div class="insight-meta">
+              <span class="insight-tag">Research</span>
+              <span>6 min read</span>
+            </div>
+            <h3>Designing Surveys That Drive Action</h3>
+            <p>Turning stakeholder insights into measurable policy and operational decisions.</p>
+            <a class="insight-link" href="#contact">Read summary -></a>
+          </article>
         </div>
       </div>
     </section>
@@ -1233,8 +1660,40 @@
           <h2>Ready to Transform Your Business?</h2>
           <p>Partner with MWITONGO E&E CO. LTD for innovative solutions that drive sustainable growth and success.</p>
           <div class="cta-actions">
-            <a href="#contact" class="btn btn-primary">Get Started Today</a>
-            <a href="mailto:e.e.eof2025@gmail.com?subject=Company%20Profile%20Request" class="btn btn-secondary">Request Company Profile</a>
+            <a href="#contact" class="btn btn-primary" data-i18n-en="Get Started Today" data-i18n-sw="Anza Leo">Get Started Today</a>
+            <a href="mailto:e.e.eof2025@gmail.com?subject=Company%20Profile%20Request" class="btn btn-secondary" data-i18n-en="Request Company Profile" data-i18n-sw="Omba Wasifu wa Kampuni">Request Company Profile</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="company-profile" id="profile">
+      <div class="container">
+        <div class="profile-grid">
+          <div class="profile-card">
+            <div class="profile-preview">
+              <div class="profile-sheet">
+                <span class="profile-label">MWITONGO E&amp;E CO. LTD</span>
+                <h3>Company Profile</h3>
+                <p>Consultancy - Civil Works - ICT</p>
+                <div class="profile-stamp">2026</div>
+              </div>
+            </div>
+            <div class="profile-actions">
+              <a class="btn btn-primary" href="/company-profile.pdf" download data-i18n-en="Download Profile" data-i18n-sw="Pakua Wasifu">Download Profile</a>
+              <a class="btn btn-secondary" href="/company-profile.pdf" target="_blank" rel="noopener" data-i18n-en="Preview PDF" data-i18n-sw="Tazama PDF">Preview PDF</a>
+            </div>
+          </div>
+          <div class="profile-details">
+            <h2 data-i18n-en="Company Profile & Credentials" data-i18n-sw="Wasifu na Uthibitisho">Company Profile &amp; Credentials</h2>
+            <p data-i18n-en="Download the latest company profile with services, certifications, and delivery history." data-i18n-sw="Pakua wasifu wa kampuni wenye huduma, vyeti, na historia ya utekelezaji.">Download the latest company profile with services, certifications, and delivery history.</p>
+            <ul class="profile-list">
+              <li>Service catalog and delivery model</li>
+              <li>Compliance, HSE, and QA standards</li>
+              <li>Case highlights and client references</li>
+              <li>Leadership contacts and office details</li>
+            </ul>
+            <div class="profile-note">Updated February 2026 - PDF format</div>
           </div>
         </div>
       </div>
@@ -1243,7 +1702,7 @@
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Contact Us</h2>
+          <h2 class="section-title" data-i18n-en="Contact Us" data-i18n-sw="Wasiliana Nasi">Contact Us</h2>
           <div class="title-underline"></div>
         </div>
         <div class="contact-grid">
@@ -1291,15 +1750,15 @@
           </div>
           <div class="contact-panel">
             <form class="contact-form" id="consultationForm">
-              <h3>Request a Consultation</h3>
+              <h3 data-i18n-en="Request a Consultation" data-i18n-sw="Omba Ushauri">Request a Consultation</h3>
               <div class="form-row">
-                <input type="text" name="name" placeholder="Full name" required>
-                <input type="email" name="email" placeholder="Work email" required>
+                <input type="text" name="name" placeholder="Full name" data-i18n-en="Full name" data-i18n-sw="Jina kamili" data-i18n-attr="placeholder" required>
+                <input type="email" name="email" placeholder="Work email" data-i18n-en="Work email" data-i18n-sw="Barua pepe ya kazi" data-i18n-attr="placeholder" required>
               </div>
               <div class="form-row">
-                <input type="tel" name="phone" placeholder="Phone / WhatsApp">
+                <input type="tel" name="phone" placeholder="Phone / WhatsApp" data-i18n-en="Phone / WhatsApp" data-i18n-sw="Simu / WhatsApp" data-i18n-attr="placeholder">
                 <select name="service" required>
-                  <option value="" disabled selected>Service of interest</option>
+                  <option value="" disabled selected data-i18n-en="Service of interest" data-i18n-sw="Huduma unayohitaji">Service of interest</option>
                   <option>Management Consultancy</option>
                   <option>Digital & ICT Solutions</option>
                   <option>Research & Proposal Development</option>
@@ -1309,23 +1768,49 @@
               </div>
               <div class="form-row">
                 <select name="budget">
-                  <option value="" disabled selected>Estimated budget (TZS)</option>
+                  <option value="" disabled selected data-i18n-en="Estimated budget (TZS)" data-i18n-sw="Makadirio ya bajeti (TZS)">Estimated budget (TZS)</option>
                   <option>Below 10M</option>
                   <option>10M – 50M</option>
                   <option>50M – 200M</option>
                   <option>200M+</option>
                 </select>
                 <select name="timeline">
-                  <option value="" disabled selected>Desired timeline</option>
+                  <option value="" disabled selected data-i18n-en="Desired timeline" data-i18n-sw="Muda unaotakiwa">Desired timeline</option>
                   <option>Immediately</option>
                   <option>Within 1 month</option>
                   <option>1–3 months</option>
                   <option>3+ months</option>
                 </select>
               </div>
-              <textarea name="message" rows="4" placeholder="Tell us about your needs and goals"></textarea>
-              <button type="submit" class="btn btn-primary">Submit Request</button>
-              <p class="form-note">We respond within 1–2 business days.</p>
+              <textarea name="message" rows="4" placeholder="Tell us about your needs and goals" data-i18n-en="Tell us about your needs and goals" data-i18n-sw="Tuambie mahitaji na malengo yako" data-i18n-attr="placeholder"></textarea>
+              <button type="submit" class="btn btn-primary" data-i18n-en="Submit Request" data-i18n-sw="Tuma Ombi">Submit Request</button>
+              <p class="form-note" data-i18n-en="We respond within 1–2 business days." data-i18n-sw="Tunajibu ndani ya siku 1–2 za kazi.">We respond within 1–2 business days.</p>
+            </form>
+            <form class="meeting-form" id="meetingForm">
+              <div class="meeting-header">
+                <h3 data-i18n-en="Schedule a Meeting" data-i18n-sw="Panga Mkutano">Schedule a Meeting</h3>
+                <p data-i18n-en="Pick a date and time. We will confirm the slot." data-i18n-sw="Chagua tarehe na muda. Tutathibitisha.">Pick a date and time. We will confirm the slot.</p>
+              </div>
+              <div class="form-row">
+                <input type="text" name="name" placeholder="Full name" data-i18n-en="Full name" data-i18n-sw="Jina kamili" data-i18n-attr="placeholder" required>
+                <input type="email" name="email" placeholder="Email address" data-i18n-en="Email address" data-i18n-sw="Barua pepe" data-i18n-attr="placeholder" required>
+              </div>
+              <div class="form-row">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+              </div>
+              <div class="form-row">
+                <select name="meetingType" required>
+                  <option value="" disabled selected data-i18n-en="Meeting type" data-i18n-sw="Aina ya mkutano">Meeting type</option>
+                  <option>Video call</option>
+                  <option>Phone call</option>
+                  <option>Office visit</option>
+                </select>
+                <input type="text" name="timezone" placeholder="Timezone" data-i18n-en="Timezone" data-i18n-sw="Saa ya eneo" data-i18n-attr="placeholder">
+              </div>
+              <textarea name="notes" rows="3" placeholder="Agenda / notes (optional)" data-i18n-en="Agenda / notes (optional)" data-i18n-sw="Ajenda / maelezo (si lazima)" data-i18n-attr="placeholder"></textarea>
+              <button type="submit" class="btn btn-secondary" data-i18n-en="Request Meeting" data-i18n-sw="Omba Mkutano">Request Meeting</button>
+              <p class="form-note" data-i18n-en="We confirm via email within 24 hours." data-i18n-sw="Tutathibitisha kwa barua pepe ndani ya saa 24.">We confirm via email within 24 hours.</p>
             </form>
             <div class="contact-map">
               <div id="map" class="map-container"></div>

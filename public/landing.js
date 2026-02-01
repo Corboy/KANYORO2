@@ -532,7 +532,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
 
 const revealTargets = document.querySelectorAll(
-  '.section-header, .hero-badge, .hero-subtitle, .hero-feature, .hero-buttons, .trust-item, .newsletter-content, .cta-content, .contact-item, .cert-card, .achievement-card, .support-card'
+  '.section-header, .hero-badge, .hero-subtitle, .hero-feature, .hero-buttons, .trust-item, .newsletter-content, .cta-content, .contact-item, .cert-card, .achievement-card, .support-card, .portfolio-card, .insight-card, .logo-card, .cert-mini-card, .profile-card, .meeting-form, .service-details, .before-after'
 );
 
 revealTargets.forEach((el, index) => {
@@ -712,6 +712,263 @@ if (consultationForm) {
       button.textContent = 'Try again';
       setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2000);
     });
+  });
+}
+
+function initializeQuickConsult() {
+  const wrapper = document.getElementById('quickConsult');
+  if (!wrapper) return;
+  const toggle = wrapper.querySelector('.quick-consult-toggle');
+  const panel = wrapper.querySelector('.quick-consult-panel');
+  const closeBtn = wrapper.querySelector('.quick-consult-close');
+  const form = wrapper.querySelector('#quickConsultForm');
+  let isOpen = false;
+
+  const setOpen = (open) => {
+    isOpen = open;
+    wrapper.classList.toggle('open', isOpen);
+    if (toggle) toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    if (isOpen) {
+      const firstField = panel && panel.querySelector('input,select,button');
+      if (firstField) firstField.focus();
+    }
+  };
+
+  if (toggle) toggle.addEventListener('click', () => setOpen(!isOpen));
+  if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+
+  document.addEventListener('click', (e) => {
+    if (!isOpen) return;
+    if (!wrapper.contains(e.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) setOpen(false);
+  });
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      const button = form.querySelector('button');
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Sending...';
+
+      const endpoint = getFormspreeEndpoint();
+      if (!endpoint) {
+        const summary = `Name: ${payload.name || ''}\nPhone: ${payload.phone || ''}\nService: ${payload.service || ''}`;
+        openMailto('Quick Consultation Request', summary);
+        setTimeout(() => { form.reset(); button.textContent = originalText; button.disabled = false; }, 1200);
+        return;
+      }
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, type: 'quick-consult' })
+      }).then(res => {
+        if (res.ok) {
+          button.textContent = 'Request Sent';
+          setTimeout(() => { form.reset(); button.textContent = originalText; button.disabled = false; }, 2000);
+        } else {
+          return res.text().then(text => Promise.reject(new Error(text || 'Failed')));
+        }
+      }).catch(err => {
+        console.error('Quick consult error', err);
+        button.textContent = 'Try again';
+        setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2000);
+      });
+    });
+  }
+}
+
+function initializeMeetingForm() {
+  const meetingForm = document.getElementById('meetingForm');
+  if (!meetingForm) return;
+  const tzInput = meetingForm.querySelector('input[name="timezone"]');
+  if (tzInput && !tzInput.value) {
+    try {
+      tzInput.value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    } catch (e) {}
+  }
+
+  meetingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(meetingForm);
+    const payload = Object.fromEntries(formData.entries());
+    const button = meetingForm.querySelector('button');
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Submitting...';
+
+    const endpoint = getFormspreeEndpoint();
+    if (!endpoint) {
+      const summary = `Meeting request\nName: ${payload.name || ''}\nEmail: ${payload.email || ''}\nDate: ${payload.date || ''}\nTime: ${payload.time || ''}\nType: ${payload.meetingType || ''}\nTimezone: ${payload.timezone || ''}\nNotes: ${payload.notes || ''}`;
+      openMailto('Meeting Request', summary);
+      setTimeout(() => { meetingForm.reset(); button.textContent = originalText; button.disabled = false; }, 1200);
+      return;
+    }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...payload, type: 'meeting-request' })
+    }).then(res => {
+      if (res.ok) {
+        button.textContent = 'Request Sent';
+        setTimeout(() => { meetingForm.reset(); button.textContent = originalText; button.disabled = false; }, 2000);
+      } else {
+        return res.text().then(text => Promise.reject(new Error(text || 'Failed')));
+      }
+    }).catch(err => {
+      console.error('Meeting request error', err);
+      button.textContent = 'Try again';
+      setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2000);
+    });
+  });
+}
+
+function initializeServiceTabs() {
+  const tabs = document.querySelectorAll('.service-tab');
+  const panels = document.querySelectorAll('.service-panel');
+  if (!tabs.length || !panels.length) return;
+
+  const activate = (tab) => {
+    const key = tab.dataset.tab;
+    tabs.forEach(t => {
+      const isActive = t === tab;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    panels.forEach(panel => {
+      panel.classList.toggle('active', panel.dataset.tab === key);
+    });
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activate(tab));
+  });
+
+  const activeTab = document.querySelector('.service-tab.active') || tabs[0];
+  if (activeTab) activate(activeTab);
+}
+
+function initializePortfolioFilters() {
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.portfolio-card');
+  if (!buttons.length || !cards.length) return;
+
+  const applyFilter = (filter) => {
+    cards.forEach(card => {
+      const categories = (card.dataset.category || '').split(',').map(c => c.trim());
+      const isVisible = filter === 'all' || categories.includes(filter);
+      card.style.display = isVisible ? '' : 'none';
+    });
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter || 'all');
+    });
+  });
+
+  const activeBtn = document.querySelector('.filter-btn.active') || buttons[0];
+  if (activeBtn) applyFilter(activeBtn.dataset.filter || 'all');
+}
+
+function openPortfolioLightbox({ image, title, desc, meta }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'portfolio-lightbox';
+  overlay.innerHTML = `
+    <div class="lightbox-card" role="dialog" aria-modal="true" aria-label="${title}">
+      <button class="lightbox-close" type="button" aria-label="Close">×</button>
+      <img src="${image}" alt="${title}">
+      <div class="lightbox-body">
+        <h3>${title}</h3>
+        <p>${desc || ''}</p>
+        <div class="lightbox-meta">
+          <span>${meta || ''}</span>
+          <span>Request details via contact form</span>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('open'));
+
+  const close = () => {
+    overlay.classList.remove('open');
+    setTimeout(() => { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 200);
+    document.removeEventListener('keydown', onKey);
+  };
+
+  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  document.addEventListener('keydown', onKey);
+
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  const closeBtn = overlay.querySelector('.lightbox-close');
+  if (closeBtn) closeBtn.addEventListener('click', close);
+}
+
+function initializePortfolioLightbox() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest && e.target.closest('.portfolio-view');
+    if (!btn) return;
+    const image = btn.dataset.image || '';
+    const title = btn.dataset.title || 'Project Detail';
+    const desc = btn.dataset.desc || '';
+    const meta = btn.dataset.meta || '';
+    if (image) openPortfolioLightbox({ image, title, desc, meta });
+  });
+}
+
+function initializeBeforeAfterSliders() {
+  document.querySelectorAll('.before-after').forEach(section => {
+    const range = section.querySelector('.before-after-range');
+    const frame = section.querySelector('.before-after-frame');
+    if (!range || !frame) return;
+    const update = () => {
+      frame.style.setProperty('--reveal', `${range.value}%`);
+    };
+    range.addEventListener('input', update);
+    update();
+  });
+}
+
+function applyLanguage(lang) {
+  const normalized = lang === 'sw' ? 'sw' : 'en';
+  document.documentElement.lang = normalized;
+  document.body.dataset.lang = normalized;
+  document.querySelectorAll('[data-i18n-en]').forEach(el => {
+    const value = normalized === 'sw' ? el.dataset.i18nSw : el.dataset.i18nEn;
+    if (!value) return;
+    const attr = el.dataset.i18nAttr;
+    if (attr) {
+      el.setAttribute(attr, value);
+    } else {
+      el.textContent = value;
+    }
+  });
+
+  document.querySelectorAll('.lang-toggle .lang-code').forEach(code => {
+    code.classList.toggle('is-active', code.dataset.lang === normalized);
+  });
+}
+
+function initializeLanguageToggle() {
+  const toggle = document.querySelector('.lang-toggle');
+  if (!toggle) return;
+  const saved = localStorage.getItem('lang');
+  const initial = (saved === 'sw' || saved === 'en') ? saved : 'en';
+  applyLanguage(initial);
+  toggle.addEventListener('click', () => {
+    const next = document.body.dataset.lang === 'sw' ? 'en' : 'sw';
+    localStorage.setItem('lang', next);
+    applyLanguage(next);
   });
 }
 
@@ -916,6 +1173,14 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(assignJohnPhoto, 350);
   // initialize enhanced staff UI (search, filters, modal)
   setTimeout(initializeStaffUI, 400);
+  // new UI modules
+  initializeLanguageToggle();
+  initializeQuickConsult();
+  initializeMeetingForm();
+  initializeServiceTabs();
+  initializePortfolioFilters();
+  initializePortfolioLightbox();
+  initializeBeforeAfterSliders();
 });
 
 // Initialize search, tag filters and profile modal for staff cards
